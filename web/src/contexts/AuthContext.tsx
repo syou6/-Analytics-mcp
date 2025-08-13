@@ -34,17 +34,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         if (error) {
           console.error('Error getting session:', error);
+          setLoading(false);
+          return;
         }
         
         if (session) {
           console.log('Initial session found:', session.user);
           setUser(session.user);
+          setLoading(false);
         } else {
           console.log('No initial session');
+          setLoading(false);
         }
       } catch (error) {
         console.error('Error in initAuth:', error);
-      } finally {
         setLoading(false);
       }
     };
@@ -57,13 +60,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.log('Auth state change:', event, session?.user?.email);
         
         if (event === 'SIGNED_IN' && session) {
+          console.log('User signed in, setting user:', session.user);
           setUser(session.user);
           setLoading(false);
-          // Clean URL and refresh page after sign in
+          // Clean URL after sign in
           if (window.location.hash) {
             window.history.replaceState(null, '', window.location.pathname);
-            // Force page refresh to show dashboard
-            window.location.reload();
           }
         } else if (event === 'SIGNED_OUT') {
           setUser(null);
