@@ -28,7 +28,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       async (event: any, session: any) => {
         console.log('Auth event:', event, session);
         
-        if (session) {
+        if (event === 'SIGNED_IN' && session) {
+          console.log('User signed in:', session.user);
+          setUser(session.user);
+          setLoading(false);
+        } else if (session) {
           setUser(session.user);
           setLoading(false);
         } else {
