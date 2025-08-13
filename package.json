@@ -1,0 +1,19 @@
+{
+  "name": "github-analytics-mcp",
+  "version": "1.0.0",
+  "description": "GitHub Analytics MCP Server with Supabase and Vercel",
+  "private": true,
+  "workspaces": [
+    "mcp-server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=web & npm run dev --workspace=mcp-server",
+    "build": "npm run build --workspace=web && npm run build --workspace=mcp-server",
+    "start:mcp": "npm run start --workspace=mcp-server",
+    "start:web": "npm run start --workspace=web"
+  },
+  "keywords": ["mcp", "github", "analytics", "supabase", "vercel"],
+  "author": "",
+  "license": "MIT"
+}
