@@ -20,6 +20,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Debug: Check URL on mount
+    console.log('Current URL:', window.location.href);
+    console.log('Hash:', window.location.hash);
+    
     // Check for session on mount
     checkSession();
 
@@ -30,15 +34,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         if (session) {
           setUser(session.user);
+          setLoading(false);
           // Clean up URL by removing hash
-          if (window.location.hash) {
-            window.history.replaceState(null, '', window.location.pathname);
-          }
+          setTimeout(() => {
+            if (window.location.hash) {
+              window.history.replaceState(null, '', window.location.pathname);
+            }
+          }, 100);
         } else {
           setUser(null);
+          setLoading(false);
         }
-        
-        setLoading(false);
       }
     ) || { data: null };
 
@@ -50,23 +56,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function checkSession() {
     try {
       if (!supabase) {
+        console.log('Supabase client not initialized');
         setLoading(false);
         return;
       }
 
-      // Get session from Supabase
+      console.log('Checking session...');
+      
+      // Get session from Supabase  
       const { data: { session }, error } = await supabase.auth.getSession();
+      
+      console.log('Session result:', session, error);
       
       if (error) {
         console.error('Session error:', error);
       }
       
       if (session) {
+        console.log('Session found, setting user:', session.user);
         setUser(session.user);
+        setLoading(false);
+      } else {
+        console.log('No session found');
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error checking session:', error);
-    } finally {
       setLoading(false);
     }
   }
