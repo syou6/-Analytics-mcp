@@ -27,6 +27,7 @@ export default function Home() {
         provider: 'github',
         options: {
           scopes: 'read:user repo',
+          redirectTo: `${window.location.origin}/auth/callback`,
         },
       });
       if (error) throw error;

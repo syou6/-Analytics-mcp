@@ -20,10 +20,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Debug: Check URL on mount
-    console.log('Current URL:', window.location.href);
-    console.log('Hash:', window.location.hash);
-    
     // Check for session on mount
     checkSession();
 
@@ -35,12 +31,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (session) {
           setUser(session.user);
           setLoading(false);
-          // Clean up URL by removing hash
-          setTimeout(() => {
-            if (window.location.hash) {
-              window.history.replaceState(null, '', window.location.pathname);
-            }
-          }, 100);
         } else {
           setUser(null);
           setLoading(false);
