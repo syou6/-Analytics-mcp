@@ -177,11 +177,40 @@ async function analyzeActivity(owner: string, repo: string, days = 30) {
   // Filter PRs by date
   const recentPrs = prs.filter((pr: any) => new Date(pr.created_at) > since);
 
+  // Calculate additions and deletions from commits
+  let totalAdditions = 0;
+  let totalDeletions = 0;
+  
+  // Fetch detailed commit stats for recent commits (limit to 10 for performance)
+  const recentCommitShas = commits.slice(0, 10).map((c: any) => c.sha);
+  for (const sha of recentCommitShas) {
+    try {
+      const commitDetailResponse = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/commits/${sha}`,
+        {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+            Accept: 'application/vnd.github.v3+json',
+          },
+        }
+      );
+      if (commitDetailResponse.ok) {
+        const detail = await commitDetailResponse.json();
+        totalAdditions += detail.stats?.additions || 0;
+        totalDeletions += detail.stats?.deletions || 0;
+      }
+    } catch (e) {
+      // Skip if individual commit fetch fails
+    }
+  }
+
   return {
     period: `Last ${days} days`,
     commits: {
       total: commits.length,
       authors: [...new Set(commits.map((c: any) => c.commit.author?.name).filter(Boolean))].length,
+      additions: totalAdditions,
+      deletions: totalDeletions,
     },
     issues: {
       total: issues.length,

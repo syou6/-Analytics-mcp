@@ -2,8 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2 } from 'lucide-react';
+import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2, Crown, Lock, Sparkles } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
+import UpgradeModal from '@/components/UpgradeModal';
+import ActivitySummaryCards from '@/components/ActivitySummaryCards';
+import CommitHeatmap from '@/components/CommitHeatmap';
+import CommitTimeDistribution from '@/components/CommitTimeDistribution';
+import RepositoryPerformanceTable from '@/components/RepositoryPerformanceTable';
+import GrowthInsights from '@/components/GrowthInsights';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { t } from '@/lib/i18n';
 
@@ -220,13 +226,69 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
   const [userRepos, setUserRepos] = useState<any[]>([]);
   const [loadingRepos, setLoadingRepos] = useState(false);
   const [activeTab, setActiveTab] = useState<'my-repos' | 'search'>('my-repos');
+  const [showUpgrade, setShowUpgrade] = useState(false);
+  const [subscription, setSubscription] = useState<any>(null);
+  const [usage, setUsage] = useState<any>(null);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  // Fetch user's repositories
+  // Fetch user's repositories and subscription status
   useEffect(() => {
-    if (user && activeTab === 'my-repos') {
-      fetchUserRepos();
+    if (user) {
+      checkSubscription();
+      if (activeTab === 'my-repos') {
+        fetchUserRepos();
+      }
+      
+      // Check for successful payment redirect
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id');
+      if (sessionId) {
+        setShowSuccessMessage(true);
+        // Clean up URL
+        window.history.replaceState({}, document.title, '/');
+        
+        // Verify payment and create subscription if needed
+        verifyPayment(sessionId);
+        
+        // Hide message after 5 seconds
+        setTimeout(() => setShowSuccessMessage(false), 5000);
+      }
     }
   }, [user, activeTab]);
+
+  async function checkSubscription() {
+    try {
+      const response = await fetch(`/api/subscription?userId=${user.id}`);
+      const data = await response.json();
+      setSubscription(data);
+      setUsage(data.usage);
+    } catch (error) {
+      console.error('Error checking subscription:', error);
+    }
+  }
+
+  async function verifyPayment(sessionId: string) {
+    try {
+      // First, verify the payment with Stripe
+      const response = await fetch('/api/check-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, userId: user.id }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        console.log('Payment verified, updating subscription status...');
+        // Wait a bit then refresh subscription status
+        setTimeout(() => {
+          checkSubscription();
+        }, 1000);
+      }
+    } catch (error) {
+      console.error('Error verifying payment:', error);
+    }
+  }
 
   async function fetchUserRepos() {
     setLoadingRepos(true);
@@ -298,6 +360,18 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
   async function getAIAnalysis() {
     if (!analysis || loadingAI) return;
     
+    // Check if user has AI analysis access
+    if (subscription && !subscription.isPro) {
+      setShowUpgrade(true);
+      return;
+    }
+    
+    // Check AI usage limits for Pro users
+    if (subscription && subscription.isPro && subscription.aiAnalysesRemaining <= 0) {
+      alert(language === 'ja' ? 'AI分析の月間上限に達しました' : 'Monthly AI analysis limit reached');
+      return;
+    }
+    
     setLoadingAI(true);
     try {
       const response = await fetch('/api/ai-analysis', {
@@ -318,6 +392,16 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
       if (data.error) throw new Error(data.error);
       
       setAiAnalysis(data);
+      
+      // Track AI usage
+      await fetch('/api/track-usage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user.id, type: 'ai' }),
+      });
+      
+      // Refresh subscription status
+      checkSubscription();
     } catch (error: any) {
       console.error('AI Analysis error:', error);
       alert(error.message || 'Failed to get AI analysis');
@@ -359,6 +443,12 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
 
   async function analyzeRepo() {
     if (!repoUrl) return;
+    
+    // Check usage limits
+    if (subscription && !subscription.isPro && subscription.analysesRemaining <= 0) {
+      setShowUpgrade(true);
+      return;
+    }
     
     setLoading(true);
     try {
@@ -412,6 +502,16 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
       setContributors(contributorsData);
       setLanguages(languagesData);
       setActivity(activityData);
+      
+      // Track usage
+      await fetch('/api/track-usage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user.id, type: 'analysis' }),
+      });
+      
+      // Refresh subscription status
+      checkSubscription();
     } catch (error: any) {
       console.error('Error:', error);
       alert(error.message || 'Failed to analyze repository');
@@ -422,6 +522,33 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Success Message */}
+      {showSuccessMessage && (
+        <div className="fixed top-4 right-4 z-50 animate-slide-in">
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 shadow-lg max-w-md">
+            <div className="flex items-start">
+              <div className="flex-shrink-0">
+                <svg className="h-6 w-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-green-800">
+                  {language === 'ja' ? '決済が完了しました！' : 'Payment Successful!'}
+                </h3>
+                <div className="mt-2 text-sm text-green-700">
+                  <p>
+                    {language === 'ja' 
+                      ? 'Proプランへのアップグレードが完了しました。全機能をお楽しみください！' 
+                      : 'You have been upgraded to Pro. Enjoy all features!'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Header */}
       <header className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -431,6 +558,75 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               <span className="font-bold text-xl text-black">GitHub Analytics MCP</span>
             </div>
             <div className="flex items-center space-x-4">
+              {subscription && (
+                <div className="flex items-center space-x-2">
+                  {subscription.isPro ? (
+                    <>
+                      <span className="flex items-center bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-3 py-1 rounded-full text-sm">
+                        <Crown className="h-4 w-4 mr-1" />
+                        Pro
+                      </span>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={async () => {
+                            const res = await fetch('/api/stripe/billing-portal', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ userId: user.id }),
+                            });
+                            const data = await res.json();
+                            if (data.url) window.location.href = data.url;
+                          }}
+                          className="text-sm text-black hover:underline"
+                        >
+                          {language === 'ja' ? '請求書' : 'Billing'}
+                        </button>
+                        <span className="text-gray-400">|</span>
+                        <button
+                          onClick={async () => {
+                            if (confirm(language === 'ja' 
+                              ? 'サブスクリプションをキャンセルしますか？\n現在の請求期間の終了まで利用可能です。' 
+                              : 'Cancel subscription?\nYou can still use it until the end of the current billing period.')) {
+                              const res = await fetch('/api/stripe/cancel-subscription', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ userId: user.id }),
+                              });
+                              const data = await res.json();
+                              if (data.success) {
+                                alert(language === 'ja' 
+                                  ? `サブスクリプションは ${new Date(data.cancelAt).toLocaleDateString()} にキャンセルされます` 
+                                  : `Subscription will be canceled on ${new Date(data.cancelAt).toLocaleDateString()}`);
+                                checkSubscription();
+                              }
+                            }
+                          }}
+                          className="text-sm text-red-600 hover:underline"
+                        >
+                          {language === 'ja' ? 'キャンセル' : 'Cancel'}
+                        </button>
+                      </div>
+                      <span className="text-sm text-black">
+                        {subscription.analysesRemaining}/{subscription.limits?.analyses || 100} {language === 'ja' ? '分析' : 'analyses'}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => setShowUpgrade(true)}
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-sm hover:opacity-90 flex items-center"
+                      >
+                        <Sparkles className="h-3 w-3 mr-1" />
+                        Upgrade to Pro
+                      </button>
+                      <span className={`text-sm ${subscription.analysesRemaining <= 3 ? 'text-red-600 font-semibold' : 'text-black'}`}>
+                        {subscription.analysesRemaining}/{subscription.limits?.analyses || 10} {language === 'ja' ? '分析' : 'analyses'}
+                        {subscription.analysesRemaining <= 3 && ' ⚠️'}
+                      </span>
+                    </>
+                  )}
+                </div>
+              )}
               <LanguageToggle />
               <span className="text-black">{user.email}</span>
               <button
@@ -550,8 +746,17 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         )}
 
         {analysis && (
-          <div className="space-y-8">
-            {/* Repository Overview */}
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Content - 2 columns */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Activity Summary Cards */}
+              <ActivitySummaryCards 
+                analysis={analysis}
+                activity={activity}
+                languages={languages}
+              />
+
+              {/* Repository Overview */}
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-bold text-black">
@@ -601,6 +806,46 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                 </div>
               )}
             </div>
+
+            {/* Commit Heatmap and Time Distribution */}
+            <div className="grid md:grid-cols-2 gap-8">
+              {subscription?.isPro ? (
+                <>
+                  <CommitHeatmap owner={analysis.owner} repo={analysis.repo} />
+                  <CommitTimeDistribution owner={analysis.owner} repo={analysis.repo} />
+                </>
+              ) : (
+                <>
+                  <div className="bg-gray-100 rounded-lg shadow p-6 border-2 border-gray-300 relative">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-90 rounded-lg">
+                      <div className="text-center">
+                        <Lock className="h-12 w-12 text-gray-400 mx-auto mb-2" />
+                        <p className="text-gray-600 font-semibold">{language === 'ja' ? 'コミットヒートマップ' : 'Commit Heatmap'}</p>
+                        <p className="text-sm text-gray-500">{language === 'ja' ? 'Pro機能' : 'Pro Feature'}</p>
+                      </div>
+                    </div>
+                    <div className="blur-sm opacity-50">
+                      <CommitHeatmap owner={analysis.owner} repo={analysis.repo} />
+                    </div>
+                  </div>
+                  <div className="bg-gray-100 rounded-lg shadow p-6 border-2 border-gray-300 relative">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-90 rounded-lg">
+                      <div className="text-center">
+                        <Lock className="h-12 w-12 text-gray-400 mx-auto mb-2" />
+                        <p className="text-gray-600 font-semibold">{language === 'ja' ? '時間別分布' : 'Time Distribution'}</p>
+                        <p className="text-sm text-gray-500">{language === 'ja' ? 'Pro機能' : 'Pro Feature'}</p>
+                      </div>
+                    </div>
+                    <div className="blur-sm opacity-50">
+                      <CommitTimeDistribution owner={analysis.owner} repo={analysis.repo} />
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Repository Performance Table */}
+            <RepositoryPerformanceTable userRepos={userRepos} />
 
             {/* Languages */}
             {languages && languages.length > 0 && (
@@ -652,15 +897,38 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
 
             {/* AI Analysis Button */}
             {analysis && !aiAnalysis && (
-              <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg shadow p-6">
-                <h3 className="text-xl font-bold mb-4 text-white">🤖 {t('aiAnalysisTitle', language)}</h3>
-                <p className="mb-4 text-white/90">Gemini AI analyzes this repository in detail and evaluates growth strategies and investment value</p>
+              <div className={`rounded-lg shadow p-6 ${subscription?.isPro ? 'bg-gradient-to-r from-purple-600 to-blue-600' : 'bg-gray-100 border-2 border-gray-300'}`}>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className={`text-xl font-bold mb-4 ${subscription?.isPro ? 'text-white' : 'text-gray-600'}`}>
+                      {subscription?.isPro ? '🤖' : '🔒'} {t('aiAnalysisTitle', language)}
+                    </h3>
+                    <p className={`mb-4 ${subscription?.isPro ? 'text-white/90' : 'text-gray-500'}`}>
+                      {subscription?.isPro 
+                        ? 'Gemini AI analyzes this repository in detail and evaluates growth strategies and investment value'
+                        : language === 'ja' 
+                          ? 'AI分析はProプランの機能です。アップグレードして詳細な分析を取得しましょう'
+                          : 'AI Analysis is a Pro feature. Upgrade to get detailed insights'}
+                    </p>
+                  </div>
+                  {!subscription?.isPro && (
+                    <div className="ml-4">
+                      <Lock className="h-8 w-8 text-gray-400" />
+                    </div>
+                  )}
+                </div>
                 <button
-                  onClick={getAIAnalysis}
-                  disabled={loadingAI}
-                  className="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50"
+                  onClick={subscription?.isPro ? getAIAnalysis : () => setShowUpgrade(true)}
+                  disabled={subscription?.isPro && loadingAI}
+                  className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+                    subscription?.isPro 
+                      ? 'bg-white text-purple-600 hover:bg-gray-100 disabled:opacity-50'
+                      : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:opacity-90'
+                  }`}
                 >
-                  {loadingAI ? 'Analyzing with AI...' : 'Start AI Analysis'}
+                  {subscription?.isPro 
+                    ? (loadingAI ? 'Analyzing with AI...' : 'Start AI Analysis')
+                    : (language === 'ja' ? '🔓 Proにアップグレード' : '🔓 Upgrade to Pro')}
                 </button>
               </div>
             )}
@@ -904,47 +1172,53 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                 </div>
               </div>
             )}
+            </div>
+
+            {/* Growth Insights Sidebar */}
+            <div className="lg:col-span-1">
+              {subscription?.isPro ? (
+                <GrowthInsights 
+                  analysis={analysis}
+                  activity={activity}
+                  contributors={contributors}
+                  owner={analysis?.owner || ''}
+                  repo={analysis?.repo || ''}
+                />
+              ) : (
+                <div className="bg-gray-100 rounded-lg shadow p-6 border-2 border-gray-300">
+                  <div className="text-center py-12">
+                    <Lock className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-bold text-gray-600 mb-2">
+                      {language === 'ja' ? '成長インサイト' : 'Growth Insights'}
+                    </h3>
+                    <p className="text-sm text-gray-500 mb-6">
+                      {language === 'ja' 
+                        ? 'スキル進歩、目標追跡、AI提案など'
+                        : 'Skill progress, goal tracking, AI suggestions'}
+                    </p>
+                    <button
+                      onClick={() => setShowUpgrade(true)}
+                      className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:opacity-90"
+                    >
+                      <Sparkles className="inline h-4 w-4 mr-1" />
+                      {language === 'ja' ? 'Proで解放' : 'Unlock with Pro'}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
-        {/* Usage Info Section */}
-        <div className="bg-white rounded-lg shadow p-6 mt-8">
-          <h3 className="text-xl font-bold mb-4 text-black">📊 {t('usageStatus', language)}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-              <p className="text-sm text-black font-medium">{t('analysesThisMonth', language)}</p>
-              <p className="text-2xl font-bold text-black">3 / 10</p>
-              <p className="text-xs text-black mt-1">{t('freePlan', language)}</p>
-            </div>
-            <div className="bg-purple-50 p-4 rounded-lg border border-purple-100">
-              <p className="text-sm text-black font-medium">{t('aiAnalysisUsage', language)}</p>
-              <p className="text-2xl font-bold text-black">0 / 0</p>
-              <p className="text-xs text-black mt-1">{t('proFeature', language)}</p>
-            </div>
-            <div className="bg-green-50 p-4 rounded-lg border border-green-100">
-              <p className="text-sm text-black font-medium">{t('cachePeriod', language)}</p>
-              <p className="text-2xl font-bold text-black">24 {t('hours', language)}</p>
-              <p className="text-xs text-black mt-1">{t('dataUpdateFrequency', language)}</p>
-            </div>
-          </div>
-          
-          <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
-            <h4 className="font-semibold text-black mb-2">🚀 {t('upgradeToPro', language)}</h4>
-            <ul className="text-sm text-black space-y-1 mb-3">
-              <li>✨ {t('aiDeepAnalysis', language)}</li>
-              <li>📈 {t('monthlyRepoLimit', language)}</li>
-              <li>💾 {t('csvJsonExport', language)}</li>
-              <li>⚡ {t('shorterCache', language)}</li>
-            </ul>
-            <button 
-              className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium opacity-50 cursor-not-allowed"
-              disabled
-            >
-              {t('startMonthly', language)} (Coming Soon)
-            </button>
-          </div>
-        </div>
       </main>
+      
+      {/* Upgrade Modal */}
+      <UpgradeModal 
+        isOpen={showUpgrade}
+        onClose={() => setShowUpgrade(false)}
+        userId={user.id}
+        userEmail={user.email}
+      />
     </div>
   );
 }
@@ -997,7 +1271,7 @@ function StatCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-gray-50 p-4 rounded-lg">
       <p className="text-black text-sm">{label}</p>
-      <p className="text-2xl font-bold">{value}</p>
+      <p className="text-2xl font-bold text-black">{value}</p>
     </div>
   );
 }
