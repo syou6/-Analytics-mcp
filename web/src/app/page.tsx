@@ -33,8 +33,16 @@ export default function Home() {
 
   async function checkUser() {
     try {
-      const { data: { user } } = await supabase?.auth?.getUser() || { data: { user: null } };
-      setUser(user);
+      // First try to get session from URL
+      const { data: { session }, error } = await supabase?.auth?.getSession() || { data: { session: null }, error: null };
+      
+      if (session) {
+        setUser(session.user);
+      } else {
+        // If no session, try to get user
+        const { data: { user } } = await supabase?.auth?.getUser() || { data: { user: null } };
+        setUser(user);
+      }
     } catch (error) {
       console.error('Error:', error);
     } finally {
