@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Gemini API設定
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'AIzaSyAb8YDOGDd6ed9cgCsIGF0ZVCrAqCf1pgs');
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const genAI = GEMINI_API_KEY ? new GoogleGenerativeAI(GEMINI_API_KEY) : null;
+const model = genAI ? genAI.getGenerativeModel({ model: 'gemini-1.5-flash' }) : null;
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,6 +31,11 @@ export async function POST(request: NextRequest) {
 
 async function generateAIInsightsWithGemini(repo: any, languages: any, activity: any, contributors: any, lang: string = 'ja') {
   try {
+    // Check if Gemini API is configured
+    if (!model) {
+      return generateBasicInsights(repo, languages, activity, contributors, lang);
+    }
+    
     // Use Gemini API for advanced analysis
     const prompt = `
     Analyze this GitHub repository in detail.
