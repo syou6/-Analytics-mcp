@@ -444,7 +444,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         {/* My Repositories Tab */}
         {activeTab === 'my-repos' && (
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-bold mb-4">{t('yourRepositories', language)}</h2>
+            <h2 className="text-2xl font-bold mb-4 text-black">{t('yourRepositories', language)}</h2>
             {loadingRepos ? (
               <div className="text-center py-8">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
@@ -497,7 +497,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         {/* Search Tab */}
         {activeTab === 'search' && (
           <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <h2 className="text-2xl font-bold mb-4">{t('analyzeAnyRepository', language)}</h2>
+            <h2 className="text-2xl font-bold mb-4 text-black">{t('analyzeAnyRepository', language)}</h2>
             <div className="flex space-x-4">
             <input
               type="text"
@@ -522,7 +522,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
           <div className="space-y-8">
             {/* Repository Overview */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-bold mb-4">
+              <h3 className="text-xl font-bold mb-4 text-black">
                 {analysis.owner}/{analysis.repo}
               </h3>
               {analysis.description && (
@@ -536,16 +536,16 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               </div>
               <div className="mt-4 pt-4 border-t grid grid-cols-1 md:grid-cols-2 gap-2">
                 <p className="text-black">
-                  Primary Language: <span className="font-semibold">{analysis.language || 'Unknown'}</span>
+                  Primary Language: <span className="font-semibold text-black">{analysis.language || 'Unknown'}</span>
                 </p>
                 <p className="text-black">
-                  License: <span className="font-semibold">{analysis.license || 'No license'}</span>
+                  License: <span className="font-semibold text-black">{analysis.license || 'No license'}</span>
                 </p>
                 <p className="text-black">
-                  Created: <span className="font-semibold">{analysis.createdAt ? new Date(analysis.createdAt).toLocaleDateString() : 'Unknown'}</span>
+                  Created: <span className="font-semibold text-black">{analysis.createdAt ? new Date(analysis.createdAt).toLocaleDateString() : 'Unknown'}</span>
                 </p>
                 <p className="text-black">
-                  Last Updated: <span className="font-semibold">{analysis.updatedAt ? new Date(analysis.updatedAt).toLocaleDateString() : 'Unknown'}</span>
+                  Last Updated: <span className="font-semibold text-black">{analysis.updatedAt ? new Date(analysis.updatedAt).toLocaleDateString() : 'Unknown'}</span>
                 </p>
               </div>
               {analysis.topics && analysis.topics.length > 0 && (
@@ -565,7 +565,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             {/* Languages */}
             {languages && languages.length > 0 && (
               <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-xl font-bold mb-4">📊 {t('languageComposition', language)}</h3>
+                <h3 className="text-xl font-bold mb-4 text-black">📊 {t('languageComposition', language)}</h3>
                 <div className="space-y-3">
                   {languages.slice(0, 5).map((lang: any) => (
                     <div key={lang.language} className="flex items-center">
@@ -587,7 +587,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             {/* Contributors */}
             {contributors && contributors.length > 0 && (
               <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-xl font-bold mb-4">👥 {t('topContributors', language)}</h3>
+                <h3 className="text-xl font-bold mb-4 text-black">👥 {t('topContributors', language)}</h3>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                   {contributors.slice(0, 10).map((contributor: any) => (
                     <a 
@@ -812,7 +812,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                             
                             <div className="pt-2 border-t border-gray-100">
                               <p className="text-sm text-black">
-                                <span className="font-medium">比較:</span> {comp.comparison}
+                                <span className="font-medium text-black">比較:</span> {comp.comparison}
                               </p>
                               {comp.language && (
                                 <p className="text-xs text-black mt-1">
@@ -840,23 +840,23 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             {/* Activity */}
             {activity && (
               <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-xl font-bold mb-4">📈 {t('recentActivity', language)} ({activity.period})</h3>
+                <h3 className="text-xl font-bold mb-4 text-black">📈 {t('recentActivity', language)} ({activity.period})</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <h4 className="font-semibold text-black mb-2">{t('commits', language)}</h4>
-                    <p className="text-2xl font-bold">{activity.commits?.total || 0}</p>
+                    <p className="text-2xl font-bold text-black">{activity.commits?.total || 0}</p>
                     <p className="text-sm text-black">by {activity.commits?.authors || 0} authors</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-black mb-2">{t('issues', language)}</h4>
-                    <p className="text-2xl font-bold">{activity.issues?.total || 0}</p>
+                    <p className="text-2xl font-bold text-black">{activity.issues?.total || 0}</p>
                     <p className="text-sm text-black">
                       {activity.issues?.open || 0} open, {activity.issues?.closed || 0} closed
                     </p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-black mb-2">{t('pullRequests', language)}</h4>
-                    <p className="text-2xl font-bold">{activity.pullRequests?.total || 0}</p>
+                    <p className="text-2xl font-bold text-black">{activity.pullRequests?.total || 0}</p>
                     <p className="text-sm text-black">
                       {activity.pullRequests?.open || 0} open, {activity.pullRequests?.merged || 0} merged
                     </p>
@@ -869,7 +869,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
 
         {/* Usage Info Section */}
         <div className="bg-white rounded-lg shadow p-6 mt-8">
-          <h3 className="text-xl font-bold mb-4">📊 {t('usageStatus', language)}</h3>
+          <h3 className="text-xl font-bold mb-4 text-black">📊 {t('usageStatus', language)}</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
               <p className="text-sm text-black font-medium">{t('analysesThisMonth', language)}</p>
