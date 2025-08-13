@@ -58,14 +58,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         if (event === 'SIGNED_IN' && session) {
           setUser(session.user);
-          // Clean URL after sign in
+          setLoading(false);
+          // Clean URL and refresh page after sign in
           if (window.location.hash) {
             window.history.replaceState(null, '', window.location.pathname);
+            // Force page refresh to show dashboard
+            window.location.reload();
           }
         } else if (event === 'SIGNED_OUT') {
           setUser(null);
+          setLoading(false);
         } else if (session) {
           setUser(session.user);
+          setLoading(false);
         }
       }
     ) || { data: null };
