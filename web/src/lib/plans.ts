@@ -19,7 +19,7 @@ export const PLANS = {
   },
   pro: {
     name: 'Pro',
-    price: 1500,
+    price: 980,
     priceId: 'price_pro_monthly', // Stripe price ID
     limits: {
       reposPerMonth: 100,

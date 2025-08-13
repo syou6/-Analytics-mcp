@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield } from 'lucide-react';
+import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2 } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { t } from '@/lib/i18n';
@@ -177,7 +177,7 @@ function LandingPage({ onSignIn }: { onSignIn: () => void }) {
           />
           <PricingCard
             name="Pro"
-            price="¥1,500"
+            price="¥980"
             features={[
               "100 repos/month",
               "Advanced analytics",
@@ -323,6 +323,37 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
       alert(error.message || 'Failed to get AI analysis');
     } finally {
       setLoadingAI(false);
+    }
+  }
+
+  async function sharePublicDashboard() {
+    try {
+      const response = await fetch('/api/public-dashboard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          analysis,
+          contributors,
+          languages,
+          activity,
+        }),
+      });
+      
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+      
+      // Copy link to clipboard
+      const publicUrl = `${window.location.origin}/public/${data.publicId}`;
+      await navigator.clipboard.writeText(publicUrl);
+      
+      // Show success message
+      alert(`Public dashboard created! Link copied to clipboard:\n${publicUrl}`);
+      
+      // Open in new tab
+      window.open(publicUrl, '_blank');
+    } catch (error: any) {
+      console.error('Error sharing dashboard:', error);
+      alert(error.message || 'Failed to create public dashboard');
     }
   }
 
@@ -522,9 +553,18 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
           <div className="space-y-8">
             {/* Repository Overview */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-bold mb-4 text-black">
-                {analysis.owner}/{analysis.repo}
-              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold text-black">
+                  {analysis.owner}/{analysis.repo}
+                </h3>
+                <button
+                  onClick={() => sharePublicDashboard()}
+                  className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <Share2 className="h-4 w-4" />
+                  <span>Share Dashboard</span>
+                </button>
+              </div>
               {analysis.description && (
                 <p className="text-black mb-4">{analysis.description}</p>
               )}

@@ -142,7 +142,7 @@ export const translations = {
     monthlyRepoLimit: 'Up to 100 repositories per month',
     csvJsonExport: 'CSV/JSON Export',
     shorterCache: '6-hour cache (fresher data)',
-    startMonthly: 'Start for $15/month',
+    startMonthly: 'Start for $9.80/month',
     
     // Errors
     invalidGitHubUrl: 'Invalid GitHub URL',
@@ -300,7 +300,7 @@ export const translations = {
     monthlyRepoLimit: '月100リポジトリまで分析可能',
     csvJsonExport: 'CSV/JSONエクスポート',
     shorterCache: '6時間キャッシュ（より新鮮なデータ）',
-    startMonthly: '月額1,500円で始める',
+    startMonthly: '月額980円で始める',
     
     // Errors
     invalidGitHubUrl: '無効なGitHub URL',
