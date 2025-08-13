@@ -109,7 +109,7 @@ function LandingPage({ onSignIn }: { onSignIn: () => void }) {
             <br />
             <span className="text-blue-600">Right in Your AI Assistant</span>
           </h1>
-          <p className="text-xl text-gray-800 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-black mb-8 max-w-3xl mx-auto">
             Analyze repositories, track contributions, and get insights without leaving your conversation.
             Built for the MCP (Model Context Protocol) ecosystem.
           </p>
@@ -401,10 +401,10 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             </div>
             <div className="flex items-center space-x-4">
               <LanguageToggle />
-              <span className="text-gray-800">{user.email}</span>
+              <span className="text-black">{user.email}</span>
               <button
                 onClick={onSignOut}
-                className="text-gray-800 hover:text-black"
+                className="text-black hover:text-black"
               >
                 Sign out
               </button>
@@ -423,7 +423,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
                 activeTab === 'my-repos'
                   ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-800 hover:text-black'
+                  : 'border-transparent text-black hover:text-black'
               }`}
             >
               📁 My Repositories
@@ -433,7 +433,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
                 activeTab === 'search'
                   ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-800 hover:text-black'
+                  : 'border-transparent text-black hover:text-black'
               }`}
             >
               🔍 Search Any Repository
@@ -448,7 +448,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             {loadingRepos ? (
               <div className="text-center py-8">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-                <p className="mt-4 text-gray-800">{t('loadingRepositories', language)}</p>
+                <p className="mt-4 text-black">{t('loadingRepositories', language)}</p>
               </div>
             ) : userRepos.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -461,20 +461,20 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                     <div className="flex items-start justify-between mb-2">
                       <h3 className="font-semibold text-black truncate flex-1">{repo.name}</h3>
                       {repo.isPrivate && (
-                        <span className="ml-2 px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">🔒 {t('private', language)}</span>
+                        <span className="ml-2 px-2 py-1 bg-gray-100 text-black text-xs rounded">🔒 {t('private', language)}</span>
                       )}
                     </div>
-                    <p className="text-sm text-gray-800 mb-3 line-clamp-2">{repo.description || t('noDescription', language)}</p>
+                    <p className="text-sm text-black mb-3 line-clamp-2">{repo.description || t('noDescription', language)}</p>
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center space-x-3">
                         {repo.language && (
-                          <span className="flex items-center text-gray-700">
+                          <span className="flex items-center text-black">
                             <span className="w-3 h-3 rounded-full bg-blue-500 mr-1"></span>
                             {repo.language}
                           </span>
                         )}
-                        <span className="text-gray-700">⭐ {repo.stars}</span>
-                        <span className="text-gray-700">🍴 {repo.forks}</span>
+                        <span className="text-black">⭐ {repo.stars}</span>
+                        <span className="text-black">🍴 {repo.forks}</span>
                       </div>
                     </div>
                     <div className="mt-3 pt-3 border-t border-gray-100">
@@ -487,8 +487,8 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               </div>
             ) : (
               <div className="text-center py-8">
-                <p className="text-gray-800">{t('noRepositories', language)}</p>
-                <p className="text-sm text-gray-700 mt-2">{t('createFirst', language)}</p>
+                <p className="text-black">{t('noRepositories', language)}</p>
+                <p className="text-sm text-black mt-2">{t('createFirst', language)}</p>
               </div>
             )}
           </div>
@@ -526,7 +526,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                 {analysis.owner}/{analysis.repo}
               </h3>
               {analysis.description && (
-                <p className="text-gray-800 mb-4">{analysis.description}</p>
+                <p className="text-black mb-4">{analysis.description}</p>
               )}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <StatCard label="⭐ Stars" value={analysis.stars?.toLocaleString() || '0'} />
@@ -535,22 +535,22 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                 <StatCard label="👀 Watchers" value={analysis.watchers?.toLocaleString() || '0'} />
               </div>
               <div className="mt-4 pt-4 border-t grid grid-cols-1 md:grid-cols-2 gap-2">
-                <p className="text-gray-800">
+                <p className="text-black">
                   Primary Language: <span className="font-semibold">{analysis.language || 'Unknown'}</span>
                 </p>
-                <p className="text-gray-800">
+                <p className="text-black">
                   License: <span className="font-semibold">{analysis.license || 'No license'}</span>
                 </p>
-                <p className="text-gray-800">
+                <p className="text-black">
                   Created: <span className="font-semibold">{analysis.createdAt ? new Date(analysis.createdAt).toLocaleDateString() : 'Unknown'}</span>
                 </p>
-                <p className="text-gray-800">
+                <p className="text-black">
                   Last Updated: <span className="font-semibold">{analysis.updatedAt ? new Date(analysis.updatedAt).toLocaleDateString() : 'Unknown'}</span>
                 </p>
               </div>
               {analysis.topics && analysis.topics.length > 0 && (
                 <div className="mt-4 pt-4 border-t">
-                  <p className="text-gray-800 mb-2">Topics:</p>
+                  <p className="text-black mb-2">Topics:</p>
                   <div className="flex flex-wrap gap-2">
                     {analysis.topics.map((topic: string) => (
                       <span key={topic} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
@@ -569,7 +569,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                 <div className="space-y-3">
                   {languages.slice(0, 5).map((lang: any) => (
                     <div key={lang.language} className="flex items-center">
-                      <span className="w-32 text-gray-700">{lang.language}</span>
+                      <span className="w-32 text-black">{lang.language}</span>
                       <div className="flex-1 bg-gray-200 rounded-full h-6 ml-4">
                         <div 
                           className="bg-blue-600 h-6 rounded-full flex items-center justify-end pr-2"
@@ -603,7 +603,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                         className="w-12 h-12 rounded-full mb-2"
                       />
                       <span className="text-sm font-medium text-black text-center">{contributor.username}</span>
-                      <span className="text-xs text-gray-700">{contributor.contributions} commits</span>
+                      <span className="text-xs text-black">{contributor.contributions} commits</span>
                     </a>
                   ))}
                 </div>
@@ -638,7 +638,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                       <div className="text-4xl font-bold text-purple-600">
                         {aiAnalysis.healthScore.grade}
                       </div>
-                      <div className="text-2xl text-gray-800">
+                      <div className="text-2xl text-black">
                         {aiAnalysis.healthScore.total}/100
                       </div>
                     </div>
@@ -711,7 +711,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                               {rec.priority === 'high' ? '高' : rec.priority === 'medium' ? '中' : '低'}優先度
                             </span>
                           </div>
-                          <ul className="text-sm space-y-1 text-gray-700">
+                          <ul className="text-sm space-y-1 text-black">
                             {rec.actions.map((action: string, j: number) => (
                               <li key={j} className="flex items-start">
                                 <span className="mr-2">•</span>
@@ -735,26 +735,26 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-4 border border-blue-200">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div>
-                            <p className="text-sm text-gray-800">市場ポジション</p>
+                            <p className="text-sm text-black">市場ポジション</p>
                             <p className="text-xl font-bold text-blue-700">
                               {aiAnalysis.competitorAnalysis.marketPosition.rank}/
                               {aiAnalysis.competitorAnalysis.marketPosition.total}位
                             </p>
-                            <p className="text-sm text-gray-700">
+                            <p className="text-sm text-black">
                               上位{aiAnalysis.competitorAnalysis.marketPosition.percentile}%
                             </p>
                           </div>
                           <div>
-                            <p className="text-sm text-gray-800">Competitor Average Stars</p>
+                            <p className="text-sm text-black">Competitor Average Stars</p>
                             <p className="text-xl font-bold text-purple-700">
                               {aiAnalysis.competitorAnalysis.analysis.averageStars?.toLocaleString()}
                             </p>
-                            <p className="text-sm text-gray-700">
+                            <p className="text-sm text-black">
                               Total Competitors: {aiAnalysis.competitorAnalysis.analysis.totalCompetitors?.toLocaleString()}
                             </p>
                           </div>
                           <div>
-                            <p className="text-sm text-gray-800">ポジション</p>
+                            <p className="text-sm text-black">ポジション</p>
                             <p className="text-xl font-bold text-green-700">
                               {aiAnalysis.competitorAnalysis.analysis.yourPosition}
                             </p>
@@ -779,7 +779,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                                   {comp.name}
                                 </a>
                                 {comp.description && (
-                                  <p className="text-sm text-gray-800 mt-1 line-clamp-2">{comp.description}</p>
+                                  <p className="text-sm text-black mt-1 line-clamp-2">{comp.description}</p>
                                 )}
                               </div>
                               {comp.growth !== 'N/A' && (
@@ -791,19 +791,19 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                             
                             <div className="grid grid-cols-4 gap-2 mb-2">
                               <div className="text-sm">
-                                <span className="text-gray-700">⭐ スター</span>
+                                <span className="text-black">⭐ スター</span>
                                 <p className="font-semibold text-black">{comp.stars?.toLocaleString()}</p>
                               </div>
                               <div className="text-sm">
-                                <span className="text-gray-700">🍴 フォーク</span>
+                                <span className="text-black">🍴 フォーク</span>
                                 <p className="font-semibold text-black">{comp.forks?.toLocaleString() || '-'}</p>
                               </div>
                               <div className="text-sm">
-                                <span className="text-gray-700">📝 イシュー</span>
+                                <span className="text-black">📝 イシュー</span>
                                 <p className="font-semibold text-black">{comp.issues?.toLocaleString() || '-'}</p>
                               </div>
                               <div className="text-sm">
-                                <span className="text-gray-700">🔥 活動</span>
+                                <span className="text-black">🔥 活動</span>
                                 <p className="font-semibold text-black">
                                   {comp.recentActivity ? `${comp.recentActivity} commits/month` : '-'}
                                 </p>
@@ -811,11 +811,11 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                             </div>
                             
                             <div className="pt-2 border-t border-gray-100">
-                              <p className="text-sm text-gray-700">
+                              <p className="text-sm text-black">
                                 <span className="font-medium">比較:</span> {comp.comparison}
                               </p>
                               {comp.language && (
-                                <p className="text-xs text-gray-700 mt-1">
+                                <p className="text-xs text-black mt-1">
                                   主要言語: {comp.language}
                                 </p>
                               )}
@@ -825,10 +825,10 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                       ) : aiAnalysis.competitorAnalysis.similarRepos.map((comp: any, i: number) => (
                         <div key={i} className="border-t border-gray-200 pt-2 mt-2">
                           <div className="font-medium text-black">{comp.name}</div>
-                          <div className="text-sm text-gray-800">
+                          <div className="text-sm text-black">
                             ⭐ {comp.stars} ({comp.growth})
                           </div>
-                          <div className="text-sm text-gray-700">{comp.comparison}</div>
+                          <div className="text-sm text-black">{comp.comparison}</div>
                         </div>
                       ))}
                     </div>
@@ -843,21 +843,21 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                 <h3 className="text-xl font-bold mb-4">📈 {t('recentActivity', language)} ({activity.period})</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
-                    <h4 className="font-semibold text-gray-700 mb-2">{t('commits', language)}</h4>
+                    <h4 className="font-semibold text-black mb-2">{t('commits', language)}</h4>
                     <p className="text-2xl font-bold">{activity.commits?.total || 0}</p>
-                    <p className="text-sm text-gray-700">by {activity.commits?.authors || 0} authors</p>
+                    <p className="text-sm text-black">by {activity.commits?.authors || 0} authors</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-700 mb-2">{t('issues', language)}</h4>
+                    <h4 className="font-semibold text-black mb-2">{t('issues', language)}</h4>
                     <p className="text-2xl font-bold">{activity.issues?.total || 0}</p>
-                    <p className="text-sm text-gray-700">
+                    <p className="text-sm text-black">
                       {activity.issues?.open || 0} open, {activity.issues?.closed || 0} closed
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-700 mb-2">{t('pullRequests', language)}</h4>
+                    <h4 className="font-semibold text-black mb-2">{t('pullRequests', language)}</h4>
                     <p className="text-2xl font-bold">{activity.pullRequests?.total || 0}</p>
-                    <p className="text-sm text-gray-700">
+                    <p className="text-sm text-black">
                       {activity.pullRequests?.open || 0} open, {activity.pullRequests?.merged || 0} merged
                     </p>
                   </div>
@@ -872,25 +872,25 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
           <h3 className="text-xl font-bold mb-4">📊 {t('usageStatus', language)}</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-              <p className="text-sm text-gray-700 font-medium">{t('analysesThisMonth', language)}</p>
+              <p className="text-sm text-black font-medium">{t('analysesThisMonth', language)}</p>
               <p className="text-2xl font-bold text-black">3 / 10</p>
-              <p className="text-xs text-gray-800 mt-1">{t('freePlan', language)}</p>
+              <p className="text-xs text-black mt-1">{t('freePlan', language)}</p>
             </div>
             <div className="bg-purple-50 p-4 rounded-lg border border-purple-100">
-              <p className="text-sm text-gray-700 font-medium">{t('aiAnalysisUsage', language)}</p>
+              <p className="text-sm text-black font-medium">{t('aiAnalysisUsage', language)}</p>
               <p className="text-2xl font-bold text-black">0 / 0</p>
-              <p className="text-xs text-gray-800 mt-1">{t('proFeature', language)}</p>
+              <p className="text-xs text-black mt-1">{t('proFeature', language)}</p>
             </div>
             <div className="bg-green-50 p-4 rounded-lg border border-green-100">
-              <p className="text-sm text-gray-700 font-medium">{t('cachePeriod', language)}</p>
+              <p className="text-sm text-black font-medium">{t('cachePeriod', language)}</p>
               <p className="text-2xl font-bold text-black">24 {t('hours', language)}</p>
-              <p className="text-xs text-gray-800 mt-1">{t('dataUpdateFrequency', language)}</p>
+              <p className="text-xs text-black mt-1">{t('dataUpdateFrequency', language)}</p>
             </div>
           </div>
           
           <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
             <h4 className="font-semibold text-black mb-2">🚀 {t('upgradeToPro', language)}</h4>
-            <ul className="text-sm text-gray-700 space-y-1 mb-3">
+            <ul className="text-sm text-black space-y-1 mb-3">
               <li>✨ {t('aiDeepAnalysis', language)}</li>
               <li>📈 {t('monthlyRepoLimit', language)}</li>
               <li>💾 {t('csvJsonExport', language)}</li>
@@ -914,7 +914,7 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode; titl
     <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
       <div className="mb-4">{icon}</div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-800">{description}</p>
+      <p className="text-black">{description}</p>
     </div>
   );
 }
@@ -930,7 +930,7 @@ function PricingCard({ name, price, features, highlighted }: { name: string; pri
       <h3 className="text-2xl font-bold mb-2">{name}</h3>
       <p className="text-4xl font-bold mb-6">
         {price}
-        <span className="text-lg text-gray-800">/month</span>
+        <span className="text-lg text-black">/month</span>
       </p>
       <ul className="space-y-3 mb-8">
         {features.map((feature, i) => (
@@ -938,7 +938,7 @@ function PricingCard({ name, price, features, highlighted }: { name: string; pri
             <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
-            <span className="text-gray-700">{feature}</span>
+            <span className="text-black">{feature}</span>
           </li>
         ))}
       </ul>
@@ -956,7 +956,7 @@ function PricingCard({ name, price, features, highlighted }: { name: string; pri
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-gray-50 p-4 rounded-lg">
-      <p className="text-gray-800 text-sm">{label}</p>
+      <p className="text-black text-sm">{label}</p>
       <p className="text-2xl font-bold">{value}</p>
     </div>
   );

@@ -44,8 +44,8 @@ export default function LanguageToggle() {
         className="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
       >
         <span className="text-lg">{currentLanguage.flag}</span>
-        <span className="text-sm font-medium text-gray-700">{currentLanguage.name}</span>
-        <ChevronDown className={`h-4 w-4 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="text-sm font-medium text-black">{currentLanguage.name}</span>
+        <ChevronDown className={`h-4 w-4 text-black transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
@@ -63,7 +63,7 @@ export default function LanguageToggle() {
                 }`}
               >
                 <span className="text-lg">{lang.flag}</span>
-                <span className="text-sm text-gray-700">{lang.name}</span>
+                <span className="text-sm text-black">{lang.name}</span>
               </button>
             ))}
           </div>
