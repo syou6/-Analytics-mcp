@@ -4,6 +4,11 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 export async function GET(request: NextRequest) {
   try {
+    if (!GITHUB_TOKEN) {
+      console.error('GITHUB_TOKEN is not configured');
+      return NextResponse.json({ repos: [] });
+    }
+
     // GitHubユーザー名を取得（今回はSupabase認証から取得）
     const username = request.nextUrl.searchParams.get('username');
     
@@ -22,7 +27,8 @@ export async function GET(request: NextRequest) {
     });
 
     if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.statusText}`);
+      console.error('GitHub API error:', response.status, response.statusText);
+      return NextResponse.json({ repos: [] });
     }
 
     const repos = await response.json();

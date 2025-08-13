@@ -28,6 +28,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
+      // Wait a bit for Supabase to process the URL
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       try {
         // Get initial session
         const { data: { session }, error } = await supabase.auth.getSession();
@@ -43,7 +46,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setUser(session.user);
           setLoading(false);
         } else {
-          console.log('No initial session');
+          console.log('No initial session found');
+          // Try to get user one more time
+          const { data: { user: currentUser } } = await supabase.auth.getUser();
+          if (currentUser) {
+            console.log('User found on second try:', currentUser);
+            setUser(currentUser);
+          }
           setLoading(false);
         }
       } catch (error) {
