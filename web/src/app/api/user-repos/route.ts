@@ -4,6 +4,10 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 export async function GET(request: NextRequest) {
   try {
+    // Debug: Check if token exists
+    console.log('GITHUB_TOKEN exists:', !!GITHUB_TOKEN);
+    console.log('GITHUB_TOKEN length:', GITHUB_TOKEN?.length);
+    
     if (!GITHUB_TOKEN) {
       console.error('GITHUB_TOKEN is not configured');
       return NextResponse.json({ repos: [] });
@@ -19,9 +23,14 @@ export async function GET(request: NextRequest) {
       url = `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`;
     }
     
+    // Try Bearer format for newer tokens
+    const authHeader = GITHUB_TOKEN.startsWith('ghp_') || GITHUB_TOKEN.startsWith('github_pat_')
+      ? `Bearer ${GITHUB_TOKEN}`
+      : `token ${GITHUB_TOKEN}`;
+    
     const response = await fetch(url, {
       headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
+        Authorization: authHeader,
         Accept: 'application/vnd.github.v3+json',
       },
     });
