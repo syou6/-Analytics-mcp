@@ -228,11 +228,29 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
   async function checkSubscription() {
     try {
       const response = await fetch(`/api/subscription?userId=${user.id}`);
+      if (!response.ok) {
+        console.error('Subscription API error:', response.status);
+        // Set default values on error
+        setSubscription({
+          isPro: false,
+          analysesRemaining: 10,
+          aiAnalysesRemaining: 0,
+          limits: { analyses: 10, aiAnalyses: 0 }
+        });
+        return;
+      }
       const data = await response.json();
       setSubscription(data);
       setUsage(data.usage);
     } catch (error) {
       console.error('Error checking subscription:', error);
+      // Set default values on error
+      setSubscription({
+        isPro: false,
+        analysesRemaining: 10,
+        aiAnalysesRemaining: 0,
+        limits: { analyses: 10, aiAnalyses: 0 }
+      });
     }
   }
 
@@ -264,6 +282,13 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
     try {
       // GitHubユーザー名を取得（メールアドレスから推測するか、プロフィールから取得）
       const response = await fetch('/api/user-repos');
+      
+      if (!response.ok) {
+        console.error('User repos API error:', response.status);
+        setUserRepos([]);
+        return;
+      }
+      
       const data = await response.json();
       
       if (data.error) throw new Error(data.error);
