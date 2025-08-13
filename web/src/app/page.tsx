@@ -125,7 +125,7 @@ function LandingPage({ onSignIn }: { onSignIn: () => void }) {
 
       {/* Features */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-3xl font-bold text-center mb-12">Powerful Analytics at Your Fingertips</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 text-black">Powerful Analytics at Your Fingertips</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <FeatureCard
             icon={<BarChart3 className="h-8 w-8 text-blue-600" />}
@@ -162,7 +162,7 @@ function LandingPage({ onSignIn }: { onSignIn: () => void }) {
 
       {/* Pricing */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gray-50 rounded-3xl">
-        <h2 className="text-3xl font-bold text-center mb-12">Simple, Transparent Pricing</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 text-black">Simple, Transparent Pricing</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <PricingCard
             name="Free"
@@ -913,7 +913,7 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode; titl
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
       <div className="mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <h3 className="text-xl font-semibold mb-2 text-black">{title}</h3>
       <p className="text-black">{description}</p>
     </div>
   );
@@ -927,8 +927,8 @@ function PricingCard({ name, price, features, highlighted }: { name: string; pri
           MOST POPULAR
         </div>
       )}
-      <h3 className="text-2xl font-bold mb-2">{name}</h3>
-      <p className="text-4xl font-bold mb-6">
+      <h3 className="text-2xl font-bold mb-2 text-black">{name}</h3>
+      <p className="text-4xl font-bold mb-6 text-black">
         {price}
         <span className="text-lg text-black">/month</span>
       </p>
