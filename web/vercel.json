@@ -1,16 +1,7 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
+  "buildCommand": "cd web && npm run build",
+  "outputDirectory": "web/.next",
+  "installCommand": "cd web && npm install",
   "framework": "nextjs",
-  "regions": ["hnd1"],
-  "functions": {
-    "src/app/api/analyze/route.ts": {
-      "maxDuration": 30
-    },
-    "src/app/api/ai-analysis/route.ts": {
-      "maxDuration": 30
-    }
-  }
+  "devCommand": "cd web && npm run dev"
 }
