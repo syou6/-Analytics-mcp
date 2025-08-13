@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   user: any;
@@ -19,7 +18,6 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     // Check for session on mount
@@ -30,13 +28,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       async (event: any, session: any) => {
         console.log('Auth event:', event, session);
         
-        if (event === 'SIGNED_IN' && session) {
+        if (session) {
           setUser(session.user);
-          // Clean up URL
-          if (window.location.hash || window.location.search.includes('code=')) {
-            router.push('/');
+          // Clean up URL by removing hash
+          if (window.location.hash) {
+            window.history.replaceState(null, '', window.location.pathname);
           }
-        } else if (event === 'SIGNED_OUT') {
+        } else {
           setUser(null);
         }
         
@@ -47,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       authListener?.subscription.unsubscribe();
     };
-  }, [router]);
+  }, []);
 
   async function checkSession() {
     try {
