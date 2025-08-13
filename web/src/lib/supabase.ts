@@ -10,7 +10,7 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
         autoRefreshToken: true,
         persistSession: true,
         detectSessionInUrl: true,
-        flowType: 'implicit'
+        flowType: 'pkce'
       }
     })
   : null as any;
