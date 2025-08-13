@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/contexts/AuthContext';
 import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2, Crown, Lock, Sparkles } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
 import UpgradeModal from '@/components/UpgradeModal';
@@ -14,41 +15,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { t } from '@/lib/i18n';
 
 export default function Home() {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    checkUser();
-    const { data: authListener } = supabase?.auth?.onAuthStateChange(
-      async (event: any, session: any) => {
-        const currentUser = session?.user;
-        setUser(currentUser ?? null);
-      }
-    );
-
-    return () => {
-      authListener?.subscription.unsubscribe();
-    };
-  }, []);
-
-  async function checkUser() {
-    try {
-      // First try to get session from URL
-      const { data: { session }, error } = await supabase?.auth?.getSession() || { data: { session: null }, error: null };
-      
-      if (session) {
-        setUser(session.user);
-      } else {
-        // If no session, try to get user
-        const { data: { user } } = await supabase?.auth?.getUser() || { data: { user: null } };
-        setUser(user);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { user, loading, signOut: authSignOut } = useAuth();
 
   async function signInWithGitHub() {
     try {
@@ -69,14 +36,7 @@ export default function Home() {
   }
 
   async function signOut() {
-    try {
-      if (!supabase) return;
-     const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      setUser(null);
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    await authSignOut();
   }
 
   if (loading) {
