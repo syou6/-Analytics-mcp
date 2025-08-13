@@ -13,8 +13,8 @@ export default function Home() {
 
   useEffect(() => {
     checkUser();
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+    const { data: authListener } = supabase?.auth?.onAuthStateChange(
+      async (event: any, session: any) => {
         const currentUser = session?.user;
         setUser(currentUser ?? null);
       }
@@ -27,7 +27,7 @@ export default function Home() {
 
   async function checkUser() {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user } } = await supabase?.auth?.getUser() || { data: { user: null } };
       setUser(user);
     } catch (error) {
       console.error('Error:', error);
@@ -38,7 +38,11 @@ export default function Home() {
 
   async function signInWithGitHub() {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      if (!supabase) {
+       alert('Authentication is not configured');
+       return;
+     }
+     const { error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: {
           scopes: 'read:user repo',
@@ -52,7 +56,8 @@ export default function Home() {
 
   async function signOut() {
     try {
-      const { error } = await supabase.auth.signOut();
+      if (!supabase) return;
+     const { error } = await supabase.auth.signOut();
       if (error) throw error;
       setUser(null);
     } catch (error) {
