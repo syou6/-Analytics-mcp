@@ -20,22 +20,41 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for session on mount
-    checkSession();
+    // Handle initial session
+    const handleInitialSession = async () => {
+      // First try to get session from URL
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const accessToken = hashParams.get('access_token');
+      
+      if (accessToken) {
+        console.log('Found access token in URL, setting session...');
+        // Let Supabase handle the token
+        const { data: { user }, error } = await supabase.auth.getUser(accessToken);
+        if (user) {
+          console.log('Session set from URL token:', user);
+          setUser(user);
+          setLoading(false);
+          // Clean URL
+          window.history.replaceState(null, '', window.location.pathname);
+          return;
+        }
+      }
+      
+      // Otherwise check existing session
+      checkSession();
+    };
+
+    handleInitialSession();
 
     // Set up auth state listener
     const { data: authListener } = supabase?.auth?.onAuthStateChange(
       async (event: any, session: any) => {
         console.log('Auth event:', event, session);
         
-        if (event === 'SIGNED_IN' && session) {
-          console.log('User signed in:', session.user);
+        if (session) {
           setUser(session.user);
           setLoading(false);
-        } else if (session) {
-          setUser(session.user);
-          setLoading(false);
-        } else {
+        } else if (event === 'SIGNED_OUT') {
           setUser(null);
           setLoading(false);
         }
