@@ -39,21 +39,29 @@ export async function POST(request: NextRequest) {
 
       if (!existingSubscription || existingSubscription.status !== 'active') {
         // Create or update subscription record
+        const subscriptionData = {
+          user_id: userId,
+          stripe_customer_id: session.customer as string,
+          stripe_subscription_id: session.subscription as string,
+          status: 'active',
+          current_period_start: new Date(),
+          current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          updated_at: new Date(),
+        };
+
+        // If no existing subscription, add created_at
+        if (!existingSubscription) {
+          (subscriptionData as any).created_at = new Date();
+        }
+
         const { error: subError } = await supabase
           .from('subscriptions')
-          .upsert({
-            user_id: userId,
-            stripe_customer_id: session.customer as string,
-            stripe_subscription_id: session.subscription as string,
-            status: 'active',
-            current_period_start: new Date(),
-            current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-            created_at: new Date(),
-            updated_at: new Date(),
-          });
+          .upsert(subscriptionData, { onConflict: 'user_id' });
         
         if (subError) {
           console.error('Error creating subscription:', subError);
+        } else {
+          console.log('Subscription activated successfully for user:', userId);
         }
 
         // Initialize usage tracking

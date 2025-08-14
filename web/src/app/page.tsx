@@ -297,10 +297,10 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
       
       if (data.success) {
         console.log('Payment verified, updating subscription status...');
-        // Wait a bit then refresh subscription status
-        setTimeout(() => {
-          checkSubscription();
-        }, 1000);
+        // Wait a bit then refresh subscription status multiple times
+        setTimeout(() => checkSubscription(), 500);
+        setTimeout(() => checkSubscription(), 2000);
+        setTimeout(() => checkSubscription(), 4000);
       }
     } catch (error) {
       console.error('Error verifying payment:', error);
