@@ -1,7 +1,6 @@
 'use client';
 
 import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase-config';
 
 let supabaseInstance: any = null;
 
@@ -14,8 +13,9 @@ export function getSupabase() {
     return supabaseInstance;
   }
 
-  const supabaseUrl = SUPABASE_URL;
-  const supabaseAnonKey = SUPABASE_ANON_KEY;
+  // Always use hardcoded values for now to bypass env issues
+  const supabaseUrl = 'https://cvhiujltpzxhmknznmuq.supabase.co';
+  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2aGl1amx0cHp4aG1rbnpubXVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNDk5MTcsImV4cCI6MjA3MDYyNTkxN30.WxnQPMbmkCYpJ1aYWpRMk9gndRTfFtFh9_VmLSqNttQ';
 
   // Debug logging with more detail
   console.log('=== Supabase Client Initialization ===');
