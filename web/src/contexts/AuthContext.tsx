@@ -29,8 +29,41 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
+      // Wait for Supabase to initialize
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
       try {
-        // Get initial session
+        // Check if there are tokens in the URL first
+        if (window.location.hash && window.location.hash.includes('access_token')) {
+          console.log('Found tokens in URL, attempting manual session set...');
+          const hashParams = new URLSearchParams(window.location.hash.substring(1));
+          const accessToken = hashParams.get('access_token');
+          const refreshToken = hashParams.get('refresh_token');
+          
+          if (accessToken && refreshToken) {
+            try {
+              const { data, error: setError } = await supabase.auth.setSession({
+                access_token: accessToken,
+                refresh_token: refreshToken,
+              });
+              
+              if (setError) {
+                console.error('Error setting session:', setError);
+              } else if (data.session) {
+                console.log('Session set successfully:', data.session.user);
+                setUser(data.session.user);
+                setLoading(false);
+                // Clean URL
+                window.history.replaceState(null, '', window.location.pathname);
+                return;
+              }
+            } catch (e) {
+              console.error('Exception setting session:', e);
+            }
+          }
+        }
+        
+        // Otherwise try to get existing session
         const { data: { session }, error } = await supabase.auth.getSession();
         
         if (error) {

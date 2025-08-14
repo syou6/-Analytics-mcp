@@ -28,6 +28,8 @@ export function getSupabase() {
       autoRefreshToken: true,
       persistSession: true,
       detectSessionInUrl: true,
+      storage: window.localStorage,
+      storageKey: 'sb-auth-token-' + supabaseUrl.split('.')[0].split('//')[1],
     }
   });
 
