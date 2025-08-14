@@ -65,7 +65,7 @@ function LandingPage({ onSignIn }: { onSignIn: () => void }) {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <Github className="h-8 w-8 text-blue-600" />
-              <span className="font-bold text-xl text-black">GitHub Analytics MCP</span>
+              <span className="font-bold text-xl text-black">GitVue</span>
             </div>
             <button
               onClick={onSignIn}
@@ -550,7 +550,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <Github className="h-8 w-8 text-blue-600" />
-              <span className="font-bold text-xl text-black">GitHub Analytics MCP</span>
+              <span className="font-bold text-xl text-black">GitVue</span>
             </div>
             <div className="flex items-center space-x-4">
               {subscription && (

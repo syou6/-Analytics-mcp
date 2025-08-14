@@ -19,7 +19,7 @@ export const envConfig = {
   // App configuration
   APP_URL: process.env.NEXT_PUBLIC_APP_URL?.startsWith('http') 
     ? process.env.NEXT_PUBLIC_APP_URL 
-    : `https://${process.env.NEXT_PUBLIC_APP_URL || 'ana-app-web.vercel.app'}`,
+    : `https://${process.env.NEXT_PUBLIC_APP_URL || 'gitvue.dev'}`,
   
   // Gemini API
   GEMINI_API_KEY: process.env.GEMINI_API_KEY,

@@ -3,7 +3,7 @@ export type Language = 'en' | 'ja';
 export const translations = {
   en: {
     // Header
-    appName: 'GitHub Analytics MCP',
+    appName: 'GitVue',
     signOut: 'Sign out',
     signInWithGitHub: 'Sign in with GitHub',
     
@@ -161,7 +161,7 @@ export const translations = {
   
   ja: {
     // Header
-    appName: 'GitHub Analytics MCP',
+    appName: 'GitVue',
     signOut: 'サインアウト',
     signInWithGitHub: 'GitHubでサインイン',
     

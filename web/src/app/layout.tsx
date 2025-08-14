@@ -15,8 +15,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GitHub Analytics MCP",
-  description: "AI-powered GitHub repository analytics",
+  title: "GitVue - Visualize Your GitHub Impact",
+  description: "AI-powered GitHub analytics dashboard with beautiful visualizations and insights",
 };
 
 export default function RootLayout({
