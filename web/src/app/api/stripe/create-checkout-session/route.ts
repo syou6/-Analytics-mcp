@@ -73,8 +73,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'subscription',
-      success_url: `${request.headers.get('origin')}/?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${request.headers.get('origin')}/?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL || request.headers.get('origin')}/?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || request.headers.get('origin')}/?canceled=true`,
       metadata: {
         user_id: userId,
       },

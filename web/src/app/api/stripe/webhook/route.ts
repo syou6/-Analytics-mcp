@@ -15,6 +15,9 @@ const supabase = createClient(
 );
 
 export async function POST(request: NextRequest) {
+  console.log('=== WEBHOOK START ===');
+  console.log('Timestamp:', new Date().toISOString());
+  
   try {
     // Check if Stripe is configured
     if (!stripe) {
@@ -36,13 +39,18 @@ export async function POST(request: NextRequest) {
 
     let event;
     try {
+      const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+      console.log('Using webhook secret:', webhookSecret ? `${webhookSecret.substring(0, 10)}...` : 'NOT SET');
+      
       event = stripe.webhooks.constructEvent(
         body,
         signature,
-        process.env.STRIPE_WEBHOOK_SECRET!
+        webhookSecret!
       );
+      console.log('Webhook event constructed:', event.type);
     } catch (err: any) {
       console.error('Webhook signature verification failed:', err.message);
+      console.error('Signature received:', signature);
       return NextResponse.json(
         { error: `Webhook Error: ${err.message}` },
         { status: 400 }
@@ -53,18 +61,37 @@ export async function POST(request: NextRequest) {
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object as any;
+        console.log('Processing checkout.session.completed');
+        console.log('Session data:', {
+          id: session.id,
+          customer: session.customer,
+          subscription: session.subscription,
+          metadata: session.metadata,
+          payment_status: session.payment_status
+        });
         
         // Update user subscription in database
-        await supabase
+        const upsertData = {
+          user_id: session.metadata.user_id,
+          stripe_customer_id: session.customer,
+          stripe_subscription_id: session.subscription,
+          status: 'active',
+          current_period_start: new Date(),
+          current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+        };
+        
+        console.log('Upserting subscription:', upsertData);
+        
+        const { data, error } = await supabase
           .from('subscriptions')
-          .upsert({
-            user_id: session.metadata.user_id,
-            stripe_customer_id: session.customer,
-            stripe_subscription_id: session.subscription,
-            status: 'active',
-            current_period_start: new Date(),
-            current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
-          });
+          .upsert(upsertData)
+          .select();
+        
+        if (error) {
+          console.error('Error upserting subscription:', error);
+        } else {
+          console.log('Subscription upserted successfully:', data);
+        }
         
         break;
       }
@@ -146,6 +173,7 @@ export async function POST(request: NextRequest) {
         console.log(`Unhandled event type ${event.type}`);
     }
 
+    console.log('=== WEBHOOK END ===');
     return NextResponse.json({ received: true });
   } catch (error: any) {
     console.error('Webhook error:', error);

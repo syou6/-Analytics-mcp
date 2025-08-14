@@ -15,12 +15,16 @@ const supabase = createClient(
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('=== CHECK-PAYMENT START ===');
+    console.log('Timestamp:', new Date().toISOString());
+    
     if (!stripe) {
       console.error('Stripe not configured');
       return NextResponse.json({ error: 'Payment processing not configured' }, { status: 503 });
     }
 
     const { sessionId, userId } = await request.json();
+    console.log('Request data:', { sessionId, userId });
     
     if (!sessionId || !userId) {
       return NextResponse.json({ error: 'Missing parameters' }, { status: 400 });
@@ -28,16 +32,29 @@ export async function POST(request: NextRequest) {
 
     // Retrieve the session from Stripe
     const session = await stripe.checkout.sessions.retrieve(sessionId);
+    console.log('Stripe session:', {
+      id: session.id,
+      payment_status: session.payment_status,
+      status: session.status,
+      customer: session.customer,
+      subscription: session.subscription,
+      metadata: session.metadata
+    });
     
     if (session.payment_status === 'paid' && session.status === 'complete') {
+      console.log('Payment confirmed, checking existing subscription...');
       // Check if subscription already exists
-      const { data: existingSubscription } = await supabase
+      const { data: existingSubscription, error: selectError } = await supabase
         .from('subscriptions')
         .select('*')
         .eq('user_id', userId)
         .single();
+      
+      console.log('Existing subscription:', existingSubscription);
+      console.log('Select error:', selectError?.message);
 
       if (!existingSubscription || existingSubscription.status !== 'active') {
+        console.log('Creating/updating subscription...');
         // Create or update subscription record
         const subscriptionData = {
           user_id: userId,
@@ -54,14 +71,21 @@ export async function POST(request: NextRequest) {
           (subscriptionData as any).created_at = new Date();
         }
 
-        const { error: subError } = await supabase
+        console.log('Upserting subscription data:', subscriptionData);
+        
+        const { data: upsertResult, error: subError } = await supabase
           .from('subscriptions')
-          .upsert(subscriptionData, { onConflict: 'user_id' });
+          .upsert(subscriptionData, { onConflict: 'user_id' })
+          .select();
+        
+        console.log('Upsert result:', upsertResult);
         
         if (subError) {
           console.error('Error creating subscription:', subError);
+          console.error('Error details:', subError);
         } else {
           console.log('Subscription activated successfully for user:', userId);
+          console.log('Created subscription:', upsertResult);
         }
 
         // Initialize usage tracking
@@ -83,6 +107,7 @@ export async function POST(request: NextRequest) {
           });
       }
 
+      console.log('=== CHECK-PAYMENT END SUCCESS ===');
       return NextResponse.json({ 
         success: true, 
         subscription: 'active',
