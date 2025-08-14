@@ -212,6 +212,8 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
       // Check for successful payment redirect
       const urlParams = new URLSearchParams(window.location.search);
       const sessionId = urlParams.get('session_id');
+      const refresh = urlParams.get('refresh');
+      
       if (sessionId) {
         setShowSuccessMessage(true);
         // Clean up URL
@@ -223,12 +225,22 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         // Hide message after 5 seconds
         setTimeout(() => setShowSuccessMessage(false), 5000);
       }
+      
+      // Force refresh subscription status if coming from subscription-debug
+      if (refresh) {
+        console.log('Forcing subscription refresh...');
+        window.history.replaceState({}, document.title, '/');
+        setTimeout(() => {
+          checkSubscription();
+        }, 500);
+      }
     }
   }, [user, activeTab]);
 
   async function checkSubscription() {
     try {
-      const response = await fetch(`/api/subscription?userId=${user.id}`);
+      console.log('Checking subscription for user:', user.id);
+      const response = await fetch(`/api/subscription?userId=${user.id}&t=${Date.now()}`);
       if (!response.ok) {
         console.error('Subscription API error:', response.status);
         // Set default values on error
@@ -241,6 +253,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         return;
       }
       const data = await response.json();
+      console.log('Subscription data received:', data);
       setSubscription(data);
       setUsage(data.usage);
     } catch (error) {

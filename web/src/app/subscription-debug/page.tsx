@@ -42,8 +42,9 @@ export default function SubscriptionDebugPage() {
         });
         const data = await response.json();
         if (data.success) {
-          alert('Pro subscription activated! Please go back to the home page.');
-          window.location.href = '/';
+          alert('Pro subscription activated! Redirecting to home page...');
+          // Force hard refresh to clear cache
+          window.location.href = '/?refresh=' + Date.now();
         } else {
           alert(`Error: ${data.error}`);
         }
