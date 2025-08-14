@@ -40,7 +40,7 @@ export default function Home() {
         provider: 'github',
         options: {
           scopes: 'read:user repo',
-          redirectTo: window.location.origin,
+          redirectTo: `${window.location.origin}/auth`,
         },
       });
       if (error) throw error;
