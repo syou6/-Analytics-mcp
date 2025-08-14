@@ -73,9 +73,20 @@ export async function POST(request: NextRequest) {
 
         console.log('Upserting subscription data:', subscriptionData);
         
+        // First, delete any existing subscriptions for this user to avoid duplicates
+        const { error: deleteError } = await supabase
+          .from('subscriptions')
+          .delete()
+          .eq('user_id', userId);
+        
+        if (deleteError) {
+          console.log('Error deleting existing subscriptions:', deleteError);
+        }
+        
+        // Then insert the new subscription
         const { data: upsertResult, error: subError } = await supabase
           .from('subscriptions')
-          .upsert(subscriptionData, { onConflict: 'user_id' })
+          .insert(subscriptionData)
           .select();
         
         console.log('Upsert result:', upsertResult);

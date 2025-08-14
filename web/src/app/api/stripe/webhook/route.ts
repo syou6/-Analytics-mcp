@@ -82,9 +82,20 @@ export async function POST(request: NextRequest) {
         
         console.log('Upserting subscription:', upsertData);
         
+        // First, delete any existing subscriptions for this user
+        await supabase
+          .from('subscriptions')
+          .delete()
+          .eq('user_id', session.metadata.user_id);
+        
+        // Then insert the new subscription
         const { data, error } = await supabase
           .from('subscriptions')
-          .upsert(upsertData)
+          .insert({
+            ...upsertData,
+            created_at: new Date(),
+            updated_at: new Date()
+          })
           .select();
         
         if (error) {

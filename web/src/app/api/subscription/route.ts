@@ -26,13 +26,20 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Get subscription status
-    const { data: subscription } = await supabase
+    // Get subscription status - get the most recent active subscription
+    // Filter for real Stripe subscriptions (not manual test ones)
+    const { data: subscriptions } = await supabase
       .from('subscriptions')
-      .select('status, current_period_end')
+      .select('status, current_period_end, stripe_customer_id, stripe_subscription_id')
       .eq('user_id', userId)
       .eq('status', 'active')
-      .single();
+      .order('created_at', { ascending: false });
+    
+    // Find the first valid Stripe subscription
+    const subscription = subscriptions?.find(sub => 
+      sub.stripe_customer_id?.startsWith('cus_') && 
+      sub.stripe_subscription_id?.startsWith('sub_')
+    ) || subscriptions?.[0];
 
     // Get current usage
     const currentMonth = new Date();
