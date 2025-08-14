@@ -1,6 +1,7 @@
 'use client';
 
 import { createClient } from '@supabase/supabase-js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './supabase-config';
 
 let supabaseInstance: any = null;
 
@@ -13,11 +14,21 @@ export function getSupabase() {
     return supabaseInstance;
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseUrl = SUPABASE_URL;
+  const supabaseAnonKey = SUPABASE_ANON_KEY;
+
+  // Debug logging
+  console.log('Environment check:');
+  console.log('- SUPABASE_URL exists:', !!supabaseUrl);
+  console.log('- SUPABASE_URL value:', supabaseUrl);
+  console.log('- ANON_KEY exists:', !!supabaseAnonKey);
+  console.log('- ANON_KEY length:', supabaseAnonKey?.length);
+  console.log('- ANON_KEY first 20 chars:', supabaseAnonKey?.substring(0, 20));
 
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('Supabase credentials missing');
+    console.error('URL:', supabaseUrl);
+    console.error('Key:', supabaseAnonKey);
     return null;
   }
 
