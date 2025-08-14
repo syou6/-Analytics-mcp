@@ -28,10 +28,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      // Wait a bit for Supabase to process the URL
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Wait for Supabase to process the URL tokens
+      await new Promise(resolve => setTimeout(resolve, 500));
 
       try {
+        // First, check if there are tokens in the URL
+        if (window.location.hash && window.location.hash.includes('access_token')) {
+          console.log('Found tokens in URL, waiting for Supabase to process...');
+          // Give Supabase more time to process the tokens
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+        
         // Get initial session
         const { data: { session }, error } = await supabase.auth.getSession();
         

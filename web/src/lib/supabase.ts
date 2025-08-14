@@ -9,7 +9,9 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
       auth: {
         autoRefreshToken: true,
         persistSession: true,
-        detectSessionInUrl: true
+        detectSessionInUrl: true,
+        storageKey: 'supabase.auth.token',
+        storage: typeof window !== 'undefined' ? window.localStorage : undefined
       }
     })
   : null as any;
