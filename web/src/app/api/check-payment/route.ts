@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createClient } from '@supabase/supabase-js';
+import { envConfig } from '@/lib/env-config';
 
-const supabase = process.env.NEXT_PUBLIC_SUPABASE_URL
-  ? createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    )
-  : null;
+const supabase = createClient(
+  'https://cvhiujltpzxhmknznmuq.supabase.co',
+  envConfig.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2aGl1amx0cHp4aG1rbnpubXVxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTA0OTkxNywiZXhwIjoyMDcwNjI1OTE3fQ.teNeiAAYG6qKVTlG9yx3dC9HVYFBCqjU0wqXJvCn_J8'
+);
 
 export async function POST(request: NextRequest) {
   try {
-    if (!stripe || !supabase) {
-      return NextResponse.json({ error: 'Not configured' }, { status: 503 });
+    if (!stripe) {
+      console.error('Stripe not configured');
+      return NextResponse.json({ error: 'Payment processing not configured' }, { status: 503 });
     }
 
     const { sessionId, userId } = await request.json();
@@ -32,9 +32,9 @@ export async function POST(request: NextRequest) {
         .eq('user_id', userId)
         .single();
 
-      if (!existingSubscription) {
-        // Create subscription record if webhook hasn't processed yet
-        await supabase
+      if (!existingSubscription || existingSubscription.status !== 'active') {
+        // Create or update subscription record
+        const { error: subError } = await supabase
           .from('subscriptions')
           .upsert({
             user_id: userId,
@@ -46,6 +46,10 @@ export async function POST(request: NextRequest) {
             created_at: new Date(),
             updated_at: new Date(),
           });
+        
+        if (subError) {
+          console.error('Error creating subscription:', subError);
+        }
 
         // Initialize usage tracking
         const currentMonth = new Date();
