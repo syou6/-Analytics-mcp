@@ -11,21 +11,21 @@ export default function LegalPage() {
             <table className="w-full border-collapse">
               <tbody>
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top w-1/3">販売事業者</td>
-                  <td className="py-4">
+                  <td className="py-4 pr-4 font-bold align-top w-1/3 text-gray-900">販売事業者</td>
+                  <td className="py-4 text-gray-700">
                     [あなたの氏名]<br/>
                     <span className="text-sm text-gray-600">※個人事業主として運営</span>
                   </td>
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">運営責任者</td>
-                  <td className="py-4">[あなたの氏名]</td>
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">運営責任者</td>
+                  <td className="py-4 text-gray-700">[あなたの氏名]</td>
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">所在地</td>
-                  <td className="py-4">
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">所在地</td>
+                  <td className="py-4 text-gray-700">
                     島根県松江市<br/>
                     <span className="text-sm text-gray-600">
                       ※詳細な住所は請求があった場合に遅滞なく開示いたします
@@ -34,8 +34,8 @@ export default function LegalPage() {
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">連絡先</td>
-                  <td className="py-4">
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">連絡先</td>
+                  <td className="py-4 text-gray-700">
                     メールアドレス: heartssh950@gmail.com<br/>
                     <span className="text-sm text-gray-600">
                       ※電話番号は請求があった場合に遅滞なく開示いたします<br/>
@@ -45,8 +45,8 @@ export default function LegalPage() {
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">販売価格</td>
-                  <td className="py-4">
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">販売価格</td>
+                  <td className="py-4 text-gray-700">
                     <ul className="list-disc pl-5">
                       <li>無料プラン: 0円</li>
                       <li>Proプラン: 月額 1,500円（税込）</li>
@@ -55,31 +55,31 @@ export default function LegalPage() {
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">追加料金</td>
-                  <td className="py-4">なし</td>
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">追加料金</td>
+                  <td className="py-4 text-gray-700">なし</td>
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">支払方法</td>
-                  <td className="py-4">クレジットカード（Visa、Mastercard、American Express、JCB）</td>
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">支払方法</td>
+                  <td className="py-4 text-gray-700">クレジットカード（Visa、Mastercard、American Express、JCB）</td>
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">支払時期</td>
-                  <td className="py-4">
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">支払時期</td>
+                  <td className="py-4 text-gray-700">
                     お申し込み時に初回料金をお支払いいただきます。<br/>
                     以降、毎月同日に自動的に課金されます。
                   </td>
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">サービス提供時期</td>
-                  <td className="py-4">決済完了後、即時利用可能</td>
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">サービス提供時期</td>
+                  <td className="py-4 text-gray-700">決済完了後、即時利用可能</td>
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">返金・キャンセル</td>
-                  <td className="py-4">
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">返金・キャンセル</td>
+                  <td className="py-4 text-gray-700">
                     <ul className="list-disc pl-5">
                       <li>初回購入から7日以内: 全額返金</li>
                       <li>サービスの不具合による利用不可: 日割り返金</li>
@@ -89,8 +89,8 @@ export default function LegalPage() {
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top">動作環境</td>
-                  <td className="py-4">
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">動作環境</td>
+                  <td className="py-4 text-gray-700">
                     <ul className="list-disc pl-5">
                       <li>インターネット接続環境</li>
                       <li>最新版のWebブラウザ（Chrome、Firefox、Safari、Edge）</li>
