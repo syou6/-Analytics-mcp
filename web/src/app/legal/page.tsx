@@ -48,8 +48,8 @@ export default function LegalPage() {
                   <td className="py-4 pr-4 font-bold align-top text-gray-900">販売価格</td>
                   <td className="py-4 text-gray-700">
                     <ul className="list-disc pl-5">
-                      <li>無料プラン: 0円</li>
-                      <li>Proプラン: 月額 1,500円（税込）</li>
+                      <li>無料プラン: $0</li>
+                      <li>Proプラン: 月額 $9.8 USD</li>
                     </ul>
                   </td>
                 </tr>

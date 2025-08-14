@@ -258,8 +258,8 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
                 onClick={() => setIsAnnual(true)}
                 className={`px-4 py-2 rounded-md transition-all ${isAnnual ? 'bg-white dark:bg-gray-900 shadow-sm' : ''}`}
               >
-                年間払い
-                <span className="ml-2 text-xs text-green-600">20%お得</span>
+                Annual
+                <span className="ml-2 text-xs text-green-600">Save 20%</span>
               </button>
             </div>
           </div>
@@ -273,8 +273,8 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
             >
               <h3 className="text-lg font-semibold mb-2">Starter</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">¥{isAnnual ? '600' : '750'}</span>
-                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/月</span>
+                <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
@@ -303,8 +303,8 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
             >
               <h3 className="text-lg font-semibold mb-2">Basic</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">¥{isAnnual ? '1,000' : '1,250'}</span>
-                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/月</span>
+                <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
@@ -342,9 +342,9 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               </div>
               <h3 className="text-lg font-semibold mb-2">Professional</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">¥{isAnnual ? '1,200' : '1,500'}</span>
-                <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>/月</span>
-                {isAnnual && <span className="ml-2 text-green-600 text-sm">年間¥3,600お得</span>}
+                <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
+                <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>/mo</span>
+                {isAnnual && <span className="ml-2 text-green-600 text-sm">Save $24/year</span>}
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
@@ -388,8 +388,8 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
             >
               <h3 className="text-lg font-semibold mb-2">Enterprise</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">¥15,000</span>
-                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/月</span>
+                <span className="text-3xl font-bold">$99</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
@@ -487,7 +487,7 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               </div>
             </div>
             <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
-              "Best ¥1,500 I spend each month. The portfolio alone has gotten me 
+              "Best $9.8 I spend each month. The portfolio alone has gotten me 
               3 new clients. ROI is incredible!"
             </p>
             <div className="flex items-center">
