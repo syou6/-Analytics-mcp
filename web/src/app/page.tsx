@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
+import { createClient } from '@supabase/supabase-js';
 import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2, Crown, Lock, Sparkles } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
 import UpgradeModal from '@/components/UpgradeModal';
@@ -16,6 +16,19 @@ import { t } from '@/lib/i18n';
 
 export default function Home() {
   const { user, loading, signOut: authSignOut } = useAuth();
+  const [supabase, setSupabase] = useState<any>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      
+      if (supabaseUrl && supabaseAnonKey) {
+        const client = createClient(supabaseUrl, supabaseAnonKey);
+        setSupabase(client);
+      }
+    }
+  }, []);
 
   async function signInWithGitHub() {
     try {

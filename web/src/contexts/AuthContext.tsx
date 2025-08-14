@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 
 interface AuthContextType {
   user: any;
@@ -18,15 +18,34 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [supabase, setSupabase] = useState<any>(null);
 
   useEffect(() => {
+    // Initialize Supabase client on client side only
+    if (typeof window !== 'undefined') {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      
+      if (supabaseUrl && supabaseAnonKey) {
+        const client = createClient(supabaseUrl, supabaseAnonKey, {
+          auth: {
+            autoRefreshToken: true,
+            persistSession: true,
+            detectSessionInUrl: true,
+            storage: window.localStorage,
+            storageKey: 'sb-auth-token'
+          }
+        });
+        setSupabase(client);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!supabase) return;
+    
     // Initialize auth
     const initAuth = async () => {
-      if (!supabase) {
-        console.log('Supabase client not initialized');
-        setLoading(false);
-        return;
-      }
 
       // Wait for Supabase to process the URL tokens
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -96,7 +115,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       authListener?.subscription.unsubscribe();
     };
-  }, []);
+  }, [supabase]);
 
 
   async function signOut() {
