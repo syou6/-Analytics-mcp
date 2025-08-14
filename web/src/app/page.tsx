@@ -6,6 +6,7 @@ import { getSupabase } from '@/lib/supabase-browser';
 import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2, Crown, Lock, Sparkles } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
 import UpgradeModal from '@/components/UpgradeModal';
+import Footer from '@/components/Footer';
 import ActivitySummaryCards from '@/components/ActivitySummaryCards';
 import CommitHeatmap from '@/components/CommitHeatmap';
 import CommitTimeDistribution from '@/components/CommitTimeDistribution';
@@ -178,6 +179,8 @@ function LandingPage({ onSignIn }: { onSignIn: () => void }) {
           />
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }
@@ -1243,6 +1246,8 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         userId={user.id}
         userEmail={user.email}
       />
+
+      <Footer />
     </div>
   );
 }
