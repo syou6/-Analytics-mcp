@@ -32,20 +32,27 @@ export default function SubscriptionDebugPage() {
   async function createManualSubscription() {
     if (!user) return;
     
-    setLoading(true);
-    try {
-      const response = await fetch('/api/debug-subscription', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: user.id }),
-      });
-      const data = await response.json();
-      alert(data.success ? 'Subscription created!' : `Error: ${data.error}`);
-      fetchDebugData();
-    } catch (error) {
-      console.error('Error creating subscription:', error);
-    } finally {
-      setLoading(false);
+    if (confirm('This will activate Pro subscription for your account. Continue?')) {
+      setLoading(true);
+      try {
+        const response = await fetch('/api/debug-subscription', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: user.id }),
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert('Pro subscription activated! Please go back to the home page.');
+          window.location.href = '/';
+        } else {
+          alert(`Error: ${data.error}`);
+        }
+        fetchDebugData();
+      } catch (error) {
+        console.error('Error creating subscription:', error);
+      } finally {
+        setLoading(false);
+      }
     }
   }
 
@@ -101,9 +108,9 @@ export default function SubscriptionDebugPage() {
             <button
               onClick={createManualSubscription}
               disabled={loading}
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold"
             >
-              Create Manual Subscription (Test)
+              🚀 Activate Pro Subscription
             </button>
             <button
               onClick={checkStripeSession}
