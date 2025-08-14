@@ -90,30 +90,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     initAuth();
 
     // Set up auth state listener
-    const { data: authListener } = supabase?.auth?.onAuthStateChange(
-      async (event: any, session: any) => {
-        console.log('Auth state change:', event, session?.user?.email);
-        
-        if (event === 'SIGNED_IN' && session) {
-          console.log('User signed in, setting user:', session.user);
-          setUser(session.user);
-          setLoading(false);
-          // Clean URL after sign in
-          if (window.location.hash) {
-            window.history.replaceState(null, '', window.location.pathname);
+    let authListener: any = null;
+    if (supabase?.auth?.onAuthStateChange) {
+      const result = supabase.auth.onAuthStateChange(
+        async (event: any, session: any) => {
+          console.log('Auth state change:', event, session?.user?.email);
+          
+          if (event === 'SIGNED_IN' && session) {
+            console.log('User signed in, setting user:', session.user);
+            setUser(session.user);
+            setLoading(false);
+            // Clean URL after sign in
+            if (window.location.hash) {
+              window.history.replaceState(null, '', window.location.pathname);
+            }
+          } else if (event === 'SIGNED_OUT') {
+            setUser(null);
+            setLoading(false);
+          } else if (session) {
+            setUser(session.user);
+            setLoading(false);
           }
-        } else if (event === 'SIGNED_OUT') {
-          setUser(null);
-          setLoading(false);
-        } else if (session) {
-          setUser(session.user);
-          setLoading(false);
         }
-      }
-    ) || { data: null };
+      );
+      authListener = result.data;
+    }
 
     return () => {
-      authListener?.subscription.unsubscribe();
+      authListener?.subscription?.unsubscribe();
     };
   }, [supabase]);
 
