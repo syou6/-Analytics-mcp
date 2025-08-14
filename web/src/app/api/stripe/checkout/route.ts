@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
+import { envConfig } from '@/lib/env-config';
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,7 +22,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create or use price ID for ¥980/month subscription
-    const finalPriceId = priceId || process.env.STRIPE_PRICE_ID;
+    const finalPriceId = priceId || envConfig.STRIPE_PRICE_ID;
     
     if (!finalPriceId) {
       // Create a price if not configured
@@ -45,8 +46,8 @@ export async function POST(request: NextRequest) {
           },
         ],
         mode: 'subscription',
-        success_url: `${process.env.NEXT_PUBLIC_APP_URL}/?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
+        success_url: `${envConfig.APP_URL}/?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${envConfig.APP_URL}/`,
         customer_email: userEmail,
         metadata: {
           user_id: userId,
@@ -71,8 +72,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'subscription',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/`,
+      success_url: `${envConfig.APP_URL}/?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${envConfig.APP_URL}/`,
       customer_email: userEmail,
       metadata: {
         user_id: userId,

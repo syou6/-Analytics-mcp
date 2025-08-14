@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { envConfig } from '@/lib/env-config';
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_TOKEN = envConfig.GITHUB_TOKEN;
 
 export async function POST(request: NextRequest) {
   try {
+    if (!GITHUB_TOKEN) {
+      console.error('GitHub token not configured');
+      return NextResponse.json(
+        { error: 'GitHub API not configured. Please check environment variables.' },
+        { status: 500 }
+      );
+    }
+
     const { owner, repo, days = 30 } = await request.json();
 
     if (!owner || !repo) {

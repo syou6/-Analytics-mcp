@@ -17,7 +17,9 @@ export const envConfig = {
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
   
   // App configuration
-  APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'https://ana-app-web.vercel.app',
+  APP_URL: process.env.NEXT_PUBLIC_APP_URL?.startsWith('http') 
+    ? process.env.NEXT_PUBLIC_APP_URL 
+    : `https://${process.env.NEXT_PUBLIC_APP_URL || 'ana-app-web.vercel.app'}`,
   
   // Gemini API
   GEMINI_API_KEY: process.env.GEMINI_API_KEY,
