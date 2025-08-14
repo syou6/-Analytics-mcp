@@ -12,28 +12,35 @@ export default function LegalPage() {
               <tbody>
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top w-1/3">販売事業者</td>
-                  <td className="py-4">[あなたの名前または事業者名]</td>
+                  <td className="py-4">
+                    [あなたの氏名]<br/>
+                    <span className="text-sm text-gray-600">※個人事業主として運営</span>
+                  </td>
                 </tr>
                 
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top">運営責任者</td>
-                  <td className="py-4">[運営責任者名]</td>
+                  <td className="py-4">[あなたの氏名]</td>
                 </tr>
                 
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top">所在地</td>
                   <td className="py-4">
-                    [郵便番号]<br/>
-                    [住所]
+                    島根県松江市<br/>
+                    <span className="text-sm text-gray-600">
+                      ※詳細な住所は請求があった場合に遅滞なく開示いたします
+                    </span>
                   </td>
                 </tr>
                 
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top">連絡先</td>
                   <td className="py-4">
-                    メールアドレス: support@gitvue.dev<br/>
-                    電話番号: [電話番号]<br/>
-                    ※お問い合わせはメールでお願いします
+                    メールアドレス: heartssh950@gmail.com<br/>
+                    <span className="text-sm text-gray-600">
+                      ※電話番号は請求があった場合に遅滞なく開示いたします<br/>
+                      お問い合わせはメールでお願いいたします
+                    </span>
                   </td>
                 </tr>
                 

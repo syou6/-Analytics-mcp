@@ -16,12 +16,12 @@ export default function Footer() {
             <h3 className="font-bold text-gray-900 mb-3">サポート</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="mailto:support@gitvue.dev" className="text-gray-600 hover:text-blue-600">
+                <a href="mailto:heartssh950@gmail.com" className="text-gray-600 hover:text-blue-600">
                   お問い合わせ
                 </a>
               </li>
               <li>
-                <a href="https://github.com/your-repo/issues" className="text-gray-600 hover:text-blue-600">
+                <a href="https://github.com/syou6/github-analytics-mcp/issues" className="text-gray-600 hover:text-blue-600">
                   GitHub Issues
                 </a>
               </li>
