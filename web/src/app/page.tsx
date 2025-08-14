@@ -234,6 +234,17 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
           checkSubscription();
         }, 500);
       }
+      
+      // Force Pro status for testing
+      const forcePro = urlParams.get('forcePro');
+      if (forcePro) {
+        console.log('Force Pro mode activated');
+        const forcedProData = localStorage.getItem('force_pro_status');
+        if (forcedProData) {
+          setSubscription(JSON.parse(forcedProData));
+          window.history.replaceState({}, document.title, '/');
+        }
+      }
     }
   }, [user, activeTab]);
 
@@ -253,7 +264,12 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         return;
       }
       const data = await response.json();
-      console.log('Subscription data received:', data);
+      console.log('Subscription data received:', {
+        isPro: data.isPro,
+        analysesRemaining: data.analysesRemaining,
+        subscription: data.subscription,
+        raw: data
+      });
       setSubscription(data);
       setUsage(data.usage);
     } catch (error) {
