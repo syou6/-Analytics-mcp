@@ -34,9 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="alternate icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
+        <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico?v=2" />
+        <link rel="apple-touch-icon" href="/icon.svg?v=2" />
+        <link rel="shortcut icon" href="/favicon.ico?v=2" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
