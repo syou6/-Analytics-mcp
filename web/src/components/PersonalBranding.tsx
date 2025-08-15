@@ -113,7 +113,7 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
           <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
             <div className="flex items-start justify-between">
               <div>
-                <h3 className="text-xl font-bold flex items-center">
+                <h3 className="text-xl font-bold flex items-center text-indigo-600">
                   <User className="w-5 h-5 mr-2" />
                   {analysis.profile.name || analysis.profile.username}
                 </h3>
@@ -127,19 +127,19 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
                 )}
                 <div className="flex items-center gap-4 mt-3 text-sm">
                   {analysis.profile.location && (
-                    <span className="flex items-center">
+                    <span className="flex items-center text-gray-700">
                       <Globe className="w-4 h-4 mr-1" />
                       {analysis.profile.location}
                     </span>
                   )}
                   {analysis.profile.company && (
-                    <span className="flex items-center">
+                    <span className="flex items-center text-gray-700">
                       <Award className="w-4 h-4 mr-1" />
                       {analysis.profile.company}
                     </span>
                   )}
                   {analysis.profile.twitterUsername && (
-                    <span className="flex items-center">
+                    <span className="flex items-center text-gray-700">
                       <Twitter className="w-4 h-4 mr-1" />
                       @{analysis.profile.twitterUsername}
                     </span>
@@ -147,7 +147,7 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-sm text-gray-500 mb-1">
+                <div className="text-sm text-gray-600 font-medium mb-1">
                   {language === 'en' ? 'Brand Score' : 'ブランドスコア'}
                 </div>
                 <div className={`text-4xl font-bold ${getScoreColor(analysis.scores.brandStrength)}`}>
@@ -167,41 +167,41 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
                 <Users className="w-5 h-5 text-blue-600" />
                 <span className="text-2xl font-bold">{(analysis.profile.followers || 0).toLocaleString()}</span>
               </div>
-              <div className="text-sm">{language === 'en' ? 'Followers' : 'フォロワー'}</div>
+              <div className="text-sm text-blue-600 font-medium">{language === 'en' ? 'Followers' : 'フォロワー'}</div>
             </div>
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="flex items-center justify-between mb-2">
                 <Star className="w-5 h-5 text-yellow-500" />
                 <span className="text-2xl font-bold">{(analysis.metrics.totalStars || 0).toLocaleString()}</span>
               </div>
-              <div className="text-sm">{language === 'en' ? 'Total Stars' : '総スター数'}</div>
+              <div className="text-sm text-yellow-600 font-medium">{language === 'en' ? 'Total Stars' : '総スター数'}</div>
             </div>
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="flex items-center justify-between mb-2">
                 <GitPullRequest className="w-5 h-5 text-green-600" />
                 <span className="text-2xl font-bold">{(analysis.metrics.totalPullRequests || 0).toLocaleString()}</span>
               </div>
-              <div className="text-sm">{language === 'en' ? 'Pull Requests' : 'プルリクエスト'}</div>
+              <div className="text-sm text-green-600 font-medium">{language === 'en' ? 'Pull Requests' : 'プルリクエスト'}</div>
             </div>
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="flex items-center justify-between mb-2">
                 <TrendingUp className="w-5 h-5 text-purple-600" />
                 <span className="text-2xl font-bold">{(analysis.metrics.totalContributions || 0).toLocaleString()}</span>
               </div>
-              <div className="text-sm">{language === 'en' ? 'Contributions' : 'コントリビューション'}</div>
+              <div className="text-sm text-purple-600 font-medium">{language === 'en' ? 'Contributions' : 'コントリビューション'}</div>
             </div>
           </div>
 
           {/* Score Breakdown */}
           <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
-            <h4 className="font-semibold mb-4">
+            <h4 className="font-semibold mb-4 text-indigo-600">
               {language === 'en' ? 'Brand Strength Breakdown' : 'ブランド強度の内訳'}
             </h4>
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <span>{language === 'en' ? 'Influence Score' : '影響力スコア'}</span>
-                  <span>{analysis.scores.influence}/100</span>
+                  <span className="text-purple-700 font-medium">{language === 'en' ? 'Influence Score' : '影響力スコア'}</span>
+                  <span className="text-purple-600 font-bold">{analysis.scores.influence}/100</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
@@ -212,8 +212,8 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
               </div>
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <span>{language === 'en' ? 'Activity Score' : '活動スコア'}</span>
-                  <span>{analysis.scores.activity}/100</span>
+                  <span className="text-green-700 font-medium">{language === 'en' ? 'Activity Score' : '活動スコア'}</span>
+                  <span className="text-green-600 font-bold">{analysis.scores.activity}/100</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
@@ -224,8 +224,8 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
               </div>
               <div>
                 <div className="flex justify-between text-sm mb-1">
-                  <span>{language === 'en' ? 'Expertise Level' : '専門知識レベル'}</span>
-                  <span>{analysis.scores.expertiseLevel}</span>
+                  <span className="text-orange-700 font-medium">{language === 'en' ? 'Expertise Level' : '専門知識レベル'}</span>
+                  <span className="text-orange-600 font-bold">{analysis.scores.expertiseLevel}</span>
                 </div>
               </div>
             </div>
@@ -234,14 +234,14 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
           {/* Top Languages */}
           {analysis.topLanguages && analysis.topLanguages.length > 0 && (
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
-              <h4 className="font-semibold mb-3">
+              <h4 className="font-semibold mb-3 text-blue-600">
                 {language === 'en' ? 'Top Languages' : 'トップ言語'}
               </h4>
               <div className="flex flex-wrap gap-2">
                 {analysis.topLanguages.map((lang: any) => (
                   <span 
                     key={lang.language}
-                    className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                    className="px-3 py-1 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 font-medium rounded-full text-sm shadow-sm"
                   >
                     {lang.language} ({lang.count})
                   </span>
@@ -253,14 +253,14 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
           {/* Recommendations */}
           {analysis.recommendations && analysis.recommendations.length > 0 && (
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gradient-to-r from-purple-900 to-blue-900' : 'bg-gradient-to-r from-purple-50 to-blue-50'}`}>
-              <h4 className="font-semibold mb-3">
+              <h4 className="font-semibold mb-3 text-purple-600">
                 {language === 'en' ? 'Recommendations to Improve Your Brand' : 'ブランド改善のための推奨事項'}
               </h4>
               <ul className="space-y-2">
                 {analysis.recommendations.map((rec: string, index: number) => (
                   <li key={index} className="flex items-start">
                     <span className="mr-2">•</span>
-                    <span className="text-sm">{rec}</span>
+                    <span className="text-sm text-gray-700">{rec}</span>
                   </li>
                 ))}
               </ul>
@@ -269,25 +269,25 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
 
           {/* Community Impact */}
           <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
-            <h4 className="font-semibold mb-3">
+            <h4 className="font-semibold mb-3 text-teal-600">
               {language === 'en' ? 'Community Impact' : 'コミュニティへの影響'}
             </h4>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
               <div>
                 <span className="font-medium">{analysis.communityImpact.organizations}</span>
-                <span className="ml-2 text-gray-500">
+                <span className="ml-2 text-gray-600 font-medium">
                   {language === 'en' ? 'Organizations' : '組織'}
                 </span>
               </div>
               <div>
                 <span className="font-medium">{analysis.communityImpact.gists}</span>
-                <span className="ml-2 text-gray-500">
+                <span className="ml-2 text-gray-600 font-medium">
                   {language === 'en' ? 'Gists' : 'Gist'}
                 </span>
               </div>
               <div>
                 <span className="font-medium">{analysis.communityImpact.sponsorships}</span>
-                <span className="ml-2 text-gray-500">
+                <span className="ml-2 text-gray-600 font-medium">
                   {language === 'en' ? 'Sponsorships' : 'スポンサーシップ'}
                 </span>
               </div>
