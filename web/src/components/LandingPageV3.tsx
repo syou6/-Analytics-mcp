@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Github, BarChart3, Zap, TrendingUp, Code2, Star, Users, CheckCircle, ArrowRight, Sparkles, Brain, Briefcase, Trophy, Clock, Shield, Globe, Languages } from 'lucide-react';
 import { motion } from 'framer-motion';
-import PortfolioPreview from './PortfolioPreview';
 import { useLanguage } from '@/hooks/useLanguage';
 import { translations } from '@/translations/landing';
 
@@ -255,8 +254,6 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
         </div>
       </section>
 
-      {/* Portfolio Preview Section */}
-      <PortfolioPreview isDark={isDark} language={language} />
 
       {/* Pricing with Decoy Effect */}
       <section className={`py-20 ${isDark ? 'bg-gray-800/50' : 'bg-gray-50'}`}>

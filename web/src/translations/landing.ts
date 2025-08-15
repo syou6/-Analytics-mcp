@@ -5,11 +5,11 @@ export const translations = {
       githubStars: '2.4k GitHub Stars'
     },
     hero: {
-      tagline: 'Turn Your Coding Time Into Career Growth',
-      title: 'Build Your Developer Portfolio',
-      subtitle: 'While You Code',
-      description: 'GitVue transforms your GitHub activity into career-advancing insights and a stunning portfolio - automatically. Get AI-powered coaching and showcase your coding journey to recruiters.',
-      ctaMain: 'Start Building Your Portfolio',
+      tagline: 'AI-Powered GitHub Repository Analytics',
+      title: 'Analyze Your GitHub Projects',
+      subtitle: 'With AI Insights',
+      description: 'GitVue provides comprehensive GitHub repository analytics with AI-powered insights. Track commits, contributors, languages, and get actionable recommendations to improve your projects.',
+      ctaMain: 'Start Analyzing',
       ctaSecondary: 'See Live Demo',
       noCreditCard: 'No credit card required',
       quickSetup: '5-minute setup',
@@ -22,22 +22,22 @@ export const translations = {
       uptime: 'Uptime'
     },
     features: {
-      title: 'Your Career Growth Platform',
-      subtitle: 'More than analytics - it\'s your personal coding coach and portfolio builder',
+      title: 'Powerful GitHub Analytics',
+      subtitle: 'Deep insights into your repositories with AI-powered analysis',
       portfolio: {
-        title: 'Auto Portfolio Generation',
-        description: 'Transform your GitHub activity into a stunning developer portfolio. Perfect for job hunting and client acquisition.',
-        cta: 'See examples'
+        title: 'Repository Analytics',
+        description: 'Comprehensive statistics including stars, forks, issues, contributors, and language breakdown. Track repository health and performance.',
+        cta: 'See details'
       },
       coaching: {
-        title: 'AI Coaching Insights',
-        description: 'Get personalized productivity tips and skill development recommendations based on your coding patterns.',
+        title: 'AI-Powered Analysis',
+        description: 'Get health scores, competitor analysis, and actionable recommendations powered by Gemini AI to improve your projects.',
         cta: 'Learn more'
       },
       career: {
-        title: 'Career Growth Tracking',
-        description: 'Monitor your skill development, set SMART goals, and track your progress toward career milestones.',
-        cta: 'View metrics'
+        title: 'Activity Visualizations',
+        description: 'Beautiful commit heatmaps, time distributions, and contribution patterns to understand your development workflow.',
+        cta: 'View charts'
       }
     },
     portfolio: {
@@ -71,21 +71,17 @@ export const translations = {
       startFreeTrial: 'Start Free Trial',
       contactSales: 'Contact Sales',
       plans: {
-        starter: {
-          name: 'Starter',
-          features: ['1 Project', 'Basic Analytics', '7-day History']
-        },
-        basic: {
-          name: 'Basic',
-          features: ['3 Projects', 'Basic Analytics', '30-day History', 'Email Reports']
+        free: {
+          name: 'Free',
+          features: ['10 Repository Analyses/month', 'Basic Statistics', 'Language Breakdown', 'Contributor List', '7-day Data Cache']
         },
         professional: {
           name: 'Professional',
-          features: ['10 Projects', 'AI Coaching', 'Portfolio Generator', 'Unlimited History', 'Priority Support', 'API Access']
+          features: ['100 Repository Analyses/month', '100 AI Analyses/month', 'Commit Heatmaps', 'Time Distribution Charts', 'Competitor Analysis', 'Health Scoring', 'Public Dashboard Sharing', 'Priority Support']
         },
         enterprise: {
           name: 'Enterprise',
-          features: ['Unlimited Projects', 'Custom Integrations', 'Team Management', 'SLA Support', 'SSO/SAML']
+          features: ['Unlimited Analyses', 'All Pro Features', 'Custom API Access', 'Dedicated Support', 'Custom Integrations', 'SLA Guarantee']
         }
       }
     },
@@ -96,24 +92,24 @@ export const translations = {
         {
           name: 'Sarah Chen',
           role: 'Senior Developer at Meta',
-          text: 'GitVue\'s portfolio generator helped me land my dream job. The AI insights showed me exactly where to improve my coding habits.'
+          text: 'GitVue\'s AI analysis helped me identify performance bottlenecks in my repositories. The competitor analysis feature is incredibly valuable.'
         },
         {
           name: 'Mike Johnson',
           role: 'Full Stack Developer',
-          text: 'The AI coaching feature is like having a senior developer mentor. My productivity increased by 40% in just 2 months.'
+          text: 'The repository health scoring and recommendations helped me improve my project maintenance. Essential tool for any serious developer.'
         },
         {
           name: 'Lisa Park',
-          role: 'Freelance Developer',
-          text: 'Best $9.8 I spend each month. The portfolio alone has gotten me 3 new clients. ROI is incredible!'
+          role: 'Open Source Maintainer',
+          text: 'Best $9.8 I spend each month. The commit visualizations and contributor analytics save me hours of manual analysis.'
         }
       ]
     },
     cta: {
-      title: 'Ready to Accelerate Your Career?',
-      subtitle: 'Join 15,000+ developers using GitVue to showcase their work and grow their careers',
-      button: 'Start Your Free Trial Now',
+      title: 'Ready to Analyze Your Repositories?',
+      subtitle: 'Join 15,000+ developers using GitVue for comprehensive GitHub analytics',
+      button: 'Start Free Analysis',
       terms: 'No credit card required • 5-minute setup • Cancel anytime'
     }
   },
@@ -123,11 +119,11 @@ export const translations = {
       githubStars: '2.4k GitHub スター'
     },
     hero: {
-      tagline: 'コーディング時間をキャリア成長に変える',
-      title: '開発者ポートフォリオを',
-      subtitle: 'コーディングしながら構築',
-      description: 'GitVueはGitHubアクティビティを自動的にキャリアを前進させる洞察と素晴らしいポートフォリオに変換します。AIによるコーチングを受け、あなたのコーディングジャーニーを採用担当者にアピールしましょう。',
-      ctaMain: 'ポートフォリオ作成を開始',
+      tagline: 'AI搭載GitHubリポジトリ分析',
+      title: 'GitHubプロジェクトを',
+      subtitle: 'AIで分析',
+      description: 'GitVueはAIを活用した包括的なGitHubリポジトリ分析を提供します。コミット、コントリビューター、言語を追跡し、プロジェクト改善のための実用的な提案を取得します。',
+      ctaMain: '分析を開始',
       ctaSecondary: 'ライブデモを見る',
       noCreditCard: 'クレジットカード不要',
       quickSetup: '5分でセットアップ',
@@ -140,22 +136,22 @@ export const translations = {
       uptime: '稼働率'
     },
     features: {
-      title: 'あなたのキャリア成長プラットフォーム',
-      subtitle: '単なる分析ツールではなく、パーソナルコーディングコーチとポートフォリオビルダー',
+      title: '強力なGitHub分析',
+      subtitle: 'AIを活用したリポジトリの深い洞察',
       portfolio: {
-        title: '自動ポートフォリオ生成',
-        description: 'GitHubアクティビティを素晴らしい開発者ポートフォリオに変換。転職活動やクライアント獲得に最適。',
-        cta: '例を見る'
+        title: 'リポジトリ分析',
+        description: 'スター、フォーク、イシュー、コントリビューター、言語内訳を含む包括的な統計。リポジトリの健全性とパフォーマンスを追跡。',
+        cta: '詳細を見る'
       },
       coaching: {
-        title: 'AIコーチング洞察',
-        description: 'コーディングパターンに基づいた、パーソナライズされた生産性のヒントとスキル開発の推奨事項を取得。',
+        title: 'AI分析機能',
+        description: 'Gemini AIを活用した健全性スコア、競合分析、プロジェクト改善のための実用的な提案を取得。',
         cta: '詳細を見る'
       },
       career: {
-        title: 'キャリア成長トラッキング',
-        description: 'スキル開発を監視し、SMARTゴールを設定し、キャリアマイルストーンへの進捗を追跡。',
-        cta: 'メトリクスを表示'
+        title: 'アクティビティ可視化',
+        description: '美しいコミットヒートマップ、時間分布、貢献パターンで開発ワークフローを理解。',
+        cta: 'チャートを表示'
       }
     },
     portfolio: {
@@ -189,21 +185,17 @@ export const translations = {
       startFreeTrial: '無料トライアル開始',
       contactSales: '営業に問い合わせ',
       plans: {
-        starter: {
-          name: 'スターター',
-          features: ['1プロジェクト', '基本分析', '7日間の履歴']
-        },
-        basic: {
-          name: 'ベーシック',
-          features: ['3プロジェクト', '基本分析', '30日間の履歴', 'メールレポート']
+        free: {
+          name: '無料',
+          features: ['10リポジトリ分析/月', '基本統計', '言語内訳', 'コントリビューター一覧', '7日間のデータキャッシュ']
         },
         professional: {
           name: 'プロフェッショナル',
-          features: ['10プロジェクト', 'AIコーチング', 'ポートフォリオ生成', '無制限履歴', '優先サポート', 'APIアクセス']
+          features: ['100リポジトリ分析/月', '100 AI分析/月', 'コミットヒートマップ', '時間分布チャート', '競合分析', '健全性スコアリング', '公開ダッシュボード共有', '優先サポート']
         },
         enterprise: {
           name: 'エンタープライズ',
-          features: ['無制限プロジェクト', 'カスタム統合', 'チーム管理', 'SLAサポート', 'SSO/SAML']
+          features: ['無制限分析', '全Pro機能', 'カスタムAPIアクセス', '専任サポート', 'カスタム統合', 'SLA保証']
         }
       }
     },
@@ -214,24 +206,24 @@ export const translations = {
         {
           name: 'サラ・チェン',
           role: 'Meta シニア開発者',
-          text: 'GitVueのポートフォリオジェネレーターは私の夢の仕事を得るのに役立ちました。AI洞察は私のコーディング習慣を改善すべき場所を正確に示してくれました。'
+          text: 'GitVueのAI分析はリポジトリのパフォーマンスボトルネックを特定するのに役立ちました。競合分析機能は非常に価値があります。'
         },
         {
           name: 'マイク・ジョンソン',
           role: 'フルスタック開発者',
-          text: 'AIコーチング機能は、シニア開発者のメンターがいるようなものです。わずか2か月で生産性が40％向上しました。'
+          text: 'リポジトリの健全性スコアリングと提案はプロジェクトのメンテナンスを改善するのに役立ちました。真剣な開発者に不可欠なツールです。'
         },
         {
           name: 'リサ・パーク',
-          role: 'フリーランス開発者',
-          text: '毎月使う最高の$9.8です。ポートフォリオだけで3つの新しいクライアントを獲得しました。ROIは信じられないほどです！'
+          role: 'オープンソースメンテナー',
+          text: '毎月使う最高の$9.8です。コミット可視化とコントリビューター分析は手動分析の時間を大幅に節約します。'
         }
       ]
     },
     cta: {
-      title: 'キャリアを加速する準備はできていますか？',
-      subtitle: 'GitVueを使用して作品を紹介し、キャリアを成長させている15,000人以上の開発者に参加',
-      button: '今すぐ無料トライアルを開始',
+      title: 'リポジトリを分析する準備はできましたか？',
+      subtitle: 'GitVueを使用して包括的なGitHub分析を行っている15,000人以上の開発者に参加',
+      button: '無料分析を開始',
       terms: 'クレジットカード不要 • 5分でセットアップ • いつでもキャンセル可能'
     }
   }
