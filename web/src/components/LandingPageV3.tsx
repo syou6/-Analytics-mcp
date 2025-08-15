@@ -438,7 +438,9 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               className={`p-6 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg`}
             >
               <div className="flex items-center mb-4">
-                <img src={`https://i.pravatar.cc/150?img=${i + 1}`} alt={review.name} className="w-12 h-12 rounded-full mr-3" />
+                <div className="w-12 h-12 rounded-full mr-3 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
+                  {review.name.split('.')[0]}
+                </div>
                 <div>
                   <div className="font-semibold">{review.name}</div>
                   <div className="text-sm text-gray-500">{review.role}</div>
