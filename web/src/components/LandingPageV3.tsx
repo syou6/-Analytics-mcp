@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Github, BarChart3, Zap, TrendingUp, Code2, Star, Users, CheckCircle, ArrowRight, Sparkles, Brain, Briefcase, Trophy, Clock, Shield, Globe, Languages } from 'lucide-react';
+import { Github, BarChart3, Zap, TrendingUp, Code2, Star, Users, CheckCircle, ArrowRight, Sparkles, Brain, Briefcase, Trophy, Clock, Shield, Globe, Languages, Twitter, Youtube, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/hooks/useLanguage';
 import { translations } from '@/translations/landing';
@@ -486,6 +486,136 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
           </p>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className={`${isDark ? 'bg-gray-900 border-gray-800' : 'bg-gray-50 border-gray-200'} border-t`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Brand */}
+            <div className="md:col-span-1">
+              <div className="flex items-center space-x-2 mb-4">
+                <Github className="h-8 w-8 text-blue-600" />
+                <span className="font-bold text-xl">GitVue</span>
+              </div>
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                {language === 'en' 
+                  ? 'AI-powered GitHub analytics for developers'
+                  : 'AI搭載のGitHub分析ツール'}
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div className="md:col-span-1">
+              <h3 className="font-semibold mb-4">{language === 'en' ? 'Product' : 'プロダクト'}</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#features" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                    {language === 'en' ? 'Features' : '機能'}
+                  </a>
+                </li>
+                <li>
+                  <a href="#pricing" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                    {language === 'en' ? 'Pricing' : '料金'}
+                  </a>
+                </li>
+                <li>
+                  <a href="#testimonials" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                    {language === 'en' ? 'Reviews' : 'レビュー'}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div className="md:col-span-1">
+              <h3 className="font-semibold mb-4">{language === 'en' ? 'Legal' : '法的情報'}</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/terms" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                    {language === 'en' ? 'Terms of Service' : '利用規約'}
+                  </a>
+                </li>
+                <li>
+                  <a href="/privacy" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                    {language === 'en' ? 'Privacy Policy' : 'プライバシーポリシー'}
+                  </a>
+                </li>
+                <li>
+                  <a href="/legal" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                    {language === 'en' ? 'Legal Notice' : '特定商取引法に基づく表記'}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Social */}
+            <div className="md:col-span-1">
+              <h3 className="font-semibold mb-4">{language === 'en' ? 'Connect' : 'フォロー'}</h3>
+              <div className="flex space-x-4">
+                <a 
+                  href="https://github.com/syou6" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition-colors`}
+                  aria-label="GitHub"
+                >
+                  <Github className="h-6 w-6" />
+                </a>
+                <a 
+                  href="https://x.com/K8292288065827" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition-colors`}
+                  aria-label="Twitter/X"
+                >
+                  <Twitter className="h-6 w-6" />
+                </a>
+                <a 
+                  href="https://www.youtube.com/@Lofiboymusic962" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition-colors`}
+                  aria-label="YouTube"
+                >
+                  <Youtube className="h-6 w-6" />
+                </a>
+              </div>
+              <div className="mt-4">
+                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {language === 'en' ? 'Contact:' : 'お問い合わせ:'}
+                </p>
+                <a 
+                  href="mailto:support@gitvue.dev" 
+                  className={`text-sm ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'} flex items-center mt-1`}
+                >
+                  <Mail className="h-4 w-4 mr-1" />
+                  support@gitvue.dev
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className={`mt-8 pt-8 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                © 2025 GitVue. All rights reserved.
+              </p>
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} mt-2 md:mt-0`}>
+                Made with ❤️ by{' '}
+                <a 
+                  href="https://github.com/syou6" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={`${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}
+                >
+                  Lofiboy
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
