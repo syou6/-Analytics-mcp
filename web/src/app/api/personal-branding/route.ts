@@ -52,13 +52,7 @@ export async function POST(request: NextRequest) {
             totalCount
           }
           organizations(first: 10) {
-            nodes {
-              name
-              description
-              membersWithRole {
-                totalCount
-              }
-            }
+            totalCount
           }
           contributionsCollection {
             totalCommitContributions
@@ -225,7 +219,7 @@ function calculateBrandingMetrics(userData: any) {
   const communityImpact = {
     pullRequests: userData.pullRequests.totalCount,
     issues: userData.issues.totalCount,
-    organizations: userData.organizations.nodes.length,
+    organizations: userData.organizations.totalCount,
     gists: userData.gists.totalCount,
     sponsorships: userData.sponsorshipsAsSponsor.totalCount + userData.sponsorshipsAsMaintainer.totalCount
   };
