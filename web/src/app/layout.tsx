@@ -31,9 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/gitvue.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/gitvue.png" />
-        <link rel="shortcut icon" href="/gitvue.png" />
+        <link rel="icon" href="/gitvue.png?v=2" type="image/png" />
+        <link rel="apple-touch-icon" href="/gitvue.png?v=2" />
+        <link rel="shortcut icon" href="/gitvue.png?v=2" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
