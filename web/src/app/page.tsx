@@ -13,6 +13,7 @@ import CommitHeatmap from '@/components/CommitHeatmap';
 import CommitTimeDistribution from '@/components/CommitTimeDistribution';
 import RepositoryPerformanceTable from '@/components/RepositoryPerformanceTable';
 import GrowthInsights from '@/components/GrowthInsights';
+import PersonalBranding from '@/components/PersonalBranding';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { t } from '@/lib/i18n';
 
@@ -199,7 +200,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
   const [loadingAI, setLoadingAI] = useState(false);
   const [userRepos, setUserRepos] = useState<any[]>([]);
   const [loadingRepos, setLoadingRepos] = useState(false);
-  const [activeTab, setActiveTab] = useState<'my-repos' | 'search'>('my-repos');
+  const [activeTab, setActiveTab] = useState<'my-repos' | 'search' | 'branding'>('my-repos');
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [subscription, setSubscription] = useState<any>(null);
   const [usage, setUsage] = useState<any>(null);
@@ -693,6 +694,16 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             >
               🔍 Search Any Repository
             </button>
+            <button
+              onClick={() => setActiveTab('branding')}
+              className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+                activeTab === 'branding'
+                  ? 'border-blue-600 text-blue-600'
+                  : 'border-transparent text-black hover:text-black'
+              }`}
+            >
+              ✨ Personal Branding
+            </button>
           </div>
         </div>
 
@@ -771,6 +782,14 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             </button>
           </div>
         </div>
+        )}
+
+        {/* Personal Branding Tab */}
+        {activeTab === 'branding' && (
+          <PersonalBranding 
+            isDark={false}
+            language={language}
+          />
         )}
 
         {analysis && (
