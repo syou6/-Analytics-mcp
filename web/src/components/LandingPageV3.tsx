@@ -59,8 +59,8 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
             <div className="flex items-center space-x-2">
               <Github className="h-8 w-8 text-blue-600" />
               <span className="font-bold text-xl">GitVue</span>
-              <span className="ml-4 px-2 py-1 bg-blue-600/10 text-blue-600 text-xs rounded-full">
-                ⭐ {t.nav.githubStars}
+              <span className="ml-4 px-2 py-1 bg-green-600/10 text-green-600 text-xs rounded-full font-semibold">
+                BETA
               </span>
             </div>
             <div className="flex items-center space-x-4">
