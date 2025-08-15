@@ -18,9 +18,8 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
   const t = translations[language];
 
   useEffect(() => {
-    // Check system preference for dark mode
-    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDark(darkModeQuery.matches);
+    // Default to light mode
+    setIsDark(false);
   }, []);
 
   const fadeInUp = {
@@ -263,16 +262,24 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
             <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'} mb-6`}>
               {t.pricing.subtitle}
             </p>
-            <div className="inline-flex items-center p-1 rounded-lg bg-gray-200 dark:bg-gray-700">
+            <div className={`inline-flex items-center p-1 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
               <button
                 onClick={() => setIsAnnual(false)}
-                className={`px-4 py-2 rounded-md transition-all ${!isAnnual ? 'bg-white dark:bg-gray-900 shadow-sm' : ''}`}
+                className={`px-4 py-2 rounded-md transition-all ${
+                  !isAnnual 
+                    ? `${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-sm` 
+                    : `${isDark ? 'text-gray-400' : 'text-gray-700'}`
+                }`}
               >
                 {t.pricing.monthly}
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
-                className={`px-4 py-2 rounded-md transition-all ${isAnnual ? 'bg-white dark:bg-gray-900 shadow-sm' : ''}`}
+                className={`px-4 py-2 rounded-md transition-all ${
+                  isAnnual 
+                    ? `${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-sm` 
+                    : `${isDark ? 'text-gray-400' : 'text-gray-700'}`
+                }`}
               >
                 {t.pricing.annual}
                 <span className="ml-2 text-xs text-green-600">20% {t.pricing.save}</span>
