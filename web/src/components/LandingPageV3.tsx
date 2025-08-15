@@ -67,6 +67,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               <button
                 onClick={() => changeLanguage(language === 'en' ? 'ja' : 'en')}
                 className={`p-2 rounded-lg ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} flex items-center gap-1`}
+                aria-label="言語切り替え / Change language"
               >
                 <Languages className="w-4 h-4" />
                 <span className="text-sm font-medium">{language === 'en' ? 'JP' : 'EN'}</span>
@@ -74,12 +75,14 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               <button
                 onClick={() => setIsDark(!isDark)}
                 className={`p-2 rounded-lg ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
+                aria-label={isDark ? 'ライトモードに切り替え' : 'ダークモードに切り替え'}
               >
                 {isDark ? '🌞' : '🌙'}
               </button>
               <button
                 onClick={onSignIn}
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all transform hover:scale-105"
+                aria-label={language === 'en' ? 'Start analyzing your GitHub' : 'GitHub分析を開始'}
               >
                 {language === 'en' ? 'Start Analyzing' : '分析を開始'}
               </button>

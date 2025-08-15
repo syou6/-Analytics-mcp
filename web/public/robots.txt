@@ -1,0 +1,14 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://github-analytics-mcp-web.vercel.app/sitemap.xml
+
+# Disallow internal pages
+Disallow: /api/
+Disallow: /auth-debug
+Disallow: /debug-payment
+Disallow: /force-pro
+Disallow: /subscription-debug
+Disallow: /cleanup

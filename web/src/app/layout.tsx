@@ -33,8 +33,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/gitvue.png?v=2" type="image/png" />
         <link rel="apple-touch-icon" href="/gitvue.png?v=2" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/gitvue.png?v=2" />
         <link rel="shortcut icon" href="/gitvue.png?v=2" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#60a5fa" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}

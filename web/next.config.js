@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  images: {
+    domains: ['avatars.githubusercontent.com', 'github.com'],
+  },
+  poweredByHeader: false,
+  compress: true,
+  reactStrictMode: true,
 };
 
-module.exports = nextConfig;
+// Bundle analyzer configuration
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer(nextConfig);

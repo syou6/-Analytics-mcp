@@ -19,16 +19,21 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const savedLang = localStorage.getItem('language') as Language;
     if (savedLang && (savedLang === 'en' || savedLang === 'ja')) {
       setLanguageState(savedLang);
+      // Set html lang attribute
+      document.documentElement.lang = savedLang;
     } else {
       // ブラウザの言語設定を確認
       const browserLang = navigator.language.toLowerCase();
-      setLanguageState(browserLang.startsWith('ja') ? 'ja' : 'en');
+      const detectedLang = browserLang.startsWith('ja') ? 'ja' : 'en';
+      setLanguageState(detectedLang);
+      document.documentElement.lang = detectedLang;
     }
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('language', lang);
+    document.documentElement.lang = lang;
   };
 
   const translate = (key: string) => t(key, language);
