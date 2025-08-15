@@ -95,6 +95,15 @@ export async function POST(request: NextRequest) {
 
     // Fetch data from GitHub
     const githubToken = process.env.GITHUB_TOKEN;
+    
+    if (!githubToken) {
+      console.error('GITHUB_TOKEN is not set in environment variables');
+      return NextResponse.json({ 
+        error: 'GitHub API configuration error', 
+        message: 'Please set GITHUB_TOKEN in Vercel environment variables'
+      }, { status: 500 });
+    }
+    
     const response = await fetch('https://api.github.com/graphql', {
       method: 'POST',
       headers: {
@@ -107,10 +116,24 @@ export async function POST(request: NextRequest) {
       }),
     });
 
+    if (!response.ok) {
+      console.error('GitHub API request failed:', response.status, response.statusText);
+      return NextResponse.json({ 
+        error: 'GitHub API request failed', 
+        status: response.status,
+        message: response.statusText 
+      }, { status: response.status });
+    }
+
     const data = await response.json();
 
     if (data.errors) {
-      return NextResponse.json({ error: 'GitHub API error', details: data.errors }, { status: 500 });
+      console.error('GitHub API errors:', data.errors);
+      return NextResponse.json({ 
+        error: 'GitHub API error', 
+        details: data.errors,
+        message: data.errors[0]?.message || 'Unknown error'
+      }, { status: 500 });
     }
 
     const userData = data.data.user;
