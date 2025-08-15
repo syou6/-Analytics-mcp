@@ -7,11 +7,11 @@ import PortfolioPreview from './PortfolioPreview';
 import { useLanguage } from '@/hooks/useLanguage';
 import { translations } from '@/translations/landing';
 
-interface LandingPageV2Props {
+interface LandingPageV3Props {
   onSignIn: () => void;
 }
 
-export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
+export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
   const [isDark, setIsDark] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState('professional');
   const [isAnnual, setIsAnnual] = useState(false);
@@ -36,6 +36,21 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
         staggerChildren: 0.1
       }
     }
+  };
+
+  // Price calculations
+  const prices = {
+    starter: { monthly: 9.8, annual: 7.8 },
+    basic: { monthly: 9.8, annual: 7.8 },
+    professional: { monthly: 9.8, annual: 7.8 },
+    enterprise: { monthly: 99, annual: 99 }
+  };
+
+  const jpyRates = {
+    starter: { monthly: 1470, annual: 1170 },
+    basic: { monthly: 1470, annual: 1170 },
+    professional: { monthly: 1470, annual: 1170 },
+    enterprise: { monthly: 14850, annual: 14850 }
   };
 
   return (
@@ -152,28 +167,28 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               className="flex flex-col items-center"
             >
               <div className="text-3xl font-bold text-blue-600">2.4M+</div>
-              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Commits Analyzed</div>
+              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.trust.commits}</div>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className="flex flex-col items-center"
             >
               <div className="text-3xl font-bold text-purple-600">500K+</div>
-              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Pull Requests</div>
+              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.trust.pullRequests}</div>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className="flex flex-col items-center"
             >
               <div className="text-3xl font-bold text-green-600">15K+</div>
-              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Active Developers</div>
+              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.trust.developers}</div>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className="flex flex-col items-center"
             >
               <div className="text-3xl font-bold text-orange-600">99.9%</div>
-              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Uptime</div>
+              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.trust.uptime}</div>
             </motion.div>
           </div>
         </div>
@@ -182,9 +197,9 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
       {/* Key Features - Portfolio Focus */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Your Career Growth Platform</h2>
+          <h2 className="text-3xl font-bold mb-4">{t.features.title}</h2>
           <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            More than analytics - it's your personal coding coach and portfolio builder
+            {t.features.subtitle}
           </p>
         </div>
 
@@ -196,13 +211,12 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
             <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-4">
               <Briefcase className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">Auto Portfolio Generation</h3>
+            <h3 className="text-xl font-semibold mb-2">{t.features.portfolio.title}</h3>
             <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Transform your GitHub activity into a stunning developer portfolio. 
-              Perfect for job hunting and client acquisition.
+              {t.features.portfolio.description}
             </p>
             <div className="mt-4 flex items-center text-blue-600">
-              <span className="text-sm font-medium">See examples</span>
+              <span className="text-sm font-medium">{t.features.portfolio.cta}</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </div>
           </motion.div>
@@ -214,13 +228,12 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
             <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center mb-4">
               <Brain className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">AI Coaching Insights</h3>
+            <h3 className="text-xl font-semibold mb-2">{t.features.coaching.title}</h3>
             <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Get personalized productivity tips and skill development recommendations 
-              based on your coding patterns.
+              {t.features.coaching.description}
             </p>
             <div className="mt-4 flex items-center text-purple-600">
-              <span className="text-sm font-medium">Learn more</span>
+              <span className="text-sm font-medium">{t.features.coaching.cta}</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </div>
           </motion.div>
@@ -232,13 +245,12 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
             <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-teal-600 rounded-lg flex items-center justify-center mb-4">
               <Trophy className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">Career Growth Tracking</h3>
+            <h3 className="text-xl font-semibold mb-2">{t.features.career.title}</h3>
             <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Monitor your skill development, set SMART goals, and track your 
-              progress toward career milestones.
+              {t.features.career.description}
             </p>
             <div className="mt-4 flex items-center text-green-600">
-              <span className="text-sm font-medium">View metrics</span>
+              <span className="text-sm font-medium">{t.features.career.cta}</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </div>
           </motion.div>
@@ -246,29 +258,29 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
       </section>
 
       {/* Portfolio Preview Section */}
-      <PortfolioPreview isDark={isDark} />
+      <PortfolioPreview isDark={isDark} language={language} />
 
       {/* Pricing with Decoy Effect */}
       <section className={`py-20 ${isDark ? 'bg-gray-800/50' : 'bg-gray-50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
+            <h2 className="text-3xl font-bold mb-4">{t.pricing.title}</h2>
             <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'} mb-6`}>
-              Choose the plan that fits your career goals
+              {t.pricing.subtitle}
             </p>
             <div className="inline-flex items-center p-1 rounded-lg bg-gray-200 dark:bg-gray-700">
               <button
                 onClick={() => setIsAnnual(false)}
                 className={`px-4 py-2 rounded-md transition-all ${!isAnnual ? 'bg-white dark:bg-gray-900 shadow-sm' : ''}`}
               >
-                Monthly
+                {t.pricing.monthly}
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
                 className={`px-4 py-2 rounded-md transition-all ${isAnnual ? 'bg-white dark:bg-gray-900 shadow-sm' : ''}`}
               >
-                Annual
-                <span className="ml-2 text-xs text-green-600">Save 20%</span>
+                {t.pricing.annual}
+                <span className="ml-2 text-xs text-green-600">20% {t.pricing.save}</span>
               </button>
             </div>
           </div>
@@ -280,67 +292,55 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               className={`rounded-xl p-6 ${isDark ? 'bg-gray-800' : 'bg-white'} ${selectedPlan === 'starter' ? 'ring-2 ring-blue-600' : ''}`}
               onClick={() => setSelectedPlan('starter')}
             >
-              <h3 className="text-lg font-semibold mb-2">Starter</h3>
+              <h3 className="text-lg font-semibold mb-2">{t.pricing.plans.starter.name}</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
-                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
-                <div className="text-xs text-gray-500 mt-1">約¥{isAnnual ? '1,170' : '1,470'} (税込)</div>
+                <span className="text-3xl font-bold">${isAnnual ? prices.starter.annual : prices.starter.monthly}</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.pricing.perMonth}</span>
+                <div className="text-xs text-gray-500 mt-1">
+                  {language === 'ja' ? `約¥${isAnnual ? jpyRates.starter.annual : jpyRates.starter.monthly} (税込)` : ''}
+                </div>
               </div>
               <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">1 Project</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">Basic Analytics</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">7-day History</span>
-                </li>
+                {t.pricing.plans.starter.features.map((feature, i) => (
+                  <li key={i} className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
+                  </li>
+                ))}
               </ul>
               <button className={`w-full py-2 rounded-lg border ${isDark ? 'border-gray-600' : 'border-gray-300'}`}>
-                Select Plan
+                {t.pricing.selectPlan}
               </button>
             </motion.div>
 
-            {/* Decoy Plan */}
+            {/* Basic Plan */}
             <motion.div 
               whileHover={{ scale: 1.02 }}
               className={`rounded-xl p-6 ${isDark ? 'bg-gray-800' : 'bg-white'} ${selectedPlan === 'basic' ? 'ring-2 ring-blue-600' : ''}`}
               onClick={() => setSelectedPlan('basic')}
             >
-              <h3 className="text-lg font-semibold mb-2">Basic</h3>
+              <h3 className="text-lg font-semibold mb-2">{t.pricing.plans.basic.name}</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
-                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
-                <div className="text-xs text-gray-500 mt-1">約¥{isAnnual ? '1,170' : '1,470'} (税込)</div>
+                <span className="text-3xl font-bold">${isAnnual ? prices.basic.annual : prices.basic.monthly}</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.pricing.perMonth}</span>
+                <div className="text-xs text-gray-500 mt-1">
+                  {language === 'ja' ? `約¥${isAnnual ? jpyRates.basic.annual : jpyRates.basic.monthly} (税込)` : ''}
+                </div>
               </div>
               <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">3 Projects</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">Basic Analytics</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">30-day History</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">Email Reports</span>
-                </li>
+                {t.pricing.plans.basic.features.map((feature, i) => (
+                  <li key={i} className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
+                  </li>
+                ))}
               </ul>
               <button className={`w-full py-2 rounded-lg border ${isDark ? 'border-gray-600' : 'border-gray-300'}`}>
-                Select Plan
+                {t.pricing.selectPlan}
               </button>
             </motion.div>
 
-            {/* Target Plan - Professional */}
+            {/* Professional Plan */}
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className={`rounded-xl p-6 ${isDark ? 'bg-gradient-to-br from-blue-900 to-purple-900' : 'bg-gradient-to-br from-blue-50 to-purple-50'} ring-2 ring-blue-600 relative`}
@@ -348,47 +348,31 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
             >
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs px-3 py-1 rounded-full">
-                  BEST VALUE
+                  {t.pricing.bestValue}
                 </span>
               </div>
-              <h3 className="text-lg font-semibold mb-2">Professional</h3>
+              <h3 className="text-lg font-semibold mb-2">{t.pricing.plans.professional.name}</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
-                <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>/mo</span>
-                <div className="text-xs text-gray-300 mt-1">約¥{isAnnual ? '1,170' : '1,470'} (税込)</div>
-                {isAnnual && <span className="text-green-600 text-sm">Save $24/year</span>}
+                <span className="text-3xl font-bold">${isAnnual ? prices.professional.annual : prices.professional.monthly}</span>
+                <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{t.pricing.perMonth}</span>
+                <div className="text-xs text-gray-300 mt-1">
+                  {language === 'ja' ? `約¥${isAnnual ? jpyRates.professional.annual : jpyRates.professional.monthly} (税込)` : ''}
+                </div>
+                {isAnnual && <span className="text-green-600 text-sm">{language === 'en' ? 'Save $24/year' : '年間$24お得'}</span>}
               </div>
               <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm font-medium">10 Projects</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm font-medium">AI Coaching</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm font-medium">Portfolio Generator</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm font-medium">Unlimited History</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm font-medium">Priority Support</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm font-medium">API Access</span>
-                </li>
+                {t.pricing.plans.professional.features.map((feature, i) => (
+                  <li key={i} className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                    <span className="text-sm font-medium">{feature}</span>
+                  </li>
+                ))}
               </ul>
               <button 
                 onClick={onSignIn}
                 className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:opacity-90 transition-all"
               >
-                Start Free Trial
+                {t.pricing.startFreeTrial}
               </button>
             </motion.div>
 
@@ -398,36 +382,24 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               className={`rounded-xl p-6 ${isDark ? 'bg-gray-800' : 'bg-white'} ${selectedPlan === 'enterprise' ? 'ring-2 ring-blue-600' : ''}`}
               onClick={() => setSelectedPlan('enterprise')}
             >
-              <h3 className="text-lg font-semibold mb-2">Enterprise</h3>
+              <h3 className="text-lg font-semibold mb-2">{t.pricing.plans.enterprise.name}</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">$99</span>
-                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
-                <div className="text-xs text-gray-500 mt-1">約¥14,850 (税込)</div>
+                <span className="text-3xl font-bold">${prices.enterprise.monthly}</span>
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.pricing.perMonth}</span>
+                <div className="text-xs text-gray-500 mt-1">
+                  {language === 'ja' ? `約¥${jpyRates.enterprise.monthly} (税込)` : ''}
+                </div>
               </div>
               <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">Unlimited Projects</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">Custom Integrations</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">Team Management</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">SLA Support</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                  <span className="text-sm">SSO/SAML</span>
-                </li>
+                {t.pricing.plans.enterprise.features.map((feature, i) => (
+                  <li key={i} className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
+                  </li>
+                ))}
               </ul>
               <button className={`w-full py-2 rounded-lg border ${isDark ? 'border-gray-600' : 'border-gray-300'}`}>
-                Contact Sales
+                {t.pricing.contactSales}
               </button>
             </motion.div>
           </div>
@@ -437,78 +409,36 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
       {/* Testimonials */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Loved by Developers Worldwide</h2>
+          <h2 className="text-3xl font-bold mb-4">{t.testimonials.title}</h2>
           <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Join thousands of developers advancing their careers with GitVue
+            {t.testimonials.subtitle}
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className={`p-6 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg`}
-          >
-            <div className="flex items-center mb-4">
-              <img src="https://i.pravatar.cc/150?img=1" alt="Sarah Chen" className="w-12 h-12 rounded-full mr-3" />
-              <div>
-                <div className="font-semibold">Sarah Chen</div>
-                <div className="text-sm text-gray-500">Senior Developer at Meta</div>
+          {t.testimonials.reviews.map((review, i) => (
+            <motion.div 
+              key={i}
+              whileHover={{ scale: 1.02 }}
+              className={`p-6 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg`}
+            >
+              <div className="flex items-center mb-4">
+                <img src={`https://i.pravatar.cc/150?img=${i + 1}`} alt={review.name} className="w-12 h-12 rounded-full mr-3" />
+                <div>
+                  <div className="font-semibold">{review.name}</div>
+                  <div className="text-sm text-gray-500">{review.role}</div>
+                </div>
               </div>
-            </div>
-            <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
-              "GitVue's portfolio generator helped me land my dream job. The AI insights 
-              showed me exactly where to improve my coding habits."
-            </p>
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 text-yellow-500 fill-current" />
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className={`p-6 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg`}
-          >
-            <div className="flex items-center mb-4">
-              <img src="https://i.pravatar.cc/150?img=2" alt="Mike Johnson" className="w-12 h-12 rounded-full mr-3" />
-              <div>
-                <div className="font-semibold">Mike Johnson</div>
-                <div className="text-sm text-gray-500">Full Stack Developer</div>
+              <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
+                "{review.text}"
+              </p>
+              <div className="flex items-center">
+                {[...Array(5)].map((_, j) => (
+                  <Star key={j} className="w-4 h-4 text-yellow-500 fill-current" />
+                ))}
               </div>
-            </div>
-            <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
-              "The AI coaching feature is like having a senior developer mentor. 
-              My productivity increased by 40% in just 2 months."
-            </p>
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 text-yellow-500 fill-current" />
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className={`p-6 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-lg`}
-          >
-            <div className="flex items-center mb-4">
-              <img src="https://i.pravatar.cc/150?img=3" alt="Lisa Park" className="w-12 h-12 rounded-full mr-3" />
-              <div>
-                <div className="font-semibold">Lisa Park</div>
-                <div className="text-sm text-gray-500">Freelance Developer</div>
-              </div>
-            </div>
-            <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
-              "Best $9.8 I spend each month. The portfolio alone has gotten me 
-              3 new clients. ROI is incredible!"
-            </p>
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 text-yellow-500 fill-current" />
-              ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -516,19 +446,19 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
       <section className={`py-20 ${isDark ? 'bg-gradient-to-r from-blue-900 to-purple-900' : 'bg-gradient-to-r from-blue-50 to-purple-50'}`}>
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold mb-4">
-            Ready to Accelerate Your Career?
+            {t.cta.title}
           </h2>
           <p className={`text-lg mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-            Join 15,000+ developers using GitVue to showcase their work and grow their careers
+            {t.cta.subtitle}
           </p>
           <button
             onClick={onSignIn}
             className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg"
           >
-            Start Your Free Trial Now
+            {t.cta.button}
           </button>
           <p className={`mt-4 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            No credit card required • 5-minute setup • Cancel anytime
+            {t.cta.terms}
           </p>
         </div>
       </section>

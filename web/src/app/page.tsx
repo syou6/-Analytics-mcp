@@ -7,7 +7,7 @@ import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2, Crown
 import LanguageToggle from '@/components/LanguageToggle';
 import UpgradeModal from '@/components/UpgradeModal';
 import Footer from '@/components/Footer';
-import LandingPageV2 from '@/components/LandingPageV2';
+import LandingPageV3 from '@/components/LandingPageV3';
 import ActivitySummaryCards from '@/components/ActivitySummaryCards';
 import CommitHeatmap from '@/components/CommitHeatmap';
 import CommitTimeDistribution from '@/components/CommitTimeDistribution';
@@ -55,7 +55,7 @@ export default function Home() {
     return <Dashboard user={user} onSignOut={signOut} />;
   }
 
-  return <LandingPageV2 onSignIn={signInWithGitHub} />;
+  return <LandingPageV3 onSignIn={signInWithGitHub} />;
 }
 
 function LandingPage({ onSignIn }: { onSignIn: () => void }) {
