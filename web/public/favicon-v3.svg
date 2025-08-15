@@ -1,0 +1,92 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle with Gradient -->
+  <circle cx="256" cy="256" r="240" fill="url(#sphereGradient)" opacity="0.95"/>
+  
+  <!-- Inner Glass Effect -->
+  <circle cx="256" cy="256" r="220" fill="url(#glassGradient)" opacity="0.3"/>
+  
+  <!-- Central Geometric Logo -->
+  <g transform="translate(256, 256)">
+    <!-- Outer Cube Frame -->
+    <path d="M-60 -35 L0 -70 L60 -35 L60 35 L0 70 L-60 35 Z" 
+          fill="none" 
+          stroke="url(#logoGradient)" 
+          stroke-width="4"/>
+    
+    <!-- Inner Cube -->
+    <path d="M-40 -23 L0 -46 L40 -23 L40 23 L0 46 L-40 23 Z" 
+          fill="url(#innerCubeGradient)" 
+          opacity="0.8"/>
+    
+    <!-- Center Diamond -->
+    <path d="M-25 0 L0 -25 L25 0 L0 25 Z" 
+          fill="url(#diamondGradient)"/>
+  </g>
+  
+  <!-- Decorative Nodes -->
+  <g opacity="0.6">
+    <!-- Top nodes -->
+    <circle cx="256" cy="100" r="8" fill="#60A5FA"/>
+    <circle cx="180" cy="120" r="6" fill="#C084FC"/>
+    <circle cx="332" cy="120" r="6" fill="#F472B6"/>
+    
+    <!-- Side nodes -->
+    <circle cx="100" cy="256" r="8" fill="#60A5FA"/>
+    <circle cx="412" cy="256" r="8" fill="#C084FC"/>
+    
+    <!-- Bottom nodes -->
+    <circle cx="256" cy="412" r="8" fill="#F472B6"/>
+    <circle cx="180" cy="392" r="6" fill="#60A5FA"/>
+    <circle cx="332" cy="392" r="6" fill="#C084FC"/>
+  </g>
+  
+  <!-- Connection Lines -->
+  <g opacity="0.3">
+    <line x1="256" y1="100" x2="256" y2="180" stroke="url(#lineGradient)" stroke-width="1"/>
+    <line x1="256" y1="332" x2="256" y2="412" stroke="url(#lineGradient)" stroke-width="1"/>
+    <line x1="100" y1="256" x2="180" y2="256" stroke="url(#lineGradient)" stroke-width="1"/>
+    <line x1="332" y1="256" x2="412" y2="256" stroke="url(#lineGradient)" stroke-width="1"/>
+  </g>
+  
+  <!-- Highlight Effect -->
+  <ellipse cx="220" cy="180" rx="80" ry="40" fill="white" opacity="0.2" transform="rotate(-30 220 180)"/>
+  
+  <defs>
+    <!-- Main Sphere Gradient -->
+    <radialGradient id="sphereGradient" cx="0.5" cy="0.3">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </radialGradient>
+    
+    <!-- Glass Effect -->
+    <radialGradient id="glassGradient" cx="0.5" cy="0.3">
+      <stop offset="0%" stop-color="white" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Logo Gradient -->
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+    
+    <!-- Inner Cube Gradient -->
+    <linearGradient id="innerCubeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#EC4899" stop-opacity="0.6"/>
+    </linearGradient>
+    
+    <!-- Diamond Gradient -->
+    <radialGradient id="diamondGradient">
+      <stop offset="0%" stop-color="white"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </radialGradient>
+    
+    <!-- Line Gradient -->
+    <linearGradient id="lineGradient">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+</svg>
