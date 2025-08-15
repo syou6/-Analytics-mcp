@@ -17,6 +17,13 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "GitVue - Visualize Your GitHub Impact",
   description: "AI-powered GitHub analytics dashboard with beautiful visualizations and insights",
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' }
+    ],
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
