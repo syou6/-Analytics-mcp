@@ -61,7 +61,7 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
   return (
     <div className={`rounded-lg shadow-lg p-6 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2 flex items-center">
+        <h2 className="text-2xl font-bold mb-2 flex items-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
           <Sparkles className="w-6 h-6 mr-2 text-purple-600" />
           {language === 'en' ? 'Personal Branding Analysis' : '個人ブランディング分析'}
         </h2>
@@ -117,7 +117,7 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
                   <User className="w-5 h-5 mr-2" />
                   {analysis.profile.name || analysis.profile.username}
                 </h3>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} mt-1`}>
+                <p className={`text-sm ${isDark ? 'text-blue-400' : 'text-blue-600'} mt-1 font-medium`}>
                   @{analysis.profile.username}
                 </p>
                 {analysis.profile.bio && (
@@ -128,19 +128,19 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
                 <div className="flex items-center gap-4 mt-3 text-sm">
                   {analysis.profile.location && (
                     <span className="flex items-center text-gray-700">
-                      <Globe className="w-4 h-4 mr-1" />
+                      <Globe className="w-4 h-4 mr-1 text-green-500" />
                       {analysis.profile.location}
                     </span>
                   )}
                   {analysis.profile.company && (
                     <span className="flex items-center text-gray-700">
-                      <Award className="w-4 h-4 mr-1" />
+                      <Award className="w-4 h-4 mr-1 text-orange-500" />
                       {analysis.profile.company}
                     </span>
                   )}
                   {analysis.profile.twitterUsername && (
                     <span className="flex items-center text-gray-700">
-                      <Twitter className="w-4 h-4 mr-1" />
+                      <Twitter className="w-4 h-4 mr-1 text-blue-400" />
                       @{analysis.profile.twitterUsername}
                     </span>
                   )}
@@ -153,7 +153,7 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
                 <div className={`text-4xl font-bold ${getScoreColor(analysis.scores.brandStrength)}`}>
                   {getScoreGrade(analysis.scores.brandStrength)}
                 </div>
-                <div className="text-lg">
+                <div className="text-lg font-semibold text-gray-600">
                   {analysis.scores.brandStrength}/100
                 </div>
               </div>
@@ -259,7 +259,7 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
               <ul className="space-y-2">
                 {analysis.recommendations.map((rec: string, index: number) => (
                   <li key={index} className="flex items-start">
-                    <span className="mr-2">•</span>
+                    <span className="mr-2 text-purple-500">•</span>
                     <span className="text-sm text-gray-700">{rec}</span>
                   </li>
                 ))}
@@ -274,19 +274,19 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
             </h4>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
               <div>
-                <span className="font-medium">{analysis.communityImpact.organizations}</span>
+                <span className="font-bold text-teal-600">{analysis.communityImpact.organizations}</span>
                 <span className="ml-2 text-gray-600 font-medium">
                   {language === 'en' ? 'Organizations' : '組織'}
                 </span>
               </div>
               <div>
-                <span className="font-medium">{analysis.communityImpact.gists}</span>
+                <span className="font-bold text-indigo-600">{analysis.communityImpact.gists}</span>
                 <span className="ml-2 text-gray-600 font-medium">
                   {language === 'en' ? 'Gists' : 'Gist'}
                 </span>
               </div>
               <div>
-                <span className="font-medium">{analysis.communityImpact.sponsorships}</span>
+                <span className="font-bold text-pink-600">{analysis.communityImpact.sponsorships}</span>
                 <span className="ml-2 text-gray-600 font-medium">
                   {language === 'en' ? 'Sponsorships' : 'スポンサーシップ'}
                 </span>
