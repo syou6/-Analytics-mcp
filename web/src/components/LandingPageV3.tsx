@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Github, BarChart3, Zap, TrendingUp, Code2, Star, Users, CheckCircle, ArrowRight, Sparkles, Brain, Briefcase, Trophy, Clock, Shield, Globe, Languages, Twitter, Youtube, Mail } from 'lucide-react';
+import { Github, BarChart3, Zap, TrendingUp, Code2, Star, Users, CheckCircle, ArrowRight, Sparkles, Brain, Briefcase, Trophy, Clock, Shield, Globe, Languages, Twitter, Youtube } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/hooks/useLanguage';
 import { translations } from '@/translations/landing';
@@ -578,18 +578,6 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
                   aria-label="YouTube"
                 >
                   <Youtube className="h-6 w-6" />
-                </a>
-              </div>
-              <div className="mt-4">
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  {language === 'en' ? 'Contact:' : 'お問い合わせ:'}
-                </p>
-                <a 
-                  href="mailto:support@gitvue.dev" 
-                  className={`text-sm ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'} flex items-center mt-1`}
-                >
-                  <Mail className="h-4 w-4 mr-1" />
-                  support@gitvue.dev
                 </a>
               </div>
             </div>
