@@ -86,29 +86,29 @@ export const translations = {
       }
     },
     testimonials: {
-      title: 'Loved by Developers Worldwide',
-      subtitle: 'Join thousands of developers advancing their careers with GitVue',
+      title: 'Early Access Feedback',
+      subtitle: 'What developers are saying about GitVue beta',
       reviews: [
         {
-          name: 'Sarah Chen',
-          role: 'Senior Developer at Meta',
-          text: 'GitVue\'s AI analysis helped me identify performance bottlenecks in my repositories. The competitor analysis feature is incredibly valuable.'
+          name: 'T.S.',
+          role: 'Individual Developer',
+          text: 'The AI analysis is promising. Looking forward to seeing how this evolves with more features.'
         },
         {
-          name: 'Mike Johnson',
-          role: 'Full Stack Developer',
-          text: 'The repository health scoring and recommendations helped me improve my project maintenance. Essential tool for any serious developer.'
+          name: 'K.Y.',
+          role: 'Tech Startup CEO',
+          text: 'Clean interface and useful repository insights. Still testing but the potential is clear.'
         },
         {
-          name: 'Lisa Park',
-          role: 'Open Source Maintainer',
-          text: 'Best $9.8 I spend each month. The commit visualizations and contributor analytics save me hours of manual analysis.'
+          name: 'Anonymous',
+          role: 'SaaS Founder',
+          text: 'Interesting approach to GitHub analytics. The visualization features are particularly helpful.'
         }
       ]
     },
     cta: {
       title: 'Ready to Analyze Your Repositories?',
-      subtitle: 'Join 15,000+ developers using GitVue for comprehensive GitHub analytics',
+      subtitle: 'Be among the first to experience comprehensive GitHub analytics',
       button: 'Start Free Analysis',
       terms: 'No credit card required • 5-minute setup • Cancel anytime'
     }
@@ -200,29 +200,29 @@ export const translations = {
       }
     },
     testimonials: {
-      title: '世界中の開発者に愛されています',
-      subtitle: 'GitVueでキャリアを前進させている数千人の開発者に加わりましょう',
+      title: 'アーリーアクセスフィードバック',
+      subtitle: 'GitVueベータ版への開発者の声',
       reviews: [
         {
-          name: 'サラ・チェン',
-          role: 'Meta シニア開発者',
-          text: 'GitVueのAI分析はリポジトリのパフォーマンスボトルネックを特定するのに役立ちました。競合分析機能は非常に価値があります。'
+          name: 'T.S.',
+          role: '個人開発者',
+          text: 'AI分析機能が期待できます。今後の機能追加でどう進化していくか楽しみです。'
         },
         {
-          name: 'マイク・ジョンソン',
-          role: 'フルスタック開発者',
-          text: 'リポジトリの健全性スコアリングと提案はプロジェクトのメンテナンスを改善するのに役立ちました。真剣な開発者に不可欠なツールです。'
+          name: 'K.Y.',
+          role: 'IT企業 CEO',
+          text: 'クリーンなインターフェースと有用なリポジトリインサイト。まだテスト中ですが、可能性は明確です。'
         },
         {
-          name: 'リサ・パーク',
-          role: 'オープンソースメンテナー',
-          text: '毎月使う最高の$9.8です。コミット可視化とコントリビューター分析は手動分析の時間を大幅に節約します。'
+          name: '匿名',
+          role: 'SaaS創業者',
+          text: 'GitHub分析への興味深いアプローチ。可視化機能が特に役立っています。'
         }
       ]
     },
     cta: {
       title: 'リポジトリを分析する準備はできましたか？',
-      subtitle: 'GitVueを使用して包括的なGitHub分析を行っている15,000人以上の開発者に参加',
+      subtitle: '包括的なGitHub分析を最初に体験する開発者になりましょう',
       button: '無料分析を開始',
       terms: 'クレジットカード不要 • 5分でセットアップ • いつでもキャンセル可能'
     }
