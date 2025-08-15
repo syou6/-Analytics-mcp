@@ -284,7 +284,7 @@ function calculateBrandingMetrics(userData: any) {
     brandStrength,
     recommendations,
     contributionGraph: {
-      total: userData.contributionsCollection.totalContributions,
+      total: userData.contributionsCollection.contributionCalendar.totalContributions,
       recentWeeks: userData.contributionsCollection.contributionCalendar.weeks.slice(-12)
     }
   };
