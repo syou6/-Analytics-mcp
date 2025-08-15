@@ -5,6 +5,7 @@ import { Github, BarChart3, Zap, TrendingUp, Code2, Star, Users, CheckCircle, Ar
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/hooks/useLanguage';
 import { translations } from '@/translations/landing';
+import OrbIcon from '@/components/OrbIcon';
 
 interface LandingPageV3Props {
   onSignIn: () => void;
@@ -56,7 +57,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <Github className="h-8 w-8 text-blue-600" />
+              <OrbIcon className="h-8 w-8" />
               <span className="font-bold text-xl">GitVue</span>
               <span className="ml-4 px-2 py-1 bg-green-600/10 text-green-600 text-xs rounded-full font-semibold">
                 BETA
@@ -126,7 +127,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               onClick={onSignIn}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg flex items-center"
             >
-              <Github className="mr-2" />
+              <OrbIcon className="h-5 w-5 mr-2" />
               {t.hero.ctaMain}
             </button>
             <button className={`px-8 py-4 rounded-lg text-lg font-semibold border-2 ${isDark ? 'border-gray-600 hover:bg-gray-800' : 'border-gray-300 hover:bg-gray-50'} transition-colors`}>
@@ -494,7 +495,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
-                <Github className="h-8 w-8 text-blue-600" />
+                <OrbIcon className="h-8 w-8" />
                 <span className="font-bold text-xl">GitVue</span>
               </div>
               <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -559,7 +560,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
                   className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition-colors`}
                   aria-label="GitHub"
                 >
-                  <Github className="h-6 w-6" />
+                  <OrbIcon className="h-6 w-6" />
                 </a>
                 <a 
                   href="https://x.com/K8292288065827" 
