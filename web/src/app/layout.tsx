@@ -19,11 +19,11 @@ export const metadata: Metadata = {
   description: "AI-powered GitHub analytics dashboard with beautiful visualizations and insights",
   icons: {
     icon: [
-      { url: '/favicon-orb.png', type: 'image/png', sizes: '512x512' },
+      { url: '/favicon-orb.svg', type: 'image/svg+xml' },
       { url: '/favicon-v3.svg', type: 'image/svg+xml' },
       { url: '/favicon.ico', sizes: 'any' }
     ],
-    apple: '/favicon-orb.png',
+    apple: '/favicon-orb.svg',
   },
 };
 
@@ -35,10 +35,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon-orb.png?v=4" type="image/png" />
-        <link rel="alternate icon" href="/favicon-v3.svg?v=4" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon-orb.png?v=4" />
-        <link rel="shortcut icon" href="/favicon-orb.png?v=4" />
+        <link rel="icon" href="/favicon-orb.svg?v=5" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon-v3.svg?v=5" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon-orb.svg?v=5" />
+        <link rel="shortcut icon" href="/favicon-orb.svg?v=5" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
