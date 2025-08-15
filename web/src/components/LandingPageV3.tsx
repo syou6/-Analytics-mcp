@@ -40,17 +40,15 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
 
   // Price calculations
   const prices = {
-    starter: { monthly: 9.8, annual: 7.8 },
-    basic: { monthly: 9.8, annual: 7.8 },
+    free: { monthly: 0, annual: 0 },
     professional: { monthly: 9.8, annual: 7.8 },
-    enterprise: { monthly: 99, annual: 99 }
+    enterprise: { monthly: 99, annual: 79 }
   };
 
   const jpyRates = {
-    starter: { monthly: 1470, annual: 1170 },
-    basic: { monthly: 1470, annual: 1170 },
+    free: { monthly: 0, annual: 0 },
     professional: { monthly: 1470, annual: 1170 },
-    enterprise: { monthly: 14850, annual: 14850 }
+    enterprise: { monthly: 14850, annual: 11850 }
   };
 
   return (
@@ -285,62 +283,45 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            {/* Starter Plan */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Free Plan */}
             <motion.div 
               whileHover={{ scale: 1.02 }}
-              className={`rounded-xl p-6 ${isDark ? 'bg-gray-800' : 'bg-white'} ${selectedPlan === 'starter' ? 'ring-2 ring-blue-600' : ''}`}
-              onClick={() => setSelectedPlan('starter')}
+              className={`rounded-xl p-6 ${isDark ? 'bg-gray-800' : 'bg-white'} ${selectedPlan === 'free' ? 'ring-2 ring-blue-600' : ''}`}
+              onClick={() => setSelectedPlan('free')}
             >
-              <h3 className="text-lg font-semibold mb-2">{t.pricing.plans.starter.name}</h3>
+              <h3 className="text-lg font-semibold mb-2">Free</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">${isAnnual ? prices.starter.annual : prices.starter.monthly}</span>
+                <span className="text-3xl font-bold">$0</span>
                 <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.pricing.perMonth}</span>
-                <div className="text-xs text-gray-500 mt-1">
-                  {language === 'ja' ? `約¥${isAnnual ? jpyRates.starter.annual : jpyRates.starter.monthly} (税込)` : ''}
-                </div>
               </div>
               <ul className="space-y-3 mb-6">
-                {t.pricing.plans.starter.features.map((feature, i) => (
-                  <li key={i} className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? '3 Projects' : '3プロジェクト'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? 'Basic Analytics' : '基本分析'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? '7-day History' : '7日間の履歴'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? 'Community Support' : 'コミュニティサポート'}</span>
+                </li>
               </ul>
-              <button className={`w-full py-2 rounded-lg border ${isDark ? 'border-gray-600' : 'border-gray-300'}`}>
-                {t.pricing.selectPlan}
+              <button 
+                onClick={onSignIn}
+                className={`w-full py-2 rounded-lg border ${isDark ? 'border-gray-600 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-50'} transition-colors`}
+              >
+                {language === 'en' ? 'Get Started Free' : '無料で始める'}
               </button>
             </motion.div>
 
-            {/* Basic Plan */}
-            <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className={`rounded-xl p-6 ${isDark ? 'bg-gray-800' : 'bg-white'} ${selectedPlan === 'basic' ? 'ring-2 ring-blue-600' : ''}`}
-              onClick={() => setSelectedPlan('basic')}
-            >
-              <h3 className="text-lg font-semibold mb-2">{t.pricing.plans.basic.name}</h3>
-              <div className="mb-4">
-                <span className="text-3xl font-bold">${isAnnual ? prices.basic.annual : prices.basic.monthly}</span>
-                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.pricing.perMonth}</span>
-                <div className="text-xs text-gray-500 mt-1">
-                  {language === 'ja' ? `約¥${isAnnual ? jpyRates.basic.annual : jpyRates.basic.monthly} (税込)` : ''}
-                </div>
-              </div>
-              <ul className="space-y-3 mb-6">
-                {t.pricing.plans.basic.features.map((feature, i) => (
-                  <li key={i} className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <button className={`w-full py-2 rounded-lg border ${isDark ? 'border-gray-600' : 'border-gray-300'}`}>
-                {t.pricing.selectPlan}
-              </button>
-            </motion.div>
-
-            {/* Professional Plan */}
+            {/* Pro Plan */}
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className={`rounded-xl p-6 ${isDark ? 'bg-gradient-to-br from-blue-900 to-purple-900' : 'bg-gradient-to-br from-blue-50 to-purple-50'} ring-2 ring-blue-600 relative`}
@@ -351,7 +332,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
                   {t.pricing.bestValue}
                 </span>
               </div>
-              <h3 className="text-lg font-semibold mb-2">{t.pricing.plans.professional.name}</h3>
+              <h3 className="text-lg font-semibold mb-2">Pro</h3>
               <div className="mb-4">
                 <span className="text-3xl font-bold">${isAnnual ? prices.professional.annual : prices.professional.monthly}</span>
                 <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{t.pricing.perMonth}</span>
@@ -361,12 +342,30 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
                 {isAnnual && <span className="text-green-600 text-sm">{language === 'en' ? 'Save $24/year' : '年間$24お得'}</span>}
               </div>
               <ul className="space-y-3 mb-6">
-                {t.pricing.plans.professional.features.map((feature, i) => (
-                  <li key={i} className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                    <span className="text-sm font-medium">{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-medium">{language === 'en' ? 'Unlimited Projects' : '無制限プロジェクト'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-medium">{language === 'en' ? 'AI Coaching' : 'AIコーチング'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-medium">{language === 'en' ? 'Portfolio Generator' : 'ポートフォリオ生成'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-medium">{language === 'en' ? 'Unlimited History' : '無制限履歴'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-medium">{language === 'en' ? 'Priority Support' : '優先サポート'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-medium">{language === 'en' ? 'API Access' : 'APIアクセス'}</span>
+                </li>
               </ul>
               <button 
                 onClick={onSignIn}
@@ -382,21 +381,40 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               className={`rounded-xl p-6 ${isDark ? 'bg-gray-800' : 'bg-white'} ${selectedPlan === 'enterprise' ? 'ring-2 ring-blue-600' : ''}`}
               onClick={() => setSelectedPlan('enterprise')}
             >
-              <h3 className="text-lg font-semibold mb-2">{t.pricing.plans.enterprise.name}</h3>
+              <h3 className="text-lg font-semibold mb-2">Enterprise</h3>
               <div className="mb-4">
-                <span className="text-3xl font-bold">${prices.enterprise.monthly}</span>
+                <span className="text-3xl font-bold">${isAnnual ? prices.enterprise.annual : prices.enterprise.monthly}</span>
                 <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.pricing.perMonth}</span>
                 <div className="text-xs text-gray-500 mt-1">
-                  {language === 'ja' ? `約¥${jpyRates.enterprise.monthly} (税込)` : ''}
+                  {language === 'ja' ? `約¥${isAnnual ? jpyRates.enterprise.annual : jpyRates.enterprise.monthly} (税込)` : ''}
                 </div>
+                {isAnnual && <span className="text-green-600 text-sm">{language === 'en' ? 'Save $240/year' : '年間$240お得'}</span>}
               </div>
               <ul className="space-y-3 mb-6">
-                {t.pricing.plans.enterprise.features.map((feature, i) => (
-                  <li key={i} className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? 'Everything in Pro' : 'Pro機能全て'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? 'Team Management' : 'チーム管理'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? 'Custom Integrations' : 'カスタム統合'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? 'SLA Support' : 'SLAサポート'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? 'SSO/SAML' : 'SSO/SAML認証'}</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{language === 'en' ? 'White-label Options' : 'ホワイトラベル対応'}</span>
+                </li>
               </ul>
               <button className={`w-full py-2 rounded-lg border ${isDark ? 'border-gray-600' : 'border-gray-300'}`}>
                 {t.pricing.contactSales}
