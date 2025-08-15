@@ -762,37 +762,30 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
 
         {/* Search Tab */}
         {activeTab === 'search' && (
-          <div className="bg-white rounded-lg shadow p-6 mb-8">
-            <h2 className="text-2xl font-bold mb-4 text-black">{t('analyzeAnyRepository', language)}</h2>
-            <div className="flex space-x-4">
-            <input
-              type="text"
-              value={repoUrl}
-              onChange={(e) => setRepoUrl(e.target.value)}
-              placeholder={t('searchPlaceholder', language)}
-              className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-              onKeyPress={(e) => e.key === 'Enter' && analyzeRepo()}
-            />
-            <button
-              onClick={analyzeRepo}
-              disabled={loading}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-            >
-              {loading ? t('analyzing', language) : t('analyzeButton', language)}
-            </button>
-          </div>
-        </div>
-        )}
+          <>
+            <div className="bg-white rounded-lg shadow p-6 mb-8">
+              <h2 className="text-2xl font-bold mb-4 text-black">{t('analyzeAnyRepository', language)}</h2>
+              <div className="flex space-x-4">
+                <input
+                  type="text"
+                  value={repoUrl}
+                  onChange={(e) => setRepoUrl(e.target.value)}
+                  placeholder={t('searchPlaceholder', language)}
+                  className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  onKeyPress={(e) => e.key === 'Enter' && analyzeRepo()}
+                />
+                <button
+                  onClick={analyzeRepo}
+                  disabled={loading}
+                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                >
+                  {loading ? t('analyzing', language) : t('analyzeButton', language)}
+                </button>
+              </div>
+            </div>
 
-        {/* Personal Branding Tab */}
-        {activeTab === 'branding' && (
-          <PersonalBranding 
-            isDark={false}
-            language={language}
-          />
-        )}
-
-        {analysis && (
+            {/* Show analysis results only in search tab */}
+            {analysis && (
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content - 2 columns */}
             <div className="lg:col-span-2 space-y-8">
@@ -1255,6 +1248,16 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               )}
             </div>
           </div>
+            )}
+          </>
+        )}
+
+        {/* Personal Branding Tab */}
+        {activeTab === 'branding' && (
+          <PersonalBranding 
+            isDark={false}
+            language={language}
+          />
         )}
 
       </main>
