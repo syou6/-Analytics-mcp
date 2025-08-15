@@ -1,88 +1,119 @@
 export default function OrbIcon({ className = "h-8 w-8" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-      {/* Main glowing sphere */}
+    <svg className={className} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        {/* Radial gradient for sphere */}
-        <radialGradient id="sphereGrad" cx="50%" cy="40%">
-          <stop offset="0%" style={{ stopColor: '#60E3FF', stopOpacity: 1 }} />
-          <stop offset="30%" style={{ stopColor: '#60A5FA', stopOpacity: 0.9 }} />
-          <stop offset="60%" style={{ stopColor: '#8B5CF6', stopOpacity: 0.8 }} />
-          <stop offset="100%" style={{ stopColor: '#EC4899', stopOpacity: 0.6 }} />
+        {/* Background gradient */}
+        <radialGradient id="bgGrad" cx="50%" cy="50%">
+          <stop offset="0%" style={{ stopColor: '#1a0033', stopOpacity: 1 }} />
+          <stop offset="100%" style={{ stopColor: '#000000', stopOpacity: 1 }} />
+        </radialGradient>
+        
+        {/* Main sphere gradient */}
+        <radialGradient id="sphereGrad" cx="40%" cy="30%">
+          <stop offset="0%" style={{ stopColor: '#00d4ff', stopOpacity: 0.9 }} />
+          <stop offset="30%" style={{ stopColor: '#0099ff', stopOpacity: 0.85 }} />
+          <stop offset="60%" style={{ stopColor: '#7b3ff2', stopOpacity: 0.8 }} />
+          <stop offset="100%" style={{ stopColor: '#e91e63', stopOpacity: 0.7 }} />
         </radialGradient>
         
         {/* Glow effect */}
         <filter id="glow">
-          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
           <feMerge>
             <feMergeNode in="coloredBlur"/>
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
         
-        {/* Inner structure gradient */}
-        <linearGradient id="innerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: '#00D4FF', stopOpacity: 1 }} />
-          <stop offset="100%" style={{ stopColor: '#BD00FF', stopOpacity: 0.8 }} />
+        {/* Inner cube gradient */}
+        <linearGradient id="cubeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{ stopColor: '#00ffff', stopOpacity: 1 }} />
+          <stop offset="50%" style={{ stopColor: '#7b3ff2', stopOpacity: 1 }} />
+          <stop offset="100%" style={{ stopColor: '#e91e63', stopOpacity: 1 }} />
         </linearGradient>
       </defs>
       
+      {/* Dark background circle */}
+      <circle cx="100" cy="100" r="98" fill="url(#bgGrad)"/>
+      
       {/* Outer glow */}
-      <circle cx="256" cy="256" r="240" fill="url(#sphereGrad)" opacity="0.3" filter="url(#glow)"/>
+      <circle cx="100" cy="100" r="85" fill="url(#sphereGrad)" opacity="0.2" filter="url(#glow)"/>
       
-      {/* Main sphere */}
-      <circle cx="256" cy="256" r="200" fill="url(#sphereGrad)" opacity="0.9"/>
+      {/* Main glass sphere */}
+      <circle cx="100" cy="100" r="75" fill="none" stroke="url(#sphereGrad)" strokeWidth="1.5" opacity="0.6"/>
+      <circle cx="100" cy="100" r="70" fill="url(#sphereGrad)" opacity="0.15"/>
       
-      {/* Glass effect overlay */}
-      <ellipse cx="256" cy="200" rx="180" ry="120" fill="white" opacity="0.1"/>
+      {/* Glass reflection */}
+      <ellipse cx="100" cy="65" rx="55" ry="35" fill="white" opacity="0.08"/>
       
-      {/* Central hexagonal structure */}
-      <g transform="translate(256, 256)">
-        {/* Outer hexagon */}
-        <path d="M-60,-35 L0,-70 L60,-35 L60,35 L0,70 L-60,35 Z" 
-              fill="none" 
-              stroke="#00D4FF" 
-              strokeWidth="3" 
-              opacity="0.8"
-              filter="url(#glow)"/>
+      {/* Central 3D cube structure */}
+      <g transform="translate(100, 100)">
+        {/* Back face */}
+        <path d="M-20,-20 L-20,20 L20,20 L20,-20 Z" 
+              fill="url(#cubeGrad)" 
+              opacity="0.3"
+              transform="translate(-10, -10)"/>
         
-        {/* Inner cube */}
-        <path d="M-40,-23 L0,-46 L40,-23 L40,23 L0,46 L-40,23 Z" 
-              fill="url(#innerGrad)" 
+        {/* Left face */}
+        <path d="M-30,-15 L-30,25 L-10,35 L-10,-5 Z" 
+              fill="url(#cubeGrad)" 
+              opacity="0.5"/>
+        
+        {/* Right face */}
+        <path d="M10,-5 L10,35 L30,25 L30,-15 Z" 
+              fill="url(#cubeGrad)" 
+              opacity="0.4"/>
+        
+        {/* Top face - main cube */}
+        <path d="M-30,-15 L-10,-25 L30,-15 L10,-5 Z" 
+              fill="url(#cubeGrad)" 
               opacity="0.7"/>
         
-        {/* Center diamond */}
-        <path d="M-20,0 L0,-20 L20,0 L0,20 Z" 
-              fill="#FFFFFF" 
+        {/* Front face */}
+        <path d="M-30,25 L-10,35 L30,25 L10,35 Z" 
+              fill="url(#cubeGrad)" 
+              opacity="0.6"/>
+        
+        {/* Inner glowing cube */}
+        <rect x="-8" y="-8" width="16" height="16" 
+              fill="#00ffff" 
               opacity="0.9"
               filter="url(#glow)"/>
       </g>
       
-      {/* Small nodes around */}
-      <g opacity="0.7">
-        <circle cx="256" cy="100" r="6" fill="#60E3FF" filter="url(#glow)"/>
-        <circle cx="380" cy="180" r="5" fill="#BD00FF" filter="url(#glow)"/>
-        <circle cx="380" cy="332" r="5" fill="#FF0080" filter="url(#glow)"/>
-        <circle cx="256" cy="412" r="6" fill="#60E3FF" filter="url(#glow)"/>
-        <circle cx="132" cy="332" r="5" fill="#BD00FF" filter="url(#glow)"/>
-        <circle cx="132" cy="180" r="5" fill="#FF0080" filter="url(#glow)"/>
+      {/* Floating particles */}
+      <g opacity="0.6">
+        {/* Top particles */}
+        <circle cx="100" cy="30" r="2" fill="#00d4ff" filter="url(#glow)"/>
+        <circle cx="70" cy="40" r="1.5" fill="#7b3ff2" filter="url(#glow)"/>
+        <circle cx="130" cy="40" r="1.5" fill="#e91e63" filter="url(#glow)"/>
         
-        {/* More small nodes */}
-        <circle cx="200" cy="140" r="3" fill="#00D4FF" opacity="0.6"/>
-        <circle cx="312" cy="140" r="3" fill="#00D4FF" opacity="0.6"/>
-        <circle cx="350" cy="256" r="3" fill="#BD00FF" opacity="0.6"/>
-        <circle cx="162" cy="256" r="3" fill="#BD00FF" opacity="0.6"/>
-        <circle cx="200" cy="372" r="3" fill="#FF0080" opacity="0.6"/>
-        <circle cx="312" cy="372" r="3" fill="#FF0080" opacity="0.6"/>
+        {/* Side particles */}
+        <circle cx="40" cy="100" r="2" fill="#00d4ff" filter="url(#glow)"/>
+        <circle cx="160" cy="100" r="2" fill="#7b3ff2" filter="url(#glow)"/>
+        
+        {/* Bottom particles */}
+        <circle cx="100" cy="170" r="2" fill="#e91e63" filter="url(#glow)"/>
+        <circle cx="70" cy="160" r="1.5" fill="#00d4ff" filter="url(#glow)"/>
+        <circle cx="130" cy="160" r="1.5" fill="#7b3ff2" filter="url(#glow)"/>
+        
+        {/* Small scattered particles */}
+        <circle cx="55" cy="70" r="1" fill="#00ffff" opacity="0.5"/>
+        <circle cx="145" cy="70" r="1" fill="#ff00ff" opacity="0.5"/>
+        <circle cx="55" cy="130" r="1" fill="#ff00ff" opacity="0.5"/>
+        <circle cx="145" cy="130" r="1" fill="#00ffff" opacity="0.5"/>
       </g>
       
       {/* Connection lines */}
-      <g stroke="#60A5FA" strokeWidth="1" opacity="0.3">
-        <line x1="256" y1="100" x2="256" y2="160"/>
-        <line x1="256" y1="352" x2="256" y2="412"/>
-        <line x1="160" y1="256" x2="132" y2="256"/>
-        <line x1="352" y1="256" x2="380" y2="256"/>
+      <g stroke="#7b3ff2" strokeWidth="0.5" opacity="0.3">
+        <line x1="100" y1="30" x2="100" y2="50"/>
+        <line x1="100" y1="150" x2="100" y2="170"/>
+        <line x1="40" y1="100" x2="60" y2="100"/>
+        <line x1="140" y1="100" x2="160" y2="100"/>
       </g>
+      
+      {/* Bottom reflection */}
+      <ellipse cx="100" cy="185" rx="60" ry="10" fill="url(#sphereGrad)" opacity="0.15"/>
     </svg>
   );
 }
