@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     nav: {
-      startBuilding: 'Start Building Your Portfolio',
+      startBuilding: 'Start Analyzing',
       githubStars: '2.4k GitHub Stars'
     },
     hero: {
@@ -115,7 +115,7 @@ export const translations = {
   },
   ja: {
     nav: {
-      startBuilding: 'ポートフォリオ作成を開始',
+      startBuilding: '分析を開始',
       githubStars: '2.4k GitHub スター'
     },
     hero: {
