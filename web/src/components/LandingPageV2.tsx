@@ -275,6 +275,7 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               <div className="mb-4">
                 <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
                 <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
+                <div className="text-xs text-gray-500 mt-1">約¥{isAnnual ? '1,170' : '1,470'} (税込)</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
@@ -305,6 +306,7 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               <div className="mb-4">
                 <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
                 <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
+                <div className="text-xs text-gray-500 mt-1">約¥{isAnnual ? '1,170' : '1,470'} (税込)</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
@@ -344,7 +346,8 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               <div className="mb-4">
                 <span className="text-3xl font-bold">${isAnnual ? '7.8' : '9.8'}</span>
                 <span className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>/mo</span>
-                {isAnnual && <span className="ml-2 text-green-600 text-sm">Save $24/year</span>}
+                <div className="text-xs text-gray-300 mt-1">約¥{isAnnual ? '1,170' : '1,470'} (税込)</div>
+                {isAnnual && <span className="text-green-600 text-sm">Save $24/year</span>}
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
@@ -390,6 +393,7 @@ export default function LandingPageV2({ onSignIn }: LandingPageV2Props) {
               <div className="mb-4">
                 <span className="text-3xl font-bold">$99</span>
                 <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>/mo</span>
+                <div className="text-xs text-gray-500 mt-1">約¥14,850 (税込)</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
