@@ -18,12 +18,8 @@ export const metadata: Metadata = {
   title: "GitVue - Visualize Your GitHub Impact",
   description: "AI-powered GitHub analytics dashboard with beautiful visualizations and insights",
   icons: {
-    icon: [
-      { url: '/favicon-orb.svg', type: 'image/svg+xml' },
-      { url: '/favicon-v3.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' }
-    ],
-    apple: '/favicon-orb.svg',
+    icon: '/favicon-3d.png',
+    apple: '/favicon-3d.png',
   },
 };
 
@@ -35,10 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon-orb.svg?v=5" type="image/svg+xml" />
-        <link rel="alternate icon" href="/favicon-v3.svg?v=5" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon-orb.svg?v=5" />
-        <link rel="shortcut icon" href="/favicon-orb.svg?v=5" />
+        <link rel="icon" href="/favicon-3d.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon-3d.png" />
+        <link rel="shortcut icon" href="/favicon-3d.png" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
