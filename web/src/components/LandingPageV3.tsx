@@ -163,28 +163,28 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               whileHover={{ scale: 1.05 }}
               className="flex flex-col items-center"
             >
-              <div className="text-3xl font-bold text-blue-600">2.4M+</div>
+              <div className="text-3xl font-bold text-blue-600">50+</div>
               <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.trust.commits}</div>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className="flex flex-col items-center"
             >
-              <div className="text-3xl font-bold text-purple-600">500K+</div>
+              <div className="text-3xl font-bold text-purple-600">10+</div>
               <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.trust.pullRequests}</div>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className="flex flex-col items-center"
             >
-              <div className="text-3xl font-bold text-green-600">15K+</div>
+              <div className="text-3xl font-bold text-green-600">12</div>
               <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.trust.developers}</div>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className="flex flex-col items-center"
             >
-              <div className="text-3xl font-bold text-orange-600">99.9%</div>
+              <div className="text-3xl font-bold text-orange-600">7</div>
               <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{t.trust.uptime}</div>
             </motion.div>
           </div>

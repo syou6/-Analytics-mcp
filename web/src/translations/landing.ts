@@ -16,10 +16,10 @@ export const translations = {
       githubOAuth: 'GitHub OAuth only'
     },
     trust: {
-      commits: 'Commits Analyzed',
-      pullRequests: 'Pull Requests',
-      developers: 'Active Developers',
-      uptime: 'Uptime'
+      commits: 'Repositories Analyzed',
+      pullRequests: 'Beta Testers',
+      developers: 'GitHub Stars',
+      uptime: 'Days Since Launch'
     },
     features: {
       title: 'Powerful GitHub Analytics',
@@ -130,10 +130,10 @@ export const translations = {
       githubOAuth: 'GitHub OAuth認証のみ'
     },
     trust: {
-      commits: 'コミット分析済み',
-      pullRequests: 'プルリクエスト',
-      developers: 'アクティブ開発者',
-      uptime: '稼働率'
+      commits: 'リポジトリ分析済み',
+      pullRequests: 'ベータテスター',
+      developers: 'GitHub スター',
+      uptime: 'ローンチからの日数'
     },
     features: {
       title: '強力なGitHub分析',
