@@ -165,28 +165,28 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="flex items-center justify-between mb-2">
                 <Users className="w-5 h-5 text-blue-600" />
-                <span className="text-2xl font-bold">{analysis.profile.followers.toLocaleString()}</span>
+                <span className="text-2xl font-bold">{(analysis.profile.followers || 0).toLocaleString()}</span>
               </div>
               <div className="text-sm">{language === 'en' ? 'Followers' : 'フォロワー'}</div>
             </div>
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="flex items-center justify-between mb-2">
                 <Star className="w-5 h-5 text-yellow-500" />
-                <span className="text-2xl font-bold">{analysis.metrics.totalStars.toLocaleString()}</span>
+                <span className="text-2xl font-bold">{(analysis.metrics.totalStars || 0).toLocaleString()}</span>
               </div>
               <div className="text-sm">{language === 'en' ? 'Total Stars' : '総スター数'}</div>
             </div>
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="flex items-center justify-between mb-2">
                 <GitPullRequest className="w-5 h-5 text-green-600" />
-                <span className="text-2xl font-bold">{analysis.metrics.totalPullRequests.toLocaleString()}</span>
+                <span className="text-2xl font-bold">{(analysis.metrics.totalPullRequests || 0).toLocaleString()}</span>
               </div>
               <div className="text-sm">{language === 'en' ? 'Pull Requests' : 'プルリクエスト'}</div>
             </div>
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="flex items-center justify-between mb-2">
                 <TrendingUp className="w-5 h-5 text-purple-600" />
-                <span className="text-2xl font-bold">{analysis.metrics.totalContributions.toLocaleString()}</span>
+                <span className="text-2xl font-bold">{(analysis.metrics.totalContributions || 0).toLocaleString()}</span>
               </div>
               <div className="text-sm">{language === 'en' ? 'Contributions' : 'コントリビューション'}</div>
             </div>
