@@ -18,7 +18,12 @@ export const metadata: Metadata = {
   title: "GitVue - Visualize Your GitHub Impact",
   description: "AI-powered GitHub analytics dashboard with beautiful visualizations and insights",
   icons: {
-    icon: '/gitvue.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.png', type: 'image/png' },
+      { url: '/gitvue.png', type: 'image/png' }
+    ],
+    shortcut: '/favicon.ico',
     apple: '/gitvue.png',
   },
 };
@@ -31,10 +36,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/gitvue.png?v=2" type="image/png" />
-        <link rel="apple-touch-icon" href="/gitvue.png?v=2" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/gitvue.png?v=2" />
-        <link rel="shortcut icon" href="/gitvue.png?v=2" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico?v=3" />
+        <link rel="icon" type="image/png" href="/favicon.png?v=3" />
+        <link rel="apple-touch-icon" href="/gitvue.png?v=3" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/gitvue.png?v=3" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#60a5fa" />
       </head>
