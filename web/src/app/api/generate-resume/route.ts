@@ -664,7 +664,7 @@ function identifyImprovementAreas(repos: any[], contributionData: any): string[]
   // 高優先度の改善点を返す
   return suggestions
     .sort((a, b) => {
-      const priority = { high: 3, medium: 2, low: 1 };
+      const priority: Record<string, number> = { high: 3, medium: 2, low: 1 };
       return priority[b.priority] - priority[a.priority];
     })
     .slice(0, 4)
