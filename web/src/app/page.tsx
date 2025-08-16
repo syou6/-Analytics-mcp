@@ -15,6 +15,7 @@ import RepositoryPerformanceTable from '@/components/RepositoryPerformanceTable'
 import GrowthInsights from '@/components/GrowthInsights';
 import PersonalBranding from '@/components/PersonalBranding';
 import ResumeGenerator from '@/components/ResumeGenerator';
+import CodeValueCalculator from '@/components/CodeValueCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { t } from '@/lib/i18n';
 
@@ -201,7 +202,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
   const [loadingAI, setLoadingAI] = useState(false);
   const [userRepos, setUserRepos] = useState<any[]>([]);
   const [loadingRepos, setLoadingRepos] = useState(false);
-  const [activeTab, setActiveTab] = useState<'my-repos' | 'search' | 'branding' | 'resume'>('my-repos');
+  const [activeTab, setActiveTab] = useState<'my-repos' | 'search' | 'branding' | 'resume' | 'code-value'>('my-repos');
   // const [showUpgrade, setShowUpgrade] = useState(false); // 無料化により削除
   const [subscription, setSubscription] = useState<any>(null);
   const [usage, setUsage] = useState<any>(null);
@@ -681,6 +682,19 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               <span className="sm:hidden">Resume</span>
               <span className="hidden sm:inline">AI Resume</span>
               <span className="ml-1 px-2 py-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs rounded-full">NEW</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('code-value')}
+              className={`flex-1 sm:flex-none px-3 sm:px-6 py-3 font-medium text-xs sm:text-sm border-b-2 transition-colors whitespace-nowrap ${
+                activeTab === 'code-value'
+                  ? 'border-blue-600 text-blue-600'
+                  : 'border-transparent text-black hover:text-black'
+              }`}
+            >
+              <span className="hidden sm:inline">💎 </span>
+              <span className="sm:hidden">Value</span>
+              <span className="hidden sm:inline">Code Value</span>
+              <span className="ml-1 px-2 py-0.5 bg-gradient-to-r from-green-400 to-emerald-500 text-white text-xs rounded-full animate-pulse">HOT</span>
             </button>
           </div>
         </div>
@@ -1181,6 +1195,11 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         {/* Resume Tab */}
         {activeTab === 'resume' && (
           <ResumeGenerator username={user.user_metadata?.user_name || user.email?.split('@')[0] || ''} />
+        )}
+
+        {/* Code Value Tab */}
+        {activeTab === 'code-value' && (
+          <CodeValueCalculator username={user.user_metadata?.user_name || user.email?.split('@')[0] || ''} />
         )}
 
       </main>
