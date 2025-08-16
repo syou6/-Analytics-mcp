@@ -40,14 +40,30 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
   // Price calculations
   const prices = {
     free: { monthly: 0, annual: 0 },
-    professional: { monthly: 9.8, annual: 7.8 },
-    enterprise: { monthly: 99, annual: 79 }
+    professional: { 
+      monthly: 9.8, 
+      annual: 7.8,
+      campaignPrice: 0  // キャンペーン価格
+    },
+    enterprise: { 
+      monthly: 50, 
+      annual: 40,
+      campaignPrice: 0  // キャンペーン価格
+    }
   };
 
   const jpyRates = {
     free: { monthly: 0, annual: 0 },
-    professional: { monthly: 1470, annual: 1170 },
-    enterprise: { monthly: 14850, annual: 11850 }
+    professional: { 
+      monthly: 1470, 
+      annual: 1170,
+      campaignPrice: 0  // キャンペーン価格
+    },
+    enterprise: { 
+      monthly: 7500, 
+      annual: 6000,
+      campaignPrice: 0  // キャンペーン価格
+    }
   };
 
   return (
@@ -90,6 +106,23 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
           </div>
         </div>
       </nav>
+
+      {/* Campaign Banner */}
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 text-center">
+        <div className="max-w-7xl mx-auto flex items-center justify-center space-x-2">
+          <span className="animate-pulse">🎉</span>
+          <span className="font-bold text-lg">
+            {language === 'en' 
+              ? 'LIMITED TIME: All Pro Features FREE During Launch!' 
+              : '期間限定：ローンチキャンペーンで全Pro機能が無料！'}
+          </span>
+          <span className="hidden sm:inline text-sm opacity-90">
+            {language === 'en' 
+              ? '(Worth $80/year)' 
+              : '(年額12,000円相当)'}
+          </span>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">

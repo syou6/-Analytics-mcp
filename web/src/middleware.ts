@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https: blob:",
     "font-src 'self' data:",
-    "connect-src 'self' https://api.stripe.com https://checkout.stripe.com https://api.github.com",
+    "connect-src 'self' https://api.stripe.com https://checkout.stripe.com https://api.github.com https://*.supabase.co",
     "frame-src 'self' https://js.stripe.com https://checkout.stripe.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",

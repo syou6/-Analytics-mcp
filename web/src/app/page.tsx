@@ -5,7 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { getSupabase } from '@/lib/supabase-browser';
 import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2, Crown, Lock, Sparkles } from 'lucide-react';
 import LanguageToggle from '@/components/LanguageToggle';
-import UpgradeModal from '@/components/UpgradeModal';
+// import UpgradeModal from '@/components/UpgradeModal'; // 無料化により削除
 import Footer from '@/components/Footer';
 import LandingPageV3 from '@/components/LandingPageV3';
 import ActivitySummaryCards from '@/components/ActivitySummaryCards';
@@ -201,7 +201,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
   const [userRepos, setUserRepos] = useState<any[]>([]);
   const [loadingRepos, setLoadingRepos] = useState(false);
   const [activeTab, setActiveTab] = useState<'my-repos' | 'search' | 'branding'>('my-repos');
-  const [showUpgrade, setShowUpgrade] = useState(false);
+  // const [showUpgrade, setShowUpgrade] = useState(false); // 無料化により削除
   const [subscription, setSubscription] = useState<any>(null);
   const [usage, setUsage] = useState<any>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -389,17 +389,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
   async function getAIAnalysis() {
     if (!analysis || loadingAI) return;
     
-    // Check if user has AI analysis access
-    if (subscription && !subscription.isPro) {
-      setShowUpgrade(true);
-      return;
-    }
-    
-    // Check AI usage limits for Pro users
-    if (subscription && subscription.isPro && subscription.aiAnalysesRemaining <= 0) {
-      alert(language === 'ja' ? 'AI分析の月間上限に達しました' : 'Monthly AI analysis limit reached');
-      return;
-    }
+    // 無料化により制限チェックを削除
     
     setLoadingAI(true);
     try {
@@ -473,11 +463,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
   async function analyzeRepo() {
     if (!repoUrl) return;
     
-    // Check usage limits
-    if (subscription && !subscription.isPro && subscription.analysesRemaining <= 0) {
-      setShowUpgrade(true);
-      return;
-    }
+    // 無料化により制限チェックを削除
     
     setLoading(true);
     try {
@@ -587,75 +573,21 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               <span className="font-bold text-xl text-black">GitVue</span>
             </div>
             <div className="flex items-center space-x-4">
-              {subscription && (
-                <div className="flex items-center space-x-2">
-                  {subscription.isPro ? (
-                    <>
-                      <span className="flex items-center bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-3 py-1 rounded-full text-sm">
-                        <Crown className="h-4 w-4 mr-1" />
-                        Pro
-                      </span>
-                      <div className="flex items-center space-x-2">
-                        <button
-                          onClick={async () => {
-                            const res = await fetch('/api/stripe/billing-portal', {
-                              method: 'POST',
-                              headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({ userId: user.id }),
-                            });
-                            const data = await res.json();
-                            if (data.url) window.location.href = data.url;
-                          }}
-                          className="text-sm text-black hover:underline"
-                        >
-                          {language === 'ja' ? '請求書' : 'Billing'}
-                        </button>
-                        <span className="text-gray-400">|</span>
-                        <button
-                          onClick={async () => {
-                            if (confirm(language === 'ja' 
-                              ? 'サブスクリプションをキャンセルしますか？\n現在の請求期間の終了まで利用可能です。' 
-                              : 'Cancel subscription?\nYou can still use it until the end of the current billing period.')) {
-                              const res = await fetch('/api/stripe/cancel-subscription', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ userId: user.id }),
-                              });
-                              const data = await res.json();
-                              if (data.success) {
-                                alert(language === 'ja' 
-                                  ? `サブスクリプションは ${new Date(data.cancelAt).toLocaleDateString()} にキャンセルされます` 
-                                  : `Subscription will be canceled on ${new Date(data.cancelAt).toLocaleDateString()}`);
-                                checkSubscription();
-                              }
-                            }
-                          }}
-                          className="text-sm text-red-600 hover:underline"
-                        >
-                          {language === 'ja' ? 'キャンセル' : 'Cancel'}
-                        </button>
-                      </div>
-                      <span className="text-sm text-black">
-                        {subscription.analysesRemaining}/{subscription.limits?.analyses || 100} {language === 'ja' ? '分析' : 'analyses'}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        onClick={() => setShowUpgrade(true)}
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-sm hover:opacity-90 flex items-center"
-                      >
-                        <Sparkles className="h-3 w-3 mr-1" />
-                        Upgrade to Pro
-                      </button>
-                      <span className={`text-sm ${subscription.analysesRemaining <= 3 ? 'text-red-600 font-semibold' : 'text-black'}`}>
-                        {subscription.analysesRemaining}/{subscription.limits?.analyses || 10} {language === 'ja' ? '分析' : 'analyses'}
-                        {subscription.analysesRemaining <= 3 && ' ⚠️'}
-                      </span>
-                    </>
-                  )}
-                </div>
-              )}
+              <div className="flex items-center space-x-2">
+                <span className="flex items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm animate-pulse">
+                  🎉 Campaign
+                </span>
+                <span className="flex items-center bg-gradient-to-r from-green-400 to-green-600 text-white px-3 py-1 rounded-full text-sm">
+                  <Sparkles className="h-4 w-4 mr-1" />
+                  Pro Features FREE
+                </span>
+                <span className="text-sm text-gray-600 line-through">
+                  $9.8/mo
+                </span>
+                <span className="text-sm font-bold text-green-600">
+                  $0 Limited Time!
+                </span>
+              </div>
               <LanguageToggle />
               <span className="text-black">{user.email}</span>
               <button
@@ -849,39 +781,9 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
 
             {/* Commit Heatmap and Time Distribution */}
             <div className="grid md:grid-cols-2 gap-8">
-              {subscription?.isPro ? (
-                <>
-                  <CommitHeatmap owner={analysis.owner} repo={analysis.repo} />
-                  <CommitTimeDistribution owner={analysis.owner} repo={analysis.repo} />
-                </>
-              ) : (
-                <>
-                  <div className="bg-gray-100 rounded-lg shadow p-6 border-2 border-gray-300 relative">
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-90 rounded-lg">
-                      <div className="text-center">
-                        <Lock className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                        <p className="text-gray-600 font-semibold">{language === 'ja' ? 'コミットヒートマップ' : 'Commit Heatmap'}</p>
-                        <p className="text-sm text-gray-500">{language === 'ja' ? 'Pro機能' : 'Pro Feature'}</p>
-                      </div>
-                    </div>
-                    <div className="blur-sm opacity-50">
-                      <CommitHeatmap owner={analysis.owner} repo={analysis.repo} />
-                    </div>
-                  </div>
-                  <div className="bg-gray-100 rounded-lg shadow p-6 border-2 border-gray-300 relative">
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-90 rounded-lg">
-                      <div className="text-center">
-                        <Lock className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                        <p className="text-gray-600 font-semibold">{language === 'ja' ? '時間別分布' : 'Time Distribution'}</p>
-                        <p className="text-sm text-gray-500">{language === 'ja' ? 'Pro機能' : 'Pro Feature'}</p>
-                      </div>
-                    </div>
-                    <div className="blur-sm opacity-50">
-                      <CommitTimeDistribution owner={analysis.owner} repo={analysis.repo} />
-                    </div>
-                  </div>
-                </>
-              )}
+              <CommitHeatmap owner={analysis.owner} repo={analysis.repo} />
+              <CommitTimeDistribution owner={analysis.owner} repo={analysis.repo} />
+            </div>
             </div>
 
             {/* Repository Performance Table */}
@@ -958,17 +860,11 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                   )}
                 </div>
                 <button
-                  onClick={subscription?.isPro ? getAIAnalysis : () => setShowUpgrade(true)}
-                  disabled={subscription?.isPro && loadingAI}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
-                    subscription?.isPro 
-                      ? 'bg-white text-purple-600 hover:bg-gray-100 disabled:opacity-50'
-                      : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:opacity-90'
-                  }`}
+                  onClick={getAIAnalysis}
+                  disabled={loadingAI}
+                  className="px-6 py-3 rounded-lg font-semibold transition-colors bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:opacity-90 disabled:opacity-50"
                 >
-                  {subscription?.isPro 
-                    ? (loadingAI ? 'Analyzing with AI...' : 'Start AI Analysis')
-                    : (language === 'ja' ? '🔓 Proにアップグレード' : '🔓 Upgrade to Pro')}
+                  {loadingAI ? 'Analyzing with AI...' : 'Start AI Analysis'}
                 </button>
               </div>
             )}

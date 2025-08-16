@@ -5,13 +5,13 @@ export const translations = {
       githubStars: '2.4k GitHub Stars'
     },
     hero: {
-      tagline: 'AI-Powered GitHub Repository Analytics',
-      title: 'Analyze Your GitHub Projects',
-      subtitle: 'With AI Insights',
-      description: 'GitVue provides comprehensive GitHub repository analytics with AI-powered insights. Track commits, contributors, languages, and get actionable recommendations to improve your projects.',
-      ctaMain: 'Start Analyzing',
-      ctaSecondary: 'See Live Demo',
-      noCreditCard: 'No credit card required',
+      tagline: 'Free GitHub Portfolio & Analytics Tool',
+      title: 'Build Your Developer Brand',
+      subtitle: 'With GitHub Analytics',
+      description: 'Transform your GitHub activity into a professional portfolio. Showcase your contributions, visualize your coding patterns, and build your personal brand as a developer - 100% free forever.',
+      ctaMain: 'Create Your Portfolio',
+      ctaSecondary: 'See Example',
+      noCreditCard: '100% Free Forever',
       quickSetup: '5-minute setup',
       githubOAuth: 'GitHub OAuth only'
     },
@@ -61,27 +61,34 @@ export const translations = {
     },
     pricing: {
       title: 'Simple, Transparent Pricing',
-      subtitle: 'Choose the plan that fits your career goals',
+      subtitle: '🎉 Launch Special: Everything FREE for a limited time!',
       monthly: 'Monthly',
       annual: 'Annual',
-      save: 'Save',
+      save: 'Save 20%',
       perMonth: '/mo',
       bestValue: 'BEST VALUE',
-      selectPlan: 'Select Plan',
-      startFreeTrial: 'Start Free Trial',
+      selectPlan: 'Start Free',
+      startFreeTrial: 'Get Free Access',
       contactSales: 'Contact Sales',
+      campaign: {
+        badge: 'LIMITED TIME',
+        originalPrice: 'Normally',
+        freeNow: 'FREE NOW!'
+      },
       plans: {
         free: {
           name: 'Free',
-          features: ['10 Repository Analyses/month', 'Basic Statistics', 'Language Breakdown', 'Contributor List', '7-day Data Cache']
+          features: ['10 Repository Analyses/month', 'Basic Statistics', 'Language Breakdown', 'Contributor List', '24-hour Data Cache']
         },
         professional: {
           name: 'Professional',
-          features: ['100 Repository Analyses/month', '100 AI Analyses/month', 'Commit Heatmaps', 'Time Distribution Charts', 'Competitor Analysis', 'Health Scoring', 'Public Dashboard Sharing', 'Priority Support']
+          originalPrice: '$9.8',
+          features: ['Unlimited Repository Analyses', 'AI-Powered Insights', 'Commit Heatmaps', 'Time Distribution Charts', 'Personal Branding Tools', 'Portfolio Generation', 'Public Dashboard Sharing', 'Priority Support']
         },
         enterprise: {
           name: 'Enterprise',
-          features: ['Unlimited Analyses', 'All Pro Features', 'Custom API Access', 'Dedicated Support', 'Custom Integrations', 'SLA Guarantee']
+          originalPrice: '$50',
+          features: ['Everything in Pro', 'Team Collaboration (5 seats)', 'Custom API Access', 'Dedicated Support', 'Custom Integrations', 'SLA Guarantee']
         }
       }
     },
@@ -119,13 +126,13 @@ export const translations = {
       githubStars: '2.4k GitHub スター'
     },
     hero: {
-      tagline: 'AI搭載GitHubリポジトリ分析',
-      title: 'GitHubプロジェクトを',
-      subtitle: 'AIで分析',
-      description: 'GitVueはAIを活用した包括的なGitHubリポジトリ分析を提供します。コミット、コントリビューター、言語を追跡し、プロジェクト改善のための実用的な提案を取得します。',
-      ctaMain: '分析を開始',
-      ctaSecondary: 'ライブデモを見る',
-      noCreditCard: 'クレジットカード不要',
+      tagline: '無料のGitHubポートフォリオ＆分析ツール',
+      title: '開発者ブランドを構築',
+      subtitle: 'GitHub分析で',
+      description: 'GitHubアクティビティをプロフェッショナルなポートフォリオに変換。貢献をショーケースし、コーディングパターンを可視化し、開発者としての個人ブランドを構築 - 完全無料でずっと。',
+      ctaMain: 'ポートフォリオを作成',
+      ctaSecondary: 'サンプルを見る',
+      noCreditCard: '永久無料',
       quickSetup: '5分でセットアップ',
       githubOAuth: 'GitHub OAuth認証のみ'
     },
@@ -175,27 +182,34 @@ export const translations = {
     },
     pricing: {
       title: 'シンプルで透明な価格設定',
-      subtitle: 'キャリア目標に合ったプランを選択',
+      subtitle: '🎉 ローンチ特別キャンペーン：期間限定で全て無料！',
       monthly: '月額',
       annual: '年額',
-      save: 'お得',
+      save: '20%お得',
       perMonth: '/月',
       bestValue: '最もお得',
-      selectPlan: 'プランを選択',
-      startFreeTrial: '無料トライアル開始',
+      selectPlan: '無料で開始',
+      startFreeTrial: '無料アクセスを取得',
       contactSales: '営業に問い合わせ',
+      campaign: {
+        badge: '期間限定',
+        originalPrice: '通常価格',
+        freeNow: '今だけ無料！'
+      },
       plans: {
         free: {
           name: '無料',
-          features: ['10リポジトリ分析/月', '基本統計', '言語内訳', 'コントリビューター一覧', '7日間のデータキャッシュ']
+          features: ['10リポジトリ分析/月', '基本統計', '言語内訳', 'コントリビューター一覧', '24時間データキャッシュ']
         },
         professional: {
           name: 'プロフェッショナル',
-          features: ['100リポジトリ分析/月', '100 AI分析/月', 'コミットヒートマップ', '時間分布チャート', '競合分析', '健全性スコアリング', '公開ダッシュボード共有', '優先サポート']
+          originalPrice: '¥1,470',
+          features: ['無制限のリポジトリ分析', 'AI分析機能', 'コミットヒートマップ', '時間分布チャート', '個人ブランディングツール', 'ポートフォリオ生成', '公開ダッシュボード共有', '優先サポート']
         },
         enterprise: {
           name: 'エンタープライズ',
-          features: ['無制限分析', '全Pro機能', 'カスタムAPIアクセス', '専任サポート', 'カスタム統合', 'SLA保証']
+          originalPrice: '¥7,500',
+          features: ['Pro版の全機能', 'チームコラボレーション(5席)', 'カスタムAPIアクセス', '専任サポート', 'カスタム統合', 'SLA保証']
         }
       }
     },

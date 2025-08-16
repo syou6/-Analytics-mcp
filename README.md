@@ -1,6 +1,24 @@
-# GitHub Analytics MCP
+# GitHub Analytics MCP - Developer Portfolio & Branding Tool
 
-AI-powered GitHub repository analytics through MCP (Model Context Protocol). Analyze repositories, track contributions, and get insights directly in your AI assistant.
+Transform your GitHub activity into a professional portfolio. Build your personal brand with AI-powered analytics, visualizations, and insights.
+
+## 🎉 Launch Campaign: All Pro Features FREE!
+
+**Limited Time Offer** - Get $80/year value absolutely free during our launch campaign!
+
+### What You Get (FREE During Campaign):
+- **Unlimited Repository Analysis** - Normally $9.8/mo
+- **AI-Powered Insights** - Advanced Gemini AI analysis
+- **Beautiful Visualizations** - Commit heatmaps, time distributions
+- **Portfolio Generation** - Auto-generate professional portfolios
+- **Public Dashboard Sharing** - Share your achievements
+- **Personal Branding Tools** - Build your developer identity
+- **Priority Support** - Get help when you need it
+
+### Regular Pricing (After Campaign):
+- **Free Plan**: Basic features, 10 repos/month
+- **Professional**: $9.8/mo (¥1,470/mo) - All features above
+- **Enterprise**: $50/mo (¥7,500/mo) - Team features + API access
 
 ## 🚀 Quick Start
 
