@@ -20,8 +20,8 @@ export default function CommitHeatmap({ owner, repo }: CommitHeatmapProps) {
 
   async function fetchCommitData() {
     try {
-      // Try the simpler REST API first
-      const response = await fetch('/api/github/commits-simple', {
+      // Try the new accurate API first
+      const response = await fetch('/api/github/commits-accurate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ owner, repo, days: 365 }),
@@ -30,26 +30,41 @@ export default function CommitHeatmap({ owner, repo }: CommitHeatmapProps) {
       const data = await response.json();
       
       if (data.error) {
-        console.error('Failed to fetch commit data:', data.error);
-        // Try GraphQL endpoint as fallback
-        const graphqlResponse = await fetch('/api/github/commits', {
+        console.error('Failed to fetch accurate commit data:', data.error);
+        // Fallback to simple API
+        const simpleResponse = await fetch('/api/github/commits-simple', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ owner, repo, days: 365 }),
         });
         
-        const graphqlData = await graphqlResponse.json();
-        if (graphqlData.error) {
+        const simpleData = await simpleResponse.json();
+        if (simpleData.error) {
           // If both fail, use mock data
           generateMockData();
         } else {
-          setHeatmapData(graphqlData.heatmap || []);
-          setTotalCommits(graphqlData.totalCommits || 0);
+          setHeatmapData(simpleData.heatmap || []);
+          setTotalCommits(simpleData.totalCommits || 0);
           setLoading(false);
         }
       } else {
-        setHeatmapData(data.heatmap || []);
+        // Process accurate heatmap data
+        const processedHeatmap = data.heatmap.map((week: any[]) => 
+          week.map((day: any) => day ? day.count : 0)
+        );
+        setHeatmapData(processedHeatmap);
         setTotalCommits(data.totalCommits || 0);
+        
+        // Store additional stats for later use
+        if (data.dailyStats) {
+          sessionStorage.setItem('commitStats', JSON.stringify({
+            currentStreak: data.dailyStats.currentStreak,
+            longestStreak: data.dailyStats.longestStreak,
+            avgCommitsPerDay: data.dailyStats.avgCommitsPerDay,
+            totalContributors: data.contributorStats?.totalContributors || 1
+          }));
+        }
+        
         setLoading(false);
       }
     } catch (error) {
