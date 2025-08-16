@@ -578,8 +578,8 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
                   </a>
                 </li>
                 <li>
-                  <a href="/legal" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
-                    {language === 'en' ? 'Legal Notice' : '特定商取引法に基づく表記'}
+                  <a href="/commercial-law" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                    {language === 'en' ? 'Commercial Law' : '特定商取引法に基づく表記'}
                   </a>
                 </li>
               </ul>

@@ -605,6 +605,12 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               </div>
               <LanguageToggle />
               <span className="hidden lg:inline text-sm text-black truncate max-w-[150px]">{user.email}</span>
+              <a
+                href="/commercial-law"
+                className="text-sm text-black hover:text-gray-600 underline"
+              >
+                特定商取引法
+              </a>
               <button
                 onClick={onSignOut}
                 className="text-sm text-black hover:text-gray-600"

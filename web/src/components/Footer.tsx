@@ -58,7 +58,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/legal" className="text-gray-600 hover:text-blue-600 font-medium">
+                <a href="/commercial-law" className="text-gray-600 hover:text-blue-600 font-medium">
                   特定商取引法に基づく表記
                 </a>
               </li>
