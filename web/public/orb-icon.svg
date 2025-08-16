@@ -1,0 +1,115 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color: #1a0033; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: #000000; stop-opacity: 1" />
+    </radialGradient>
+    
+    <!-- Main sphere gradient -->
+    <radialGradient id="sphereGrad" cx="40%" cy="30%">
+      <stop offset="0%" style="stop-color: #00d4ff; stop-opacity: 0.9" />
+      <stop offset="30%" style="stop-color: #0099ff; stop-opacity: 0.85" />
+      <stop offset="60%" style="stop-color: #7b3ff2; stop-opacity: 0.8" />
+      <stop offset="100%" style="stop-color: #e91e63; stop-opacity: 0.7" />
+    </radialGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Inner cube gradient -->
+    <linearGradient id="cubeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color: #00ffff; stop-opacity: 1" />
+      <stop offset="50%" style="stop-color: #7b3ff2; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: #e91e63; stop-opacity: 1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Dark background circle -->
+  <circle cx="100" cy="100" r="98" fill="url(#bgGrad)"/>
+  
+  <!-- Outer glow -->
+  <circle cx="100" cy="100" r="85" fill="url(#sphereGrad)" opacity="0.2" filter="url(#glow)"/>
+  
+  <!-- Main glass sphere -->
+  <circle cx="100" cy="100" r="75" fill="none" stroke="url(#sphereGrad)" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="100" cy="100" r="70" fill="url(#sphereGrad)" opacity="0.15"/>
+  
+  <!-- Glass reflection -->
+  <ellipse cx="100" cy="65" rx="55" ry="35" fill="white" opacity="0.08"/>
+  
+  <!-- Central 3D cube structure -->
+  <g transform="translate(100, 100)">
+    <!-- Back face -->
+    <path d="M-20,-20 L-20,20 L20,20 L20,-20 Z" 
+          fill="url(#cubeGrad)" 
+          opacity="0.3"
+          transform="translate(-10, -10)"/>
+    
+    <!-- Left face -->
+    <path d="M-30,-15 L-30,25 L-10,35 L-10,-5 Z" 
+          fill="url(#cubeGrad)" 
+          opacity="0.5"/>
+    
+    <!-- Right face -->
+    <path d="M10,-5 L10,35 L30,25 L30,-15 Z" 
+          fill="url(#cubeGrad)" 
+          opacity="0.4"/>
+    
+    <!-- Top face - main cube -->
+    <path d="M-30,-15 L-10,-25 L30,-15 L10,-5 Z" 
+          fill="url(#cubeGrad)" 
+          opacity="0.7"/>
+    
+    <!-- Front face -->
+    <path d="M-30,25 L-10,35 L30,25 L10,35 Z" 
+          fill="url(#cubeGrad)" 
+          opacity="0.6"/>
+    
+    <!-- Inner glowing cube -->
+    <rect x="-8" y="-8" width="16" height="16" 
+          fill="#00ffff" 
+          opacity="0.9"
+          filter="url(#glow)"/>
+  </g>
+  
+  <!-- Floating particles -->
+  <g opacity="0.6">
+    <!-- Top particles -->
+    <circle cx="100" cy="30" r="2" fill="#00d4ff" filter="url(#glow)"/>
+    <circle cx="70" cy="40" r="1.5" fill="#7b3ff2" filter="url(#glow)"/>
+    <circle cx="130" cy="40" r="1.5" fill="#e91e63" filter="url(#glow)"/>
+    
+    <!-- Side particles -->
+    <circle cx="40" cy="100" r="2" fill="#00d4ff" filter="url(#glow)"/>
+    <circle cx="160" cy="100" r="2" fill="#7b3ff2" filter="url(#glow)"/>
+    
+    <!-- Bottom particles -->
+    <circle cx="100" cy="170" r="2" fill="#e91e63" filter="url(#glow)"/>
+    <circle cx="70" cy="160" r="1.5" fill="#00d4ff" filter="url(#glow)"/>
+    <circle cx="130" cy="160" r="1.5" fill="#7b3ff2" filter="url(#glow)"/>
+    
+    <!-- Small scattered particles -->
+    <circle cx="55" cy="70" r="1" fill="#00ffff" opacity="0.5"/>
+    <circle cx="145" cy="70" r="1" fill="#ff00ff" opacity="0.5"/>
+    <circle cx="55" cy="130" r="1" fill="#ff00ff" opacity="0.5"/>
+    <circle cx="145" cy="130" r="1" fill="#00ffff" opacity="0.5"/>
+  </g>
+  
+  <!-- Connection lines -->
+  <g stroke="#7b3ff2" stroke-width="0.5" opacity="0.3">
+    <line x1="100" y1="30" x2="100" y2="50"/>
+    <line x1="100" y1="150" x2="100" y2="170"/>
+    <line x1="40" y1="100" x2="60" y2="100"/>
+    <line x1="140" y1="100" x2="160" y2="100"/>
+  </g>
+  
+  <!-- Bottom reflection -->
+  <ellipse cx="100" cy="185" rx="60" ry="10" fill="url(#sphereGrad)" opacity="0.15"/>
+</svg>
