@@ -5,7 +5,6 @@ import { Github, BarChart3, Zap, TrendingUp, Code2, Star, Users, CheckCircle, Ar
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/hooks/useLanguage';
 import { translations } from '@/translations/landing';
-import OrbIcon from '@/components/OrbIcon';
 
 interface LandingPageV3Props {
   onSignIn: () => void;
@@ -73,7 +72,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <OrbIcon className="h-8 w-8" />
+              <Github className="h-8 w-8 text-blue-600" />
               <span className="font-bold text-xl">GitVue</span>
               <span className="ml-4 px-2 py-1 bg-green-600/10 text-green-600 text-xs rounded-full font-semibold">
                 BETA
@@ -531,7 +530,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
-                <OrbIcon className="h-8 w-8" />
+                <Github className="h-8 w-8 text-blue-600" />
                 <span className="font-bold text-xl">GitVue</span>
               </div>
               <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>

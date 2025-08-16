@@ -7,7 +7,6 @@ import { Github, BarChart3, Users, Code2, TrendingUp, Zap, Shield, Share2, Crown
 import LanguageToggle from '@/components/LanguageToggle';
 // import UpgradeModal from '@/components/UpgradeModal'; // 無料化により削除
 import Footer from '@/components/Footer';
-import OrbIcon from '@/components/OrbIcon';
 import LandingPageV3 from '@/components/LandingPageV3';
 import ActivitySummaryCards from '@/components/ActivitySummaryCards';
 import CommitHeatmap from '@/components/CommitHeatmap';
@@ -572,7 +571,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             {/* Logo */}
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <OrbIcon className="h-6 sm:h-8 w-6 sm:w-8" />
+                <Github className="h-6 sm:h-8 w-6 sm:w-8 text-blue-600" />
                 <span className="font-bold text-lg sm:text-xl text-black">GitVue</span>
               </div>
               {/* Mobile menu button */}

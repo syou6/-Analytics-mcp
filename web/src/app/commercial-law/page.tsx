@@ -3,7 +3,6 @@
 import { Github } from 'lucide-react';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
-import OrbIcon from '@/components/OrbIcon';
 
 export default function CommercialLawPage() {
   return (
@@ -13,7 +12,7 @@ export default function CommercialLawPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <OrbIcon className="h-8 w-8" />
+              <Github className="h-8 w-8 text-blue-600" />
               <span className="font-bold text-xl text-black">GitVue</span>
             </Link>
           </div>
