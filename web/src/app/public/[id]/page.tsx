@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Github, BarChart3, Users, Code2, Share2, Eye } from 'lucide-react';
 import Link from 'next/link';
+import OrbIcon from '@/components/OrbIcon';
 
 export default function PublicDashboard() {
   const params = useParams();
@@ -59,8 +60,8 @@ export default function PublicDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Github className="h-8 w-8 text-blue-600" />
-              <span className="font-bold text-xl text-black">GitHub Analytics MCP</span>
+              <OrbIcon className="h-8 w-8" />
+              <span className="font-bold text-xl text-black">GitVue</span>
               <span className="text-sm text-black bg-green-100 px-2 py-1 rounded">Public Dashboard</span>
             </div>
             <div className="flex items-center space-x-4">
