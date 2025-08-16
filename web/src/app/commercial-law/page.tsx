@@ -55,7 +55,7 @@ export default function CommercialLawPage() {
             {/* メールアドレス */}
             <div className="border-b pb-4">
               <h2 className="font-semibold text-lg mb-2">お問い合わせ</h2>
-              <p>GitHub Issues: <a href="https://github.com/anthropics/claude-code/issues" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://github.com/anthropics/claude-code/issues</a></p>
+              <p>GitHub Issues: <a href="https://github.com/syou6/-Analytics-mcp/issues" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://github.com/syou6/-Analytics-mcp/issues</a></p>
               <p className="text-sm text-gray-600 mt-1">※技術的なお問い合わせはGitHub Issuesにてお願いいたします</p>
             </div>
 
@@ -145,7 +145,7 @@ export default function CommercialLawPage() {
               <h2 className="font-semibold text-lg mb-2">その他</h2>
               <p>本サービスはオープンソースプロジェクトとして提供されています。</p>
               <p className="mt-2">
-                ソースコード: <a href="https://github.com/syou6/-Analytics-mcp" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+                ソースコード: <a href="https://github.com/syou6/-Analytics-mcp" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://github.com/syou6/-Analytics-mcp</a>
               </p>
             </div>
 
