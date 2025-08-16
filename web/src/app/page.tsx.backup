@@ -253,7 +253,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
     }
   }, [user, activeTab]);
 
-  async function checkSubscription() {
+    async function checkSubscription() {
     try {
       console.log('Checking subscription for user:', user.id);
       const response = await fetch(`/api/subscription?userId=${user.id}&t=${Date.now()}`);
@@ -1120,7 +1120,6 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               />
             </div>
           </div>
-            )}
           </>
         )}
 
