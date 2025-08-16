@@ -595,7 +595,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
                   className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition-colors`}
                   aria-label="GitHub"
                 >
-                  <OrbIcon className="h-6 w-6" />
+                  <Github className="h-6 w-6" />
                 </a>
                 <a 
                   href="https://x.com/K8292288065827" 
