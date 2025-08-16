@@ -114,13 +114,58 @@ export default function RepositoryPerformanceTable({ userRepos }: RepositoryPerf
 
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
-      <div className="p-6 border-b border-gray-200">
-        <h3 className="text-xl font-bold text-black">
+      <div className="p-4 sm:p-6 border-b border-gray-200">
+        <h3 className="text-lg sm:text-xl font-bold text-black">
           {language === 'ja' ? 'リポジトリ別パフォーマンス' : 'Repository Performance'}
         </h3>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile View - Cards */}
+      <div className="block sm:hidden">
+        {sortedRepos.map((repo, index) => (
+          <div key={index} className="p-4 border-b border-gray-200 hover:bg-gray-50">
+            <div className="flex justify-between items-start mb-2">
+              <a 
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-black hover:text-blue-600 flex items-center"
+              >
+                {repo.name}
+                <ExternalLink className="h-3 w-3 ml-1" />
+              </a>
+              <span className={`text-xs px-2 py-1 rounded ${
+                repo.trend === 'up' ? 'bg-green-100 text-green-800' :
+                repo.trend === 'down' ? 'bg-red-100 text-red-800' :
+                'bg-gray-100 text-gray-800'
+              }`}>
+                {repo.trend === 'up' ? '📈' : repo.trend === 'down' ? '📉' : '➡️'}
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <div>
+                <span className="text-gray-500">{language === 'ja' ? '言語:' : 'Lang:'}</span>
+                <span className="ml-1 text-black">{repo.language}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">⭐</span>
+                <span className="ml-1 text-black">{repo.stars}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">{language === 'ja' ? 'コミット:' : 'Commits:'}</span>
+                <span className="ml-1 text-black">{repo.monthlyCommits}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">🕐</span>
+                <span className="ml-1 text-black">{repo.lastUpdate}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop View - Table */}
+      <div className="hidden sm:block overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>

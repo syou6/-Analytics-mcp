@@ -567,35 +567,55 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
       {/* Header */}
       <header className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <Github className="h-8 w-8 text-blue-600" />
-              <span className="font-bold text-xl text-black">GitVue</span>
-            </div>
-            <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 sm:py-0 sm:h-16 gap-4 sm:gap-0">
+            {/* Logo */}
+            <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <span className="flex items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm animate-pulse">
+                <Github className="h-6 sm:h-8 w-6 sm:w-8 text-blue-600" />
+                <span className="font-bold text-lg sm:text-xl text-black">GitVue</span>
+              </div>
+              {/* Mobile menu button */}
+              <button
+                onClick={onSignOut}
+                className="sm:hidden text-black hover:text-gray-600"
+              >
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden sm:flex items-center space-x-2 lg:space-x-4">
+              {/* Campaign Badge */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="flex items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 py-0.5 rounded-full text-xs animate-pulse">
                   🎉 Campaign
                 </span>
-                <span className="flex items-center bg-gradient-to-r from-green-400 to-green-600 text-white px-3 py-1 rounded-full text-sm">
-                  <Sparkles className="h-4 w-4 mr-1" />
-                  Pro Features FREE
+                <span className="hidden md:flex items-center bg-gradient-to-r from-green-400 to-green-600 text-white px-2 py-0.5 rounded-full text-xs">
+                  <Sparkles className="h-3 w-3 mr-1" />
+                  Pro FREE
                 </span>
-                <span className="text-sm text-gray-600 line-through">
+                <span className="hidden lg:inline text-xs text-gray-600 line-through">
                   $9.8/mo
                 </span>
-                <span className="text-sm font-bold text-green-600">
-                  $0 Limited Time!
+                <span className="text-xs font-bold text-green-600">
+                  $0!
                 </span>
               </div>
               <LanguageToggle />
-              <span className="text-black">{user.email}</span>
+              <span className="hidden lg:inline text-sm text-black truncate max-w-[150px]">{user.email}</span>
               <button
                 onClick={onSignOut}
-                className="text-black hover:text-black"
+                className="text-sm text-black hover:text-gray-600"
               >
                 Sign out
               </button>
+            </div>
+            
+            {/* Mobile Campaign Banner */}
+            <div className="sm:hidden bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-lg text-xs text-center">
+              🎉 All Pro Features FREE - Limited Time!
             </div>
           </div>
         </div>
@@ -604,37 +624,43 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Tab Navigation */}
-        <div className="bg-white rounded-lg shadow mb-6">
-          <div className="flex border-b">
+        <div className="bg-white rounded-lg shadow mb-6 overflow-x-auto">
+          <div className="flex border-b min-w-max">
             <button
               onClick={() => setActiveTab('my-repos')}
-              className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+              className={`flex-1 sm:flex-none px-3 sm:px-6 py-3 font-medium text-xs sm:text-sm border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === 'my-repos'
                   ? 'border-blue-600 text-blue-600'
                   : 'border-transparent text-black hover:text-black'
               }`}
             >
-              📁 My Repositories
+              <span className="hidden sm:inline">📁 </span>
+              <span className="sm:hidden">My Repos</span>
+              <span className="hidden sm:inline">My Repositories</span>
             </button>
             <button
               onClick={() => setActiveTab('search')}
-              className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+              className={`flex-1 sm:flex-none px-3 sm:px-6 py-3 font-medium text-xs sm:text-sm border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === 'search'
                   ? 'border-blue-600 text-blue-600'
                   : 'border-transparent text-black hover:text-black'
               }`}
             >
-              🔍 Search Any Repository
+              <span className="hidden sm:inline">🔍 </span>
+              <span className="sm:hidden">Search</span>
+              <span className="hidden sm:inline">Search Any Repository</span>
             </button>
             <button
               onClick={() => setActiveTab('branding')}
-              className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+              className={`flex-1 sm:flex-none px-3 sm:px-6 py-3 font-medium text-xs sm:text-sm border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === 'branding'
                   ? 'border-blue-600 text-blue-600'
                   : 'border-transparent text-black hover:text-black'
               }`}
             >
-              ✨ Personal Branding
+              <span className="hidden sm:inline">✨ </span>
+              <span className="sm:hidden">Branding</span>
+              <span className="hidden sm:inline">Personal Branding</span>
             </button>
           </div>
         </div>
@@ -649,34 +675,34 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
                 <p className="mt-4 text-black">{t('loadingRepositories', language)}</p>
               </div>
             ) : userRepos.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
                 {userRepos.map((repo) => (
                   <div
                     key={repo.id}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer"
+                    className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-lg transition-shadow cursor-pointer bg-white"
                     onClick={() => analyzeUserRepo(repo)}
                   >
                     <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold text-black truncate flex-1">{repo.name}</h3>
+                      <h3 className="font-semibold text-sm sm:text-base text-black truncate flex-1">{repo.name}</h3>
                       {repo.isPrivate && (
-                        <span className="ml-2 px-2 py-1 bg-gray-100 text-black text-xs rounded">🔒 {t('private', language)}</span>
+                        <span className="ml-2 px-1.5 py-0.5 bg-gray-100 text-black text-xs rounded">🔒</span>
                       )}
                     </div>
-                    <p className="text-sm text-black mb-3 line-clamp-2">{repo.description || t('noDescription', language)}</p>
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center space-x-3">
-                        {repo.language && (
-                          <span className="flex items-center text-black">
-                            <span className="w-3 h-3 rounded-full bg-blue-500 mr-1"></span>
-                            {repo.language}
-                          </span>
-                        )}
-                        <span className="text-black">⭐ {repo.stars}</span>
-                        <span className="text-black">🍴 {repo.forks}</span>
-                      </div>
+                    <p className="text-xs sm:text-sm text-gray-600 mb-3 line-clamp-2 min-h-[2.5rem]">
+                      {repo.description || t('noDescription', language)}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+                      {repo.language && (
+                        <span className="flex items-center text-black">
+                          <span className="w-2 h-2 rounded-full bg-blue-500 mr-1"></span>
+                          <span className="truncate max-w-[80px]">{repo.language}</span>
+                        </span>
+                      )}
+                      <span className="text-black">⭐ {repo.stars}</span>
+                      <span className="text-black">🍴 {repo.forks}</span>
                     </div>
                     <div className="mt-3 pt-3 border-t border-gray-100">
-                      <button className="w-full text-center text-blue-600 hover:text-blue-700 font-medium text-sm">
+                      <button className="w-full text-center text-blue-600 hover:text-blue-700 font-medium text-xs sm:text-sm py-1">
                         {t('analyze', language)} →
                       </button>
                     </div>
@@ -695,21 +721,21 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
         {/* Search Tab */}
         {activeTab === 'search' && (
           <>
-            <div className="bg-white rounded-lg shadow p-6 mb-8">
-              <h2 className="text-2xl font-bold mb-4 text-black">{t('analyzeAnyRepository', language)}</h2>
-              <div className="flex space-x-4">
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6 mb-6 sm:mb-8">
+              <h2 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-4 text-black">{t('analyzeAnyRepository', language)}</h2>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <input
                   type="text"
                   value={repoUrl}
                   onChange={(e) => setRepoUrl(e.target.value)}
                   placeholder={t('searchPlaceholder', language)}
-                  className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="flex-1 px-3 py-2 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                   onKeyPress={(e) => e.key === 'Enter' && analyzeRepo()}
                 />
                 <button
                   onClick={analyzeRepo}
                   disabled={loading}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                  className="bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 text-sm sm:text-base font-medium"
                 >
                   {loading ? t('analyzing', language) : t('analyzeButton', language)}
                 </button>
@@ -718,9 +744,9 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
 
             {/* Show analysis results only in search tab */}
             {analysis && (
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Content - 2 columns */}
-            <div className="lg:col-span-2 space-y-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                {/* Main Content - 2 columns on desktop */}
+                <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
               {/* Activity Summary Cards */}
               <ActivitySummaryCards 
                 analysis={analysis}
