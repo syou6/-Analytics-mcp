@@ -162,7 +162,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               onClick={onSignIn}
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg flex items-center"
             >
-              <OrbIcon className="h-5 w-5 mr-2" />
+              <Github className="h-5 w-5 mr-2" />
               {t.hero.ctaMain}
             </button>
             <button className={`px-8 py-4 rounded-lg text-lg font-semibold border-2 ${isDark ? 'border-gray-600 hover:bg-gray-800' : 'border-gray-300 hover:bg-gray-50'} transition-colors`}>
