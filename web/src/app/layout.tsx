@@ -39,15 +39,6 @@ export const metadata: Metadata = {
     description: "Transform your GitHub activity into beautiful visualizations. 100% FREE during launch!",
     images: ["/gitvue.png"],
   },
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon.png', type: 'image/png' },
-      { url: '/gitvue.png', type: 'image/png' }
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/gitvue.png',
-  },
 };
 
 export default function RootLayout({
@@ -57,15 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20250116" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20250116" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20250116" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20250116" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20250116" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#7b3ff2" />
-      </head>
+      <head />
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
