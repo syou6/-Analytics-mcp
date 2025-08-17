@@ -22,8 +22,8 @@ export default function LegalPage() {
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top text-gray-900">代表者名<br/><span className="text-sm font-normal text-gray-600">Representative</span></td>
                   <td className="py-4 text-gray-700">
-                    [運営者名]<br/>
-                    <span className="text-sm text-gray-600">※請求があった場合に遅滞なく開示いたします</span>
+                    <span className="text-sm text-gray-600">※請求があった場合に遅滞なく開示いたします<br/>
+                    Disclosed upon request</span>
                   </td>
                 </tr>
                 
