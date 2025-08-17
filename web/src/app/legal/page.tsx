@@ -20,7 +20,8 @@ export default function LegalPage() {
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top text-gray-900">代表者名</td>
                   <td className="py-4 text-gray-700">
-                    <span className="text-sm text-gray-600">※請求があった場合に遅滞なく開示いたします</span>
+                    将　勝治<br/>
+                    <span className="text-sm text-gray-600">※お問い合わせはメールでお願いいたします</span>
                   </td>
                 </tr>
                 
@@ -66,21 +67,22 @@ export default function LegalPage() {
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top text-gray-900">料金</td>
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">販売価格</td>
                   <td className="py-4 text-gray-700">
                     <ul className="list-disc pl-5">
-                      <li><strong>無料プラン:</strong> ¥0</li>
+                      <li><strong>無料プラン:</strong> ¥0（送料不要）</li>
                       <li><strong>プロフェッショナルプラン:</strong><br/>
-                        月額 $9.8 USD (約¥1,470 税込)<br/>
-                        年額 $93.6 USD (約¥14,040 税込) - 20%割引
+                        月額 $9.8 USD (約¥1,470)<br/>
+                        年額 $93.6 USD (約¥14,040) - 20%割引
                       </li>
                       <li><strong>エンタープライズプラン:</strong><br/>
-                        月額 $99 USD (約¥14,850 税込)
+                        月額 $99 USD (約¥14,850)
                       </li>
                     </ul>
                     <span className="text-sm text-gray-600 block mt-2">
+                      ※価格は税込表示です<br/>
                       ※日本円表示は参考価格です。実際の請求は米ドルで行われます。<br/>
-                      ※表示価格には日本の消費税10%が含まれています。
+                      ※送料: 該当なし（デジタルサービスのため）
                     </span>
                   </td>
                 </tr>
@@ -88,16 +90,24 @@ export default function LegalPage() {
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top text-gray-900">追加料金</td>
                   <td className="py-4 text-gray-700">
-                    表示価格以外の追加料金はありません
+                    表示価格以外の追加料金は一切発生しません<br/>
+                    <span className="text-sm text-gray-600">
+                      ※アップグレード・ダウングレード時は日割り計算で調整されます
+                    </span>
                   </td>
                 </tr>
                 
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top text-gray-900">支払方法</td>
                   <td className="py-4 text-gray-700">
-                    クレジットカード (Stripe決済)<br/>
+                    <strong>クレジットカード決済</strong><br/>
+                    対応カード: Visa, Mastercard, American Express, JCB, Diners Club, Discover<br/><br/>
+                    
+                    <strong>決済処理:</strong> Stripe, Inc.<br/>
                     <span className="text-sm text-gray-600">
-                      対応カード: Visa, Mastercard, American Express, JCB
+                      ※Stripeは世界最高水準のセキュリティ基準PCI DSSレベル1を満たしています<br/>
+                      ※カード情報は当社のサーバーを通過せず、直接Stripeで暗号化処理されます<br/>
+                      ※デビットカードもご利用いただけます
                     </span>
                   </td>
                 </tr>
@@ -120,20 +130,40 @@ export default function LegalPage() {
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top text-gray-900">サービス提供時期</td>
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">商品引き渡し時期</td>
                   <td className="py-4 text-gray-700">
-                    アカウント作成後、即時アクセス可能
+                    決済完了後、即時アクセス可能<br/>
+                    <span className="text-sm text-gray-600">
+                      ※クレジットカード決済確認後、自動的にプレミアム機能が有効化されます<br/>
+                      ※サービスの利用開始に必要な情報は登録メールアドレスに送信されます
+                    </span>
                   </td>
                 </tr>
                 
                 <tr className="border-b">
-                  <td className="py-4 pr-4 font-bold align-top text-gray-900">返品・返金</td>
+                  <td className="py-4 pr-4 font-bold align-top text-gray-900">返品・交換・キャンセル</td>
                   <td className="py-4 text-gray-700">
+                    <strong>【返品・交換について】</strong><br/>
+                    デジタルサービスの性質上、返品・交換は承っておりません。<br/><br/>
+                    
+                    <strong>【返金について】</strong><br/>
                     <ul className="list-disc pl-5">
-                      <li>初回購入から30日以内: 日割り返金可能</li>
-                      <li>30日経過後: 返金不可（次回更新からの解約のみ）</li>
+                      <li>初回購入から30日以内: 全額返金保証</li>
                       <li>サービス不具合による利用不可: 影響期間の日割り返金</li>
-                    </ul>
+                      <li>重複決済・誤決済: 全額返金</li>
+                    </ul><br/>
+                    
+                    <strong>【解約について】</strong><br/>
+                    <ul className="list-disc pl-5">
+                      <li>いつでも解約可能（次回更新分から停止）</li>
+                      <li>解約後も契約期間終了まで利用可能</li>
+                      <li>再加入はいつでも可能</li>
+                    </ul><br/>
+                    
+                    <span className="text-sm text-gray-600">
+                      ※返金をご希望の場合は、k.sho626626@gmail.com までご連絡ください<br/>
+                      ※返金処理には5-10営業日かかる場合があります
+                    </span>
                   </td>
                 </tr>
                 
