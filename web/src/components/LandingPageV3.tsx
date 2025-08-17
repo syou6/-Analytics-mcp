@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Github, BarChart3, Zap, TrendingUp, Code2, Star, Users, CheckCircle, ArrowRight, Sparkles, Brain, Briefcase, Trophy, Clock, Shield, Globe, Languages, Twitter, Youtube } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -568,19 +569,19 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               <h3 className="font-semibold mb-4">{language === 'en' ? 'Legal' : '法的情報'}</h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="/terms" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                  <Link href="/terms" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
                     {language === 'en' ? 'Terms of Service' : '利用規約'}
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/privacy" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                  <Link href="/privacy" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
                     {language === 'en' ? 'Privacy Policy' : 'プライバシーポリシー'}
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/legal" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+                  <Link href="/legal" className={`text-sm ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
                     {language === 'en' ? 'Commercial Transaction Act' : '特定商取引法に基づく表記'}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
