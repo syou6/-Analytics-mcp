@@ -32,7 +32,7 @@ export default function SubscriptionDebugPage() {
   async function createManualSubscription() {
     if (!user) return;
     
-    if (confirm('This will activate Pro subscription for your account. Continue?')) {
+    if (confirm('アカウントのProサブスクリプションを有効化します。続行しますか？')) {
       setLoading(true);
       try {
         const response = await fetch('/api/debug-subscription', {
@@ -42,11 +42,11 @@ export default function SubscriptionDebugPage() {
         });
         const data = await response.json();
         if (data.success) {
-          alert('Pro subscription activated! Redirecting to home page...');
+          alert('Proサブスクリプションを有効化しました！ホームページにリダイレクトします...');
           // Force hard refresh to clear cache
           window.location.href = '/?refresh=' + Date.now();
         } else {
-          alert(`Error: ${data.error}`);
+          alert(`エラー: ${data.error}`);
         }
         fetchDebugData();
       } catch (error) {
@@ -62,7 +62,7 @@ export default function SubscriptionDebugPage() {
     const sessionId = urlParams.get('session_id');
     
     if (!sessionId) {
-      alert('No session_id in URL. Complete a Stripe payment first.');
+      alert('URLにsession_idがありません。先にストライプ決済を完了してください。');
       return;
     }
 
@@ -73,7 +73,7 @@ export default function SubscriptionDebugPage() {
         body: JSON.stringify({ sessionId, userId: user?.id }),
       });
       const data = await response.json();
-      alert(`Payment check: ${JSON.stringify(data, null, 2)}`);
+      alert(`決済チェック: ${JSON.stringify(data, null, 2)}`);
       fetchDebugData();
     } catch (error) {
       console.error('Error checking payment:', error);
@@ -84,8 +84,8 @@ export default function SubscriptionDebugPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Please login first</h1>
-          <a href="/" className="text-blue-600 hover:underline">Go to Home</a>
+          <h1 className="text-2xl font-bold mb-4">ログインしてください</h1>
+          <a href="/" className="text-blue-600 hover:underline">ホームへ戻る</a>
         </div>
       </div>
     );
@@ -94,50 +94,50 @@ export default function SubscriptionDebugPage() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Subscription Debug</h1>
+        <h1 className="text-3xl font-bold mb-8">サブスクリプションデバッグ</h1>
         
         <div className="bg-white rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-bold mb-4">Actions</h2>
+          <h2 className="text-xl font-bold mb-4">アクション</h2>
           <div className="space-x-4">
             <button
               onClick={fetchDebugData}
               disabled={loading}
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
-              Refresh Data
+              データ更新
             </button>
             <button
               onClick={createManualSubscription}
               disabled={loading}
               className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold"
             >
-              🚀 Activate Pro Subscription
+              🚀 Proサブスクリプションを有効化
             </button>
             <button
               onClick={checkStripeSession}
               disabled={loading}
               className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
             >
-              Check Stripe Session
+              ストライプセッション確認
             </button>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-6">
-          <h2 className="text-xl font-bold mb-4">Debug Data</h2>
+          <h2 className="text-xl font-bold mb-4">デバッグデータ</h2>
           {loading ? (
-            <div>Loading...</div>
+            <div>読み込み中...</div>
           ) : debugData ? (
             <pre className="bg-gray-100 p-4 rounded overflow-auto text-sm">
               {JSON.stringify(debugData, null, 2)}
             </pre>
           ) : (
-            <div>No data yet</div>
+            <div>データがありません</div>
           )}
         </div>
 
         <div className="mt-6">
-          <a href="/" className="text-blue-600 hover:underline">← Back to Home</a>
+          <a href="/" className="text-blue-600 hover:underline">← ホームに戻る</a>
         </div>
       </div>
     </div>

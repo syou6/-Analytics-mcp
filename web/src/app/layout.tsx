@@ -15,12 +15,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GitVue - Free GitHub Analytics & Personal Branding Tool",
-  description: "Transform your GitHub activity into beautiful visualizations. Track contributions, analyze repositories, and build your developer brand. 100% FREE during launch campaign!",
-  keywords: "GitHub analytics, developer portfolio, contribution tracker, code visualization, personal branding, GitHub stats, free developer tools",
+  title: "GitVue - 無料GitHub分析＆パーソナルブランディングツール",
+  description: "GitHubアクティビティを美しいビジュアライゼーションに変換。貢献を追跡し、リポジトリを分析し、開発者ブランドを構築。ローンチキャンペーン中100%無料！",
+  keywords: "GitHub分析, 開発者ポートフォリオ, 貢献トラッカー, コード可視化, パーソナルブランディング, GitHub統計, 無料開発者ツール",
   openGraph: {
-    title: "GitVue - Free GitHub Analytics & Personal Branding",
-    description: "Transform your GitHub activity into beautiful visualizations. Build your developer brand with AI-powered insights. 100% FREE!",
+    title: "GitVue - 無料GitHub分析＆パーソナルブランディング",
+    description: "GitHubアクティビティを美しいビジュアライゼーションに変換。AIによるインサイトで開発者ブランドを構築。100%無料！",
     url: "https://gitvue.app",
     siteName: "GitVue",
     type: "website",
@@ -29,14 +29,14 @@ export const metadata: Metadata = {
         url: "/gitvue.png",
         width: 1200,
         height: 630,
-        alt: "GitVue - GitHub Analytics Platform",
+        alt: "GitVue - GitHub分析プラットフォーム",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GitVue - Free GitHub Analytics",
-    description: "Transform your GitHub activity into beautiful visualizations. 100% FREE during launch!",
+    title: "GitVue - 無料GitHub分析",
+    description: "GitHubアクティビティを美しいビジュアライゼーションに変換。ローンチ中100%無料！",
     images: ["/gitvue.png"],
   },
 };
@@ -47,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <head />
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}

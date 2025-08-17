@@ -73,7 +73,7 @@ export default function Error({
         <div className="mt-12 p-4 bg-blue-50 dark:bg-gray-700 rounded-lg">
           <p className="text-sm text-gray-600 dark:text-gray-300">
             問題が続く場合は、
-            <a href="mailto:support@gitvue.dev" className="text-blue-600 dark:text-blue-400 hover:underline">
+            <a href="mailto:k.sho626626@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">
               サポート
             </a>
             までお問い合わせください。

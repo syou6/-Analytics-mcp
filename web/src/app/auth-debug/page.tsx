@@ -61,12 +61,12 @@ export default function AuthDebugPage() {
   
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Auth Debug Info</h1>
+      <h1 className="text-2xl font-bold mb-4">認証デバッグ情報</h1>
       <pre className="bg-gray-100 p-4 rounded overflow-auto">
         {JSON.stringify(debugInfo, null, 2)}
       </pre>
       <div className="mt-4">
-        <a href="/" className="text-blue-600 hover:underline">← Back to Home</a>
+        <a href="/" className="text-blue-600 hover:underline">← ホームに戻る</a>
       </div>
     </div>
   );

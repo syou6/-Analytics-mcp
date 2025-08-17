@@ -30,7 +30,7 @@ export default function ForceProPage() {
       // Store in localStorage to persist
       localStorage.setItem('force_pro_status', JSON.stringify(proData));
       
-      alert('Pro status forced! Redirecting to home...');
+      alert('Proステータスを強制設定しました！ホームにリダイレクトします...');
       window.location.href = '/?forcePro=true';
     }
   }, [user]);
@@ -38,7 +38,7 @@ export default function ForceProPage() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
-        <h1 className="text-2xl font-bold mb-4">Forcing Pro Status...</h1>
+        <h1 className="text-2xl font-bold mb-4">Proステータスを強制設定中...</h1>
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
       </div>
     </div>

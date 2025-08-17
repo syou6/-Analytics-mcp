@@ -10,11 +10,11 @@ export default function CleanupPage() {
 
   async function runCleanup() {
     if (!user) {
-      alert('Please login first');
+      alert('ログインしてください');
       return;
     }
 
-    if (!confirm('This will remove duplicate subscriptions. Continue?')) {
+    if (!confirm('重複したサブスクリプションを削除します。続行しますか？')) {
       return;
     }
 
@@ -29,11 +29,11 @@ export default function CleanupPage() {
       setResult(data);
       
       if (data.success) {
-        alert(`Cleanup successful! Deleted ${data.deletedCount} duplicate subscriptions.`);
+        alert(`クリーンアップ成功！${data.deletedCount}件の重複サブスクリプションを削除しました。`);
       }
     } catch (error) {
       console.error('Cleanup error:', error);
-      setResult({ error: 'Cleanup failed' });
+      setResult({ error: 'クリーンアップに失敗しました' });
     } finally {
       setLoading(false);
     }
@@ -42,11 +42,11 @@ export default function CleanupPage() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Subscription Cleanup Tool</h1>
+        <h1 className="text-3xl font-bold mb-8">サブスクリプションクリーンアップツール</h1>
         
         <div className="bg-white rounded-lg p-6 mb-6">
           <p className="mb-4">
-            This tool will clean up duplicate subscription records and keep only the valid one.
+            このツールは重複したサブスクリプションレコードをクリーンアップし、有効なもののみを保持します。
           </p>
           
           <button
@@ -54,13 +54,13 @@ export default function CleanupPage() {
             disabled={loading || !user}
             className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 font-semibold disabled:opacity-50"
           >
-            {loading ? 'Running Cleanup...' : 'Run Cleanup'}
+            {loading ? 'クリーンアップ実行中...' : 'クリーンアップ実行'}
           </button>
         </div>
 
         {result && (
           <div className="bg-white rounded-lg p-6">
-            <h2 className="text-xl font-bold mb-4">Result</h2>
+            <h2 className="text-xl font-bold mb-4">結果</h2>
             <pre className="bg-gray-100 p-4 rounded overflow-auto text-sm">
               {JSON.stringify(result, null, 2)}
             </pre>
@@ -68,7 +68,7 @@ export default function CleanupPage() {
         )}
 
         <div className="mt-6">
-          <a href="/" className="text-blue-600 hover:underline">← Back to Home</a>
+          <a href="/" className="text-blue-600 hover:underline">← ホームに戻る</a>
         </div>
       </div>
     </div>

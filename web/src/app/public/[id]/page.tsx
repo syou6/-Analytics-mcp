@@ -42,9 +42,9 @@ export default function PublicDashboard() {
   if (!dashboard) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold text-black mb-4">Dashboard Not Found</h1>
+        <h1 className="text-2xl font-bold text-black mb-4">ダッシュボードが見つかりません</h1>
         <Link href="/" className="text-blue-600 hover:underline">
-          Go to Homepage
+          ホームページへ
         </Link>
       </div>
     );
@@ -61,18 +61,18 @@ export default function PublicDashboard() {
             <div className="flex items-center space-x-2">
               <Github className="h-8 w-8 text-blue-600" />
               <span className="font-bold text-xl text-black">GitVue</span>
-              <span className="text-sm text-black bg-green-100 px-2 py-1 rounded">Public Dashboard</span>
+              <span className="text-sm text-black bg-green-100 px-2 py-1 rounded">公開ダッシュボード</span>
             </div>
             <div className="flex items-center space-x-4">
               <span className="flex items-center text-black">
                 <Eye className="h-4 w-4 mr-1" />
-                {views} views
+                {views} 閲覧
               </span>
               <Link 
                 href="/"
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Create Your Own
+                あなたのダッシュボードを作成
               </Link>
             </div>
           </div>
@@ -90,10 +90,10 @@ export default function PublicDashboard() {
               <p className="text-black mb-4">{analysis.description}</p>
             )}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <StatCard label="⭐ Stars" value={analysis.stars?.toLocaleString() || '0'} />
-              <StatCard label="🍴 Forks" value={analysis.forks?.toLocaleString() || '0'} />
-              <StatCard label="📝 Open Issues" value={analysis.openIssues?.toLocaleString() || '0'} />
-              <StatCard label="👀 Watchers" value={analysis.watchers?.toLocaleString() || '0'} />
+              <StatCard label="⭐ スター" value={analysis.stars?.toLocaleString() || '0'} />
+              <StatCard label="🍴 フォーク" value={analysis.forks?.toLocaleString() || '0'} />
+              <StatCard label="📝 オープンイシュー" value={analysis.openIssues?.toLocaleString() || '0'} />
+              <StatCard label="👀 ウォッチャー" value={analysis.watchers?.toLocaleString() || '0'} />
             </div>
           </div>
         )}
