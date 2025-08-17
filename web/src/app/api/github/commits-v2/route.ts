@@ -282,13 +282,14 @@ function generateCommitStatistics(commits: CommitData[], days: number) {
   let currentStreak = 0;
   let longestStreak = 0;
   let tempStreak = 0;
-  let lastDate: Date | null = null;
+  let lastDateValue: number | null = null;
 
   sortedDates.forEach(dateStr => {
     const date = new Date(dateStr);
+    const dateValue = date.getTime();
     
-    if (lastDate) {
-      const dayDiff = Math.floor((date.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+    if (lastDateValue !== null) {
+      const dayDiff = Math.floor((dateValue - lastDateValue) / (1000 * 60 * 60 * 24));
       
       if (dayDiff === 1) {
         tempStreak++;
@@ -300,14 +301,14 @@ function generateCommitStatistics(commits: CommitData[], days: number) {
       tempStreak = 1;
     }
     
-    lastDate = date;
+    lastDateValue = dateValue;
   });
   
   longestStreak = Math.max(longestStreak, tempStreak);
   
   // Check if streak continues to today
-  if (lastDate) {
-    const daysSinceLastCommit = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+  if (lastDateValue !== null) {
+    const daysSinceLastCommit = Math.floor((now.getTime() - lastDateValue) / (1000 * 60 * 60 * 24));
     if (daysSinceLastCommit <= 1) {
       currentStreak = tempStreak;
     }
