@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { User, TrendingUp, Star, Users, GitPullRequest, Award, Globe, Twitter, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useAnalysis } from '@/contexts/AnalysisContext';
 
 interface PersonalBrandingProps {
   isDark?: boolean;
@@ -14,6 +15,15 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
   const [loading, setLoading] = useState(false);
   const [analysis, setAnalysis] = useState<any>(null);
   const [error, setError] = useState('');
+  const { brandingAnalysis, setBrandingAnalysis, isDataStale } = useAnalysis();
+
+  // キャッシュされたデータがあれば復元
+  useEffect(() => {
+    if (brandingAnalysis && !isDataStale(brandingAnalysis.timestamp)) {
+      setUsername(brandingAnalysis.username);
+      setAnalysis(brandingAnalysis);
+    }
+  }, []);
 
   const analyzeBranding = async () => {
     if (!username) return;
@@ -34,7 +44,13 @@ export default function PersonalBranding({ isDark = false, language = 'en' }: Pe
         throw new Error(data.error || 'Failed to analyze');
       }
 
-      setAnalysis(data);
+      const analysisData = {
+        ...data,
+        username,
+        timestamp: Date.now()
+      };
+      setAnalysis(analysisData);
+      setBrandingAnalysis(analysisData);
     } catch (err: any) {
       setError(err.message);
     } finally {

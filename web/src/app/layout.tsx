@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { AnalysisProvider } from "@/contexts/AnalysisContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -54,7 +55,9 @@ export default function RootLayout({
       >
         <AuthProvider>
           <LanguageProvider>
-            {children}
+            <AnalysisProvider>
+              {children}
+            </AnalysisProvider>
           </LanguageProvider>
         </AuthProvider>
       </body>

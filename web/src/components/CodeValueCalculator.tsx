@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAnalysis } from '@/contexts/AnalysisContext';
 import { DollarSign, TrendingUp, Code, GitBranch, Star, Calendar } from 'lucide-react';
 
 interface CodeValueData {
@@ -59,6 +60,15 @@ export default function CodeValueCalculator({ username }: { username: string }) 
   const [data, setData] = useState<CodeValueData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const { codeValueData, setCodeValueData, isDataStale } = useAnalysis();
+
+  // キャッシュされたデータがあれば復元
+  useEffect(() => {
+    if (codeValueData && codeValueData.username === username && !isDataStale(codeValueData.timestamp)) {
+      setData(codeValueData.details);
+      setShowDetails(true);
+    }
+  }, [username]);
 
   const calculateValue = async () => {
     setLoading(true);
@@ -78,6 +88,15 @@ export default function CodeValueCalculator({ username }: { username: string }) 
       const result = await response.json();
       setData(result);
       setShowDetails(true);
+      
+      // キャッシュに保存
+      setCodeValueData({
+        username,
+        totalValue: result.totalValue,
+        breakdown: result.breakdown,
+        details: result,
+        timestamp: Date.now()
+      });
     } catch (err: any) {
       setError(err.message || 'An error occurred');
     } finally {

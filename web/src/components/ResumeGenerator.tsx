@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FileText, Download, Loader2, Sparkles, Copy, CheckCircle, Linkedin, FileCode, Mail } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAnalysis } from '@/contexts/AnalysisContext';
 
 interface ResumeData {
   personalInfo: {
@@ -54,6 +55,17 @@ export default function ResumeGenerator({ username }: { username: string }) {
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<'preview' | 'markdown' | 'insights'>('preview');
+  const { resumeData: cachedResume, setResumeData: setCachedResume, isDataStale } = useAnalysis();
+
+  // キャッシュされたデータがあれば復元
+  useEffect(() => {
+    if (cachedResume && cachedResume.username === username && !isDataStale(cachedResume.timestamp)) {
+      const parsedData = typeof cachedResume.content === 'string' 
+        ? JSON.parse(cachedResume.content) 
+        : cachedResume.content;
+      setResumeData(parsedData);
+    }
+  }, [username]);
 
   const generateResume = async () => {
     setIsGenerating(true);
@@ -68,6 +80,14 @@ export default function ResumeGenerator({ username }: { username: string }) {
       
       const data = await response.json();
       setResumeData(data);
+      
+      // キャッシュに保存
+      setCachedResume({
+        username,
+        content: JSON.stringify(data),
+        skills: data.skills.topTechnologies || [],
+        timestamp: Date.now()
+      });
     } catch (error) {
       console.error('Error generating resume:', error);
       alert('Failed to generate resume. Please try again.');
