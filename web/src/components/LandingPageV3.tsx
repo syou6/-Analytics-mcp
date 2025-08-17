@@ -66,40 +66,41 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
   };
 
   return (
-    <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-white' : 'bg-gradient-to-b from-gray-50 to-white text-gray-900'}`}>
+    <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-white' : 'bg-gradient-to-b from-gray-50 to-white text-gray-900'} overflow-x-hidden`}>
       {/* Navigation */}
       <nav className={`${isDark ? 'bg-gray-900/80' : 'bg-white/80'} backdrop-blur-sm sticky top-0 z-50 border-b ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <Github className="h-8 w-8 text-blue-600" />
-              <span className="font-bold text-xl">GitVue</span>
-              <span className="ml-4 px-2 py-1 bg-green-600/10 text-green-600 text-xs rounded-full font-semibold">
+            <div className="flex items-center space-x-1 sm:space-x-2">
+              <Github className="h-6 sm:h-8 w-6 sm:w-8 text-blue-600" />
+              <span className="font-bold text-lg sm:text-xl">GitVue</span>
+              <span className="ml-2 sm:ml-4 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-green-600/10 text-green-600 text-xs rounded-full font-semibold hidden sm:inline">
                 BETA
               </span>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-1 sm:space-x-3">
               <button
                 onClick={() => changeLanguage(language === 'en' ? 'ja' : 'en')}
-                className={`p-2 rounded-lg ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} flex items-center gap-1`}
+                className={`p-1 sm:p-2 rounded-lg ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} flex items-center gap-0.5 sm:gap-1`}
                 aria-label="言語切り替え / Change language"
               >
-                <Languages className="w-4 h-4" />
-                <span className="text-sm font-medium">{language === 'en' ? 'JP' : 'EN'}</span>
+                <Languages className="w-3 sm:w-4 h-3 sm:h-4" />
+                <span className="text-xs sm:text-sm font-medium">{language === 'en' ? 'JP' : 'EN'}</span>
               </button>
               <button
                 onClick={() => setIsDark(!isDark)}
-                className={`p-2 rounded-lg ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
+                className={`p-1 sm:p-2 rounded-lg ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} text-sm sm:text-base`}
                 aria-label={isDark ? 'ライトモードに切り替え' : 'ダークモードに切り替え'}
               >
                 {isDark ? '🌞' : '🌙'}
               </button>
               <button
                 onClick={onSignIn}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all transform hover:scale-105"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 sm:px-4 lg:px-6 py-1 sm:py-1.5 lg:py-2 text-xs sm:text-sm lg:text-base rounded-lg hover:opacity-90 transition-all transform hover:scale-105 whitespace-nowrap"
                 aria-label={language === 'en' ? 'Start analyzing your GitHub' : 'GitHub分析を開始'}
               >
-                {language === 'en' ? 'Start Analyzing' : '分析を開始'}
+                <span className="hidden sm:inline">{language === 'en' ? 'Start Analyzing' : '分析を開始'}</span>
+                <span className="sm:hidden">{language === 'en' ? 'Start' : '開始'}</span>
               </button>
             </div>
           </div>
@@ -235,7 +236,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div 
             whileHover={{ scale: 1.03 }}
             className={`p-6 rounded-xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-xl`}
@@ -323,7 +324,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Free Plan */}
             <motion.div 
               whileHover={{ scale: 1.02 }}
@@ -473,7 +474,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {t.testimonials.reviews.map((review, i) => (
             <motion.div 
               key={i}
@@ -526,7 +527,7 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
       {/* Footer */}
       <footer className={`${isDark ? 'bg-gray-900 border-gray-800' : 'bg-gray-50 border-gray-200'} border-t`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
