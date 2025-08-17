@@ -157,7 +157,7 @@ async function calculateRepoValue(repo: any, username: string): Promise<any> {
   const estimatedLines = Math.round(repo.size * 25);
   
   // Get base cost per line for the primary language
-  const languageCost = COST_FACTORS.languages[repo.language] || COST_FACTORS.languages.default;
+  const languageCost = COST_FACTORS.languages[repo.language as keyof typeof COST_FACTORS.languages] || COST_FACTORS.languages.default;
   
   // Calculate base value
   let value = estimatedLines * languageCost;
