@@ -80,7 +80,7 @@ export default function PrivacyPage() {
               <p className="text-gray-700 leading-relaxed">ユーザーは以下の方法でデータの削除を要求できます：</p>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
                 <li>アカウントの削除リクエスト</li>
-                <li>サポートへの連絡（heartssh950@gmail.com）</li>
+                <li>サポートへの連絡（k.sho626626@gmail.com）</li>
               </ul>
             </section>
 
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
               <h2 className="text-xl font-bold mb-4 text-gray-900">8. お問い合わせ</h2>
               <p className="text-gray-700 leading-relaxed">プライバシーに関するお問い合わせ：</p>
               <p className="mt-2 text-gray-700">
-                メール: heartssh950@gmail.com<br/>
+                メール: k.sho626626@gmail.com<br/>
                 GitHub Issues: <a href="https://github.com/syou6/github-analytics-mcp/issues" className="text-blue-600 hover:underline">GitHub</a>
               </p>
             </section>
