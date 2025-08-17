@@ -25,7 +25,7 @@ export default function TermsPage() {
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
                 <li>無料プラン：月10回までの分析が無料</li>
                 <li>Proプラン：月額1,500円（税込）で月100回までの分析とAI機能</li>
-                <li>支払いは Stripe を通じてクレジットカードで行われます</li>
+                <li>支払いはクレジットカード決済で行われます（決済代行：ストライプ社）</li>
                 <li>料金は前払いとし、月額プランは自動更新されます</li>
               </ul>
             </section>

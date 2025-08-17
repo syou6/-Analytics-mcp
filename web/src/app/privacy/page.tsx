@@ -14,10 +14,10 @@ export default function PrivacyPage() {
               <h2 className="text-xl font-bold mb-4 text-gray-900">1. 収集する情報</h2>
               <p className="text-gray-700 leading-relaxed">GitVue（以下「本サービス」）は、以下の情報を収集します：</p>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                <li><strong>GitHubアカウント情報</strong>：ユーザー名、メールアドレス、プロフィール画像</li>
+                <li><strong>ギットハブアカウント情報</strong>：ユーザー名、メールアドレス、プロフィール画像</li>
                 <li><strong>リポジトリ情報</strong>：公開リポジトリのメタデータ、統計情報</li>
                 <li><strong>利用状況</strong>：分析回数、アクセスログ</li>
-                <li><strong>決済情報</strong>：Stripeが管理（クレジットカード情報は当社では保持しません）</li>
+                <li><strong>決済情報</strong>：決済代行会社が管理（クレジットカード情報は当社では保持しません）</li>
               </ul>
             </section>
 
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
               <h2 className="text-xl font-bold mb-4 text-gray-900">3. 情報の管理</h2>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
                 <li>SSL/TLS暗号化通信による保護</li>
-                <li>Supabaseの安全なデータベースでの管理</li>
+                <li>安全なクラウドデータベースでの管理</li>
                 <li>アクセス権限の適切な管理</li>
                 <li>定期的なセキュリティ監査</li>
               </ul>
@@ -66,8 +66,8 @@ export default function PrivacyPage() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-bold mb-4 text-gray-900">6. Cookie の使用</h2>
-              <p className="text-gray-700 leading-relaxed">本サービスは、ユーザー体験の向上のために Cookie を使用します：</p>
+              <h2 className="text-xl font-bold mb-4 text-gray-900">6. クッキーの使用</h2>
+              <p className="text-gray-700 leading-relaxed">本サービスは、ユーザー体験の向上のためにクッキーを使用します：</p>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
                 <li>認証状態の維持</li>
                 <li>言語設定の保存</li>
