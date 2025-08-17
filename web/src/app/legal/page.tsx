@@ -53,7 +53,7 @@ export default function LegalPage() {
                 <tr className="border-b">
                   <td className="py-4 pr-4 font-bold align-top text-gray-900">メールアドレス<br/><span className="text-sm font-normal text-gray-600">Email</span></td>
                   <td className="py-4 text-gray-700">
-                    heartssh950@gmail.com<br/>
+                    k.sho626626@gmail.com<br/>
                     <span className="text-sm text-gray-600">
                       お問い合わせはメールでお願いいたします<br/>
                       Please contact us via email
@@ -215,7 +215,7 @@ export default function LegalPage() {
                 <strong>お問い合わせ / Contact:</strong><br/>
                 サポート対応時間: 平日 9:00-18:00 JST<br/>
                 Email responses within 24 hours during business days<br/>
-                heartssh950@gmail.com
+                k.sho626626@gmail.com
               </p>
             </div>
           </div>
