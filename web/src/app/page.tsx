@@ -608,7 +608,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
               <LanguageToggle />
               <span className="hidden lg:inline text-sm text-black truncate max-w-[150px]">{user.email}</span>
               <a
-                href="/commercial-law"
+                href="/legal"
                 className="text-sm text-black hover:text-gray-600 underline"
               >
                 特定商取引法
