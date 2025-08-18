@@ -11,7 +11,7 @@ import LandingPageV3 from '@/components/LandingPageV3';
 import ActivitySummaryCards from '@/components/ActivitySummaryCards';
 import CommitHeatmap from '@/components/CommitHeatmap';
 import CommitTimeDistribution from '@/components/CommitTimeDistribution';
-import RepositoryPerformanceTable from '@/components/RepositoryPerformanceTable';
+import RepositoryPerformanceCards from '@/components/RepositoryPerformanceCards';
 import GrowthInsights from '@/components/GrowthInsights';
 import PersonalBranding from '@/components/PersonalBranding';
 import ResumeGenerator from '@/components/ResumeGenerator';
@@ -847,7 +847,7 @@ function Dashboard({ user, onSignOut }: { user: any; onSignOut: () => void }) {
             </div>
 
             {/* Repository Performance Table */}
-            <RepositoryPerformanceTable userRepos={userRepos} />
+            <RepositoryPerformanceCards userRepos={userRepos} username={user?.email?.split('@')[0] || ''} />
 
             {/* Languages */}
             {languages && languages.length > 0 && (
