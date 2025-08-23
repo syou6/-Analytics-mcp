@@ -18,8 +18,16 @@ import ResumeGenerator from '@/components/ResumeGenerator';
 import CodeValueCalculator from '@/components/CodeValueCalculator';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { t } from '@/lib/i18n';
+import MaintenancePage from './maintenance';
 
 export default function Home() {
+  // メンテナンスモードを有効化
+  const isMaintenanceMode = true;
+  
+  if (isMaintenanceMode) {
+    return <MaintenancePage />;
+  }
+  
   const { user, loading, signOut: authSignOut } = useAuth();
 
   async function signInWithGitHub() {
