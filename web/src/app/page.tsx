@@ -21,16 +21,18 @@ import { t } from '@/lib/i18n';
 import MaintenancePage from './maintenance';
 
 export default function Home() {
-  // メンテナンスモードを有効化
+  // メンテナンスモードを有効化（ログインのみ無効）
   const isMaintenanceMode = true;
-  
-  if (isMaintenanceMode) {
-    return <MaintenancePage />;
-  }
   
   const { user, loading, signOut: authSignOut } = useAuth();
 
   async function signInWithGitHub() {
+    // メンテナンスモード中はログインを無効化
+    if (isMaintenanceMode) {
+      alert('現在メンテナンス中のため、ログインできません。しばらくお待ちください。');
+      return;
+    }
+    
     try {
       const supabase = getSupabase();
       if (!supabase) {
@@ -62,11 +64,13 @@ export default function Home() {
     );
   }
 
-  if (user) {
+  // メンテナンスモード中は既存ユーザーもダッシュボードにアクセスできない
+  if (user && !isMaintenanceMode) {
     return <Dashboard user={user} onSignOut={signOut} />;
   }
 
-  return <LandingPageV3 onSignIn={signInWithGitHub} />;
+  // ランディングページを表示（ログインボタンは無効化される）
+  return <LandingPageV3 onSignIn={signInWithGitHub} isMaintenanceMode={isMaintenanceMode} />;
 }
 
 function LandingPage({ onSignIn }: { onSignIn: () => void }) {

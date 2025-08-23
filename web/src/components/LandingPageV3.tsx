@@ -9,9 +9,10 @@ import { translations } from '@/translations/landing';
 
 interface LandingPageV3Props {
   onSignIn: () => void;
+  isMaintenanceMode?: boolean;
 }
 
-export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
+export default function LandingPageV3({ onSignIn, isMaintenanceMode = false }: LandingPageV3Props) {
   const [isDark, setIsDark] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState('professional');
   const [isAnnual, setIsAnnual] = useState(false);
@@ -97,33 +98,57 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               </button>
               <button
                 onClick={onSignIn}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 sm:px-4 lg:px-6 py-1 sm:py-1.5 lg:py-2 text-xs sm:text-sm lg:text-base rounded-lg hover:opacity-90 transition-all transform hover:scale-105 whitespace-nowrap"
-                aria-label={language === 'en' ? 'Start analyzing your GitHub' : 'GitHub分析を開始'}
+                className={`${
+                  isMaintenanceMode 
+                    ? 'bg-gray-400 cursor-not-allowed opacity-60' 
+                    : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transform hover:scale-105'
+                } text-white px-2 sm:px-4 lg:px-6 py-1 sm:py-1.5 lg:py-2 text-xs sm:text-sm lg:text-base rounded-lg transition-all whitespace-nowrap`}
+                aria-label={isMaintenanceMode ? (language === 'en' ? 'Service under maintenance' : 'メンテナンス中') : (language === 'en' ? 'Start analyzing your GitHub' : 'GitHub分析を開始')}
+                disabled={isMaintenanceMode}
               >
-                <span className="hidden sm:inline">{language === 'en' ? 'Start Analyzing' : '分析を開始'}</span>
-                <span className="sm:hidden">{language === 'en' ? 'Start' : '開始'}</span>
+                {isMaintenanceMode ? (
+                  <span>{language === 'en' ? 'Under Maintenance' : 'メンテナンス中'}</span>
+                ) : (
+                  <>
+                    <span className="hidden sm:inline">{language === 'en' ? 'Start Analyzing' : '分析を開始'}</span>
+                    <span className="sm:hidden">{language === 'en' ? 'Start' : '開始'}</span>
+                  </>
+                )}
               </button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Campaign Banner */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 text-center">
-        <div className="max-w-7xl mx-auto flex items-center justify-center space-x-2">
-          <span className="animate-pulse">🎉</span>
-          <span className="font-bold text-lg">
-            {language === 'en' 
-              ? 'LIMITED TIME: All Pro Features FREE During Launch!' 
-              : '期間限定：ローンチキャンペーンで全Pro機能が無料！'}
-          </span>
-          <span className="hidden sm:inline text-sm opacity-90">
-            {language === 'en' 
-              ? '(Worth $80/year)' 
-              : '(年額12,000円相当)'}
-          </span>
+      {/* Campaign Banner or Maintenance Notice */}
+      {isMaintenanceMode ? (
+        <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-4 text-center">
+          <div className="max-w-7xl mx-auto flex items-center justify-center space-x-2">
+            <span>⚠️</span>
+            <span className="font-bold text-lg">
+              {language === 'en' 
+                ? 'Service is currently under maintenance. Login is temporarily disabled.' 
+                : 'ただいまメンテナンス中です。ログイン機能は一時的に無効になっています。'}
+            </span>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 text-center">
+          <div className="max-w-7xl mx-auto flex items-center justify-center space-x-2">
+            <span className="animate-pulse">🎉</span>
+            <span className="font-bold text-lg">
+              {language === 'en' 
+                ? 'LIMITED TIME: All Pro Features FREE During Launch!' 
+                : '期間限定：ローンチキャンペーンで全Pro機能が無料！'}
+            </span>
+            <span className="hidden sm:inline text-sm opacity-90">
+              {language === 'en' 
+                ? '(Worth $80/year)' 
+                : '(年額12,000円相当)'}
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
@@ -162,7 +187,12 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
           >
             <button
               onClick={onSignIn}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg flex items-center"
+              className={`${
+                isMaintenanceMode 
+                  ? 'bg-gray-400 cursor-not-allowed opacity-60' 
+                  : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:opacity-90 transform hover:scale-105'
+              } text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all shadow-lg flex items-center`}
+              disabled={isMaintenanceMode}
             >
               <Github className="h-5 w-5 mr-2" />
               {t.hero.ctaMain}
@@ -357,7 +387,12 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               </ul>
               <button 
                 onClick={onSignIn}
-                className={`w-full py-2 rounded-lg border ${isDark ? 'border-gray-600 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-50'} transition-colors`}
+                className={`w-full py-2 rounded-lg border ${
+                  isMaintenanceMode 
+                    ? 'cursor-not-allowed opacity-60' 
+                    : ''
+                } ${isDark ? 'border-gray-600 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-50'} transition-colors`}
+                disabled={isMaintenanceMode}
               >
                 {language === 'en' ? 'Get Started Free' : '無料で始める'}
               </button>
@@ -411,7 +446,12 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
               </ul>
               <button 
                 onClick={onSignIn}
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:opacity-90 transition-all"
+                className={`w-full py-3 ${
+                  isMaintenanceMode 
+                    ? 'bg-gray-400 cursor-not-allowed opacity-60' 
+                    : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90'
+                } text-white rounded-lg font-semibold transition-all`}
+                disabled={isMaintenanceMode}
               >
                 {t.pricing.startFreeTrial}
               </button>
@@ -515,7 +555,12 @@ export default function LandingPageV3({ onSignIn }: LandingPageV3Props) {
           </p>
           <button
             onClick={onSignIn}
-            className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg"
+            className={`${
+              isMaintenanceMode 
+                ? 'bg-gray-400 cursor-not-allowed opacity-60' 
+                : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:opacity-90 transform hover:scale-105'
+            } text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all shadow-lg`}
+            disabled={isMaintenanceMode}
           >
             {t.cta.button}
           </button>
